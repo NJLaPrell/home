@@ -1,13 +1,34 @@
 {
-	"name": "home",
-	"main": "server.js",
-	"dependencies": {
-		"express": ">=4.0.0",
-		"body-parser": ">=1.0.1",
-		"basic-auth": ">=1.1.0",
-		"node-hue-api": ">=2.3.0",
-		"fauxmojs": ">=0.2.0",
-		"xml2js": ">=0.4.17",
-		"node-schedule": ">=1.2.0"
-	}
+  "name": "home",
+  "version": "1.0.0",
+  "description": "Some misc. scripts for home automation. Based on my own hardward, so really only useful as examples.",
+  "main": "._config.js",
+  "dependencies": {},
+  "devDependencies": {
+	"express": ">=4.0.0",
+	"body-parser": ">=1.0.1",
+	"basic-auth": ">=1.1.0",
+	"node-hue-api": ">=2.3.0",
+	"fauxmojs": ">=0.2.0",
+	"xml2js": ">=0.4.17",
+	"node-schedule": ">=1.2.0"
+  },
+  "scripts": {
+    "test": "node server.js | node jobs.js | node wemo.js",
+    "start": "node server.js | node jobs.js | node wemo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NJLaPrell/home.git"
+  },
+  "keywords": [
+    "home",
+    "automation"
+  ],
+  "author": "Nick LaPrell",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/NJLaPrell/home/issues"
+  },
+  "homepage": "https://github.com/NJLaPrell/home#readme"
 }
