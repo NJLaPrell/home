@@ -16,7 +16,11 @@ module.exports = {
 			break;
 
 			case "power-on":
-			self.executeCommand("home", response);
+			self.executeCommand("home", function(response){
+				var doItAgain = setTimeout(function(response){
+					self.executeCommand("home", response);
+				}, 400);
+			});
 			break;
 
 			case "power-off":
@@ -110,7 +114,7 @@ module.exports = {
             res.on('data', function(chunk) {
               body += chunk;
             });
-            res.on('end', function(){
+            res.on('end', function(response){
               response({
               	status:200,
               	message: "Success - The TV command '" + self.cmd + "' has been executed.",
