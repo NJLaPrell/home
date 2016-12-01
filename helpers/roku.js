@@ -11,22 +11,12 @@ module.exports = {
 			this.sendRequest("/input?a=b", "POST", response);
 			break;
 
+			case "wake":
+			this.executeCommand("turn-off-screen", response);
+			break;
+
 			case "power-on":
-			this.getPowerStatus(function(status){
-				if(status===null){
-					response({
-						status:500,
-              			message: "The TV is not responding."
-              		});
-				} else if(!status){
-					self.executeCommand("power", response);
-				} else {
-					response({
-						status:200,
-              			message: "The TV is already on."
-              		});
-				}
-			});
+			self.executeCommand("home", response);
 			break;
 
 			case "power-off":
@@ -37,7 +27,7 @@ module.exports = {
               			message: "The TV is not responding."
               		});
 				} else if(status){
-					self.executeCommand("power", response);
+					self.executeCommand("turn-off-screen", response);
 				} else {
 					response({
 						status:200,
@@ -47,9 +37,14 @@ module.exports = {
 			});
 			break;
 
+			case "turn-off-screen":
+			this.sendRequest("/launch/dev", "POST", response);
+			break;
+
 
 			case "power":
 			this.sendRequest("/keypress/power", "POST", response);
+			
 			break;
 
 			case "netflix":
@@ -66,6 +61,10 @@ module.exports = {
 
 			case "plex":
 			this.sendRequest("/launch/13535", "POST", response);
+			break;
+
+			case "home":
+			this.sendRequest("/keypress/home", "POST", response);
 			break;
 
 			// The method doesn't exist.
