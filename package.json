@@ -1,0 +1,12 @@
+{
+	"name": "home",
+	"main": "server.js",
+	"dependencies": {
+		"express": ">=4.0.0",
+		"body-parser": ">=1.0.1",
+		"basic-auth": ">=1.1.0",
+		"node-hue-api": ">=2.3.0",
+		"fauxmojs": ">=0.2.0",
+		"xml2js": ">=0.4.17"
+	}
+}
