@@ -7,6 +7,7 @@
 		"basic-auth": ">=1.1.0",
 		"node-hue-api": ">=2.3.0",
 		"fauxmojs": ">=0.2.0",
-		"xml2js": ">=0.4.17"
+		"xml2js": ">=0.4.17",
+		"node-schedule": ">=1.2.0"
 	}
 }

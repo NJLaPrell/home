@@ -1,4 +1,5 @@
 #!/bin/bash
-forever stop --sourceDir $PWD --workingDir $PWD -t ~/webapps/home/server.js
-forever stop --sourceDir $PWD --workingDir $PWD -t ~/webapps/home/wemo.js
-forever stop --sourceDir $PWD --workingDir $PWD -t ~/webapps/home/jobs.js
+APPROOT="/home/pi/webapps/test/home"
+forever stop --sourceDir $APPROOT --workingDir $APPROOT --workingDir $PWD -t $APPROOT"/server.js"
+forever stop --sourceDir $APPROOT --workingDir $APPROOT --workingDir $PWD -t $APPROOT"/wemo.js"
+forever stop --sourceDir $APPROOT --workingDir $APPROOT --workingDir $PWD -t $APPROOT"/jobs.js"
