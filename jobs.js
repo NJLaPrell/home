@@ -7,7 +7,7 @@ var log = function(msg, type, job){
 	console.log(currentDate.toString() + " - " + type + ": " + job + "\r\n" + msg + "\r\n\r\n");
 };
 
-log("Started the job process.", "INFO", "jobs.js");
+log("Started jobs.js service.", "INFO", "jobs.js");
 
 
 //var j1 = schedule.scheduleJob('*/1 * * * *', function(){

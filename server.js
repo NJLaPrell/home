@@ -7,6 +7,11 @@ var bodyParser = require('body-parser');
 var auth = require('basic-auth');
 var hueAnimation = require("./helpers/hue-animation");
 
+var log = function(msg, type){
+  var currentDate = new Date();
+  console.log(currentDate.toString() + " - " + type + ": server.js\r\n" + msg + "\r\n\r\n");
+};
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -85,4 +90,4 @@ app.use('/home', router);
 
 app.listen(conf.port);
 
-console.log("Listening on port " + conf.port);
+log("Started server.js, listening on port: " + conf.port, "INFO");
