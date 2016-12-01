@@ -9,8 +9,9 @@ var log = function(msg, type, job){
 
 log("Started the job process.", "INFO", "jobs.js");
 
-var j1 = schedule.scheduleJob('*/1 * * * *', function(){
-  
+
+//var j1 = schedule.scheduleJob('*/1 * * * *', function(){
+/*  
 	roku.executeCommand("ping", function(response){
 		if(response.status >=200 && response.status < 400){
 			log("Successfully pinged Roku. Returned status: " + response.status, "INFO", "Ping Roku");	
@@ -19,6 +20,7 @@ var j1 = schedule.scheduleJob('*/1 * * * *', function(){
 		}
 	});
 });
+*/
 
 var j2 = schedule.scheduleJob('*/5 * * * *', function(){
 	roku.getPowerStatus(function(power){
