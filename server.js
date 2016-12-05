@@ -85,7 +85,16 @@ router.route('/tv').put(function(req, res){
 });
 
 
-
+////////////////////////////////////////////////////////////
+// EVENT TRIGGER ROUTE
+////////////////////////////////////////////////////////////
+router.route('/trigger-event').post(function(req, res){
+	if(!req.body.event){
+		res.status(400).send({"error": "Event Not Defined - An 'event' parameter was not sent."});
+	} else {
+		res.status(200).send({"message": "Event '" + req.body.event + "' has been triggered."});	
+	}
+});
 
 
 // Rout all the calls through /home
