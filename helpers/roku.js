@@ -114,7 +114,7 @@ module.exports = {
             res.on('data', function(chunk) {
               body += chunk;
             });
-            res.on('end', function(response){
+            res.on('end', function(res){
               response({
               	status:200,
               	message: "Success - The TV command '" + self.cmd + "' has been executed.",
