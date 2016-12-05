@@ -11,7 +11,9 @@
 	"node-hue-api": ">=2.3.0",
 	"fauxmojs": ">=0.2.0",
 	"xml2js": ">=0.4.17",
-	"node-schedule": ">=1.2.0"
+	"node-schedule": ">=1.2.0",
+  "stack-trace": "*",
+  "forever": "*"
   },
   "scripts": {
     "test": "node server.js | node jobs.js | node wemo.js",
