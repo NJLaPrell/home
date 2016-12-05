@@ -1,10 +1,10 @@
+var stackTrace = require('stack-trace');
+
 module.exports = {
 	getScript: function(script){
-		if(!script && module.parent){
-			var components = module.parent.id.split("/");
-			return components[(components.length-1)];
-		} else if(!script) {
-			return '<UNKNOWN SCRIPT>';
+		if(!script){
+
+			return stackTrace.get()[3].getFileName();
 		} else {
 			return script;
 		}
@@ -15,6 +15,7 @@ module.exports = {
 		console.log(currentDate.toString() + "\r\n" + type + ": " + script + "\r\n" + msg + "\r\n\r\n");
 	},
 	error: function(msg, script){
+		//var trace = "\r\nTRACE -- file: " + stackTrace.getFileName() + " Function: " + stackTrace.getFunctionName() + " Line: " + stackTrace.getLineNumber();		
 		this.log(msg, "ERROR", script);
 	},
 	warning: function(msg, script){
