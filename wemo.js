@@ -1,13 +1,10 @@
-var log = function(msg, type){
-  var currentDate = new Date();
-  console.log(currentDate.toString() + " - " + type + ": wemo.js\r\n" + msg + "\r\n\r\n");
-};
- 
-
+var log = require("./helpers/log.js");
 var conf = require('./config');
 var FauxMo = require('fauxmojs');
 var roku = require('./helpers/roku');
- 
+
+log.info("Starting wemo.js service.");
+
 var fauxMo = new FauxMo(
   {
     ipAddress: conf.localIP,
@@ -84,5 +81,3 @@ var fauxMo = new FauxMo(
       }
     ]
   });
- 
-log("Started wemo.js service.", "INFO");

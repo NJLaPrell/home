@@ -6,6 +6,9 @@ var app =  new express();
 var bodyParser = require('body-parser');
 var auth = require('basic-auth');
 var hueAnimation = require("./helpers/hue-animation");
+var log = require("./helpers/log.js");
+
+log.info("Starting server.js on port: " + conf.port);
 
 var log = function(msg, type){
   var currentDate = new Date();
@@ -90,4 +93,3 @@ app.use('/home', router);
 
 app.listen(conf.port);
 
-log("Started server.js, listening on port: " + conf.port, "INFO");
