@@ -83,7 +83,7 @@ module.exports = {
 	},
 
 	getPowerStatus: function(response){
-		this.sendRequest("/query/device-info", "GET", function(res){
+		this.sendRequest("/query/device-info", "GET", function(response){
 			var parseString = require('xml2js').parseString;
 			parseString(res.body, function (err, result) {
 				var power = null;
