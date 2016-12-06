@@ -100,5 +100,7 @@ router.route('/trigger-event').post(function(req, res){
 
 // Rout all the calls through /home
 app.use('/home', router);
+
+app.use(express.static('static'));
 app.listen(conf.port);
 
