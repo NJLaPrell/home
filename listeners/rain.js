@@ -1,10 +1,8 @@
-var log = require("../helpers/log.js");
-
 module.exports = function(house){
 	house.listenForEvent('weather', function(args){
-		house.logTriggeredListener('weather');
+		house.recordTriggeredListener('weather');
 		if(args.status == 'rain'){
-			log.info("LISTENER: It is raining.");
+			house.log.info("LISTENER: It is raining.");
 		}
 	});
 };

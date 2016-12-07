@@ -1,17 +1,19 @@
 // Config
-var  conf = require('./config');
 var house = require('./helpers/house-status');
 var express = require('express');
 var app =  new express();
 var bodyParser = require('body-parser');
 var auth = require('basic-auth');
 var hueAnimation = require("./helpers/hue-animation");
-var log = require("./helpers/log.js");
 var roku = require('./helpers/roku');
 
-log.startup();
+house.log.startup();
+house.log.startup("STARTING SERVICE: server.js on port: " + house.conf.port);
 
-log.startup("STARTING SERVICE: server.js on port: " + conf.port);
+
+var startJobs = require('./jobs/');
+startJobs(house);
+
 
 ////////////////////////////////////////////////////////////
 // Register Event Listeners
@@ -42,7 +44,7 @@ router.use(function(req, res, next){
 			pass: req.body.overridePassword
 		};
 	} 
-	if(!credentials || credentials.name !== conf.uName || credentials.pass !== conf.password){
+	if(!credentials || credentials.name !== house.conf.uName || credentials.pass !== house.conf.password){
 		res.status(401).send({"error": "Access Denied - Invalid authentication credentials."});
 	} else {
 		next();	
@@ -112,5 +114,5 @@ router.route('/debug').get(function(req, res){
 app.use('/home', router);
 
 app.use(express.static('static'));
-app.listen(conf.port);
+app.listen(house.conf.port);
 

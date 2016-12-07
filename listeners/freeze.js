@@ -1,10 +1,8 @@
-var log = require("../helpers/log.js");
-
 module.exports = function(house){
 	house.listenForEvent('weather', function(args){
-		house.logTriggeredListener('weather');
+		house.recordTriggeredListener('weather');
 		if(args.status == 'freezeing'){
-			log.info("LISTENER: It is below freezing.");
+			house.log.info("LISTENER: It is below freezing.");
 		}
 	});
 };

@@ -1,9 +1,12 @@
+var conf = require('../config.js');
 var log = require('./log');
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
 
 module.exports = {
 	eventEmitter: eventEmitter,
+	log: log,
+	conf: conf,
 	eventsFired: [],
 	listenersTriggered: [],
 	listenersRegistered: [],
@@ -12,7 +15,9 @@ module.exports = {
 		nighttime: null,
 		nickslocation: null,
 		brendaslocation: null,
-		motionLastDetected: null
+		motionLastDetected: null,
+		powered: true,
+		internetAccess: null
 	},
 	getStatus: function(status){
 		if(typeof this.status[status] !== undefined){
@@ -70,7 +75,7 @@ module.exports = {
 	    Error.prepareStackTrace = originalFunc; 
 	    return callerfile;
 	},
-	logTriggeredListener(event){
+	recordTriggeredListener(event){
 		var date = new Date();
 		this.listenersTriggered.push({
 			time: date.toString(),
