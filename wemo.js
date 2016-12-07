@@ -1,4 +1,4 @@
-var log = require("./helpers/log.js");
+var log = require("./helpers/log");
 var conf = require('./config');
 var FauxMo = require('fauxmojs');
 var roku = require('./helpers/roku');
@@ -16,9 +16,9 @@ var fauxMo = new FauxMo(
           roku.executeCommand("power-" + action, function(response){
             var payload = {};
             if(response.status!=200){
-              log("Failed to execute faux tv switch: " + action + "- " + response.message, "ERROR");
+              log.error("Failed to execute faux tv switch: " + action + "- " + response.message);
             } else {
-              log("Executed faux tv switch: " + action, "INFO");
+              log.info("Executed faux tv switch: " + action);
             }
           });
         }
@@ -30,9 +30,9 @@ var fauxMo = new FauxMo(
           roku.executeCommand("netflix", function(response){
             var payload = {};
             if(response.status!=200){
-              log("Failed to execute Netflix switch - " + response.message, "ERROR");
+              log.error("Failed to execute Netflix switch - " + response.message);
             } else {
-              log("Executed Netflix switch.", "INFO");
+              log.info("Executed Netflix switch.");
             }
           });
         }
@@ -44,9 +44,9 @@ var fauxMo = new FauxMo(
           roku.executeCommand("hulu", function(response){
             var payload = {};
             if(response.status!=200){
-              log("Failed to execute Hulu switch - " + response.message, "ERROR");
+              log.error("Failed to execute Hulu switch - " + response.message);
             } else {
-              log("Executed Hulu switch.", "INFO");
+              log.info("Executed Hulu switch.");
             }
           });
         }
@@ -58,9 +58,9 @@ var fauxMo = new FauxMo(
           roku.executeCommand("plex", function(response){
             var payload = {};
             if(response.status!=200){
-              log("Failed to execute Plex switch - " + response.message, "ERROR");
+              log.error("Failed to execute Plex switch - " + response.message);
             } else {
-              log("Executed Plex switch.", "INFO");
+              log.info("Executed Plex switch.");
             }
           });
         }
@@ -72,9 +72,9 @@ var fauxMo = new FauxMo(
           roku.executeCommand("amazon", function(response){
             var payload = {};
             if(response.status!=200){
-              log("Failed to execute Amazon switch - " + response.message, "ERROR");
+              log.error("Failed to execute Amazon switch - " + response.message);
             } else {
-              log("Executed Amazon switch.", "INFO");
+              log.info("Executed Amazon switch.");
             }
           });
         }

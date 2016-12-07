@@ -1,6 +1,8 @@
 // Config
 var  conf = require('./config');
 
+var houseStatus = require('./house-status');
+
 var express = require('express');
 var app =  new express();
 var bodyParser = require('body-parser');
@@ -96,7 +98,7 @@ router.route('/trigger-event').post(function(req, res){
 		res.status(400).send({"error": "Event Not Defined - An 'event' parameter was not sent."});
 	} else {
 		var args = req.body.args ? req.body.args : {};
-		eventEmitter.emit(req.body.event, args);
+		eventEmitter.emit(req.body.event, args, houseStatus);
 		res.status(200).send({"message": "Event '" + req.body.event + "' has been triggered with " + args + "."});	
 	}
 });

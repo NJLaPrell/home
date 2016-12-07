@@ -1,21 +1,20 @@
 var SMTPConnection = require('smtp-connection');
 var log = require('./log.js');
+var conf = require('../config');
 
-module.exports = function(msg){
-	var conf = require('../config');
-	var message = 'From: LaPrell Home <' + conf.smtpEnvelope.from + '>\r\n';
-	message	+= 'To: IFTTT <' + conf.smtpEnvelope.to + '>\r\n';
-	message	+= 'Subject: ' + conf.smtpMessage.subject + '\r\n';
+module.exports = function(msg){	
+	var message = 'From: LaPrell Home <' + conf.textAlert.smtpEnvelope.from + '>\r\n';
+	message	+= 'To: IFTTT <' + conf.textAlert.smtpEnvelope.to + '>\r\n';
+	message	+= 'Subject: ' + conf.textAlert.subject + '\r\n';
 	message	+= '\r\n';
 	message	+= msg;
-
-	var connection = new SMTPConnection(conf.smtpConfig);
+	var connection = new SMTPConnection(conf.textAlert.smtpConfig);
 	connection.connect(function(){
-		connection.login(conf.smtpAuth, function(err){
+		connection.login(conf.textAlert.smtpAuth, function(err){
 			if(err !== null){
 				log.error(err);
 			} else {
-				connection.send(conf.smtpEnvelope, message, function(err){
+				connection.send(conf.textAlert.smtpEnvelope, message, function(err){
 					if(err !== null){
 						log.error(err);
 					} else {
