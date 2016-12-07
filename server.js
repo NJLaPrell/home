@@ -13,9 +13,9 @@ var events = require('events');
 var eventEmitter = new events.EventEmitter();
 var roku = require('./helpers/roku');
 
+log.startup();
 
-
-log.info("Starting server.js on port: " + conf.port);
+log.startup("STARTING SERVICE: server.js on port: " + conf.port);
 
 ////////////////////////////////////////////////////////////
 // Register Event Listeners

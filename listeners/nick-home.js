@@ -1,6 +1,6 @@
 var log = require("../helpers/log.js");
 var alert = require("../helpers/text-alert.js");
-log.info("Registering listener nick-home.js for event: gps");
+log.startup("Registering listener nick-home.js for event: gps");
 
 module.exports = function(eventEmitter){
 	eventEmitter.on('gps', function(args){

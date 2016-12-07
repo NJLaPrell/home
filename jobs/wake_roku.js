@@ -3,7 +3,7 @@ var roku = require('../helpers/roku');
 log = require('../helpers/log.js');
 
 // Log the started schedule
-log.info("Job Scheduled");
+log.startup("Job Scheduled");
 
 // Define the job
 module.exports = {

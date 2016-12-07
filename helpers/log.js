@@ -3,8 +3,7 @@ var stackTrace = require('stack-trace');
 module.exports = {
 	getScript: function(script){
 		if(!script){
-
-			return stackTrace.get()[3].getFileName();
+			return stackTrace.get()[2].getFileName();
 		} else {
 			return script;
 		}
@@ -22,6 +21,13 @@ module.exports = {
 	},
 	info: function(msg, script){
 		this.log(msg, "INFO", script);
+	},
+	startup: function(msg, script){
+		if(!msg){
+			console.log('********** STARTING SERVER ********** (' + this.getDate(script) + ')');
+		} else {
+			console.log(msg + " (" + this.getScript() + ")");
+		}
 	},
 	getDate: function(){
 		var datePieces = {};

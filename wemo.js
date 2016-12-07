@@ -3,7 +3,7 @@ var conf = require('./config');
 var FauxMo = require('fauxmojs');
 var roku = require('./helpers/roku');
 
-log.info("Starting wemo.js service.");
+log.startup("STARTING SERVICE");
 
 var fauxMo = new FauxMo(
   {
@@ -81,3 +81,5 @@ var fauxMo = new FauxMo(
       }
     ]
   });
+
+console.log("********** STARTUP COMPLETE **********\r\n\r\n");

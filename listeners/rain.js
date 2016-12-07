@@ -1,5 +1,5 @@
 var log = require("../helpers/log.js");
-log.info("Registering listener rain.js for event: weather");
+log.startup("Registering listener rain.js for event: weather");
 
 module.exports = function(eventEmitter){
 	eventEmitter.on('weather', function(args){

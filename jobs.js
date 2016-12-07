@@ -1,5 +1,5 @@
 var log = require("./helpers/log.js");
-log.info("Starting jobs.js service");
+log.startup("STARTING SERVICE");
 
 var startJobs = require('./jobs/');
 startJobs();

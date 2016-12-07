@@ -1,5 +1,5 @@
 var log = require("../helpers/log.js");
-log.info("Registering listener email-received.js for event: email-received");
+log.startup("Registering listener email-received.js for event: email-received");
 
 module.exports = function(eventEmitter){
 	eventEmitter.on('email-received', function(args){
