@@ -21,7 +21,11 @@ log.info("Starting server.js on port: " + conf.port);
 var registerListeners = require('./listeners/');
 registerListeners(eventEmitter);
 
-
+////////////////////////////////////////////////////////////
+// Register Event Listeners
+////////////////////////////////////////////////////////////
+var registerMailListener = require('./helpers/mail-listener');
+registerMailListener(eventEmitter);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

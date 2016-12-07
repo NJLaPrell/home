@@ -14,7 +14,8 @@
 	"node-schedule": ">=1.2.0",
   "stack-trace": "*",
   "forever": "*",
-  "smtp-connection": "*"
+  "smtp-connection": "*",
+  "mail-listener": "*"
   },
   "scripts": {
     "test": "node server.js | node jobs.js | node wemo.js",
