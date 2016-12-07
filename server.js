@@ -1,7 +1,7 @@
 // Config
 var  conf = require('./config');
 
-var houseStatus = require('./house-status');
+var houseStatus = require('./helpers/house-status');
 
 var express = require('express');
 var app =  new express();
@@ -101,6 +101,10 @@ router.route('/trigger-event').post(function(req, res){
 		eventEmitter.emit(req.body.event, args, houseStatus);
 		res.status(200).send({"message": "Event '" + req.body.event + "' has been triggered with " + args + "."});	
 	}
+});
+
+router.route('/status').get(function(req, res){
+	res.status(200).send(houseStatus);
 });
 
 
