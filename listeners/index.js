@@ -1,3 +1,5 @@
+var log = require('../helpers/log');
+log.startup("Registering listeners in /listeners");
 var fs = require('fs');
 
 module.exports = function(house){

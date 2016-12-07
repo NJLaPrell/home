@@ -103,6 +103,10 @@ router.route('/status').get(function(req, res){
 	res.status(200).send(house.getStatusReport());
 });
 
+router.route('/debug').get(function(req, res){
+	res.status(200).send(house.getDebugInfo());
+});
+
 
 // Rout all the calls through /home
 app.use('/home', router);

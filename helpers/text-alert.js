@@ -17,8 +17,6 @@ module.exports = function(msg){
 				connection.send(conf.textAlert.smtpEnvelope, message, function(err){
 					if(err !== null){
 						log.error(err);
-					} else {
-						log.info("Sent text alert using IFTTT with message: " + msg);
 					}
 					connection.quit();
 				});

@@ -2,7 +2,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED']=0;
 
 var conf = require('../config.js');
 var log = require('./log.js');
-var MailListener = require("mail-listener");
+var MailListener = require("mail-listener2");
 
 log.startup("MailListener has started.");
 
@@ -15,8 +15,12 @@ module.exports = function(house){
 		log.startup("MailListener has connected.");
 	});
 
-	mailListener.on("mail:parsed", function(mail){
+	mailListener.on("mail", function(mail, seqno, attributes){
 		house.triggerEvent('email-received', mail);
+	});
+
+	mailListener.on("error", function(err){
+		log.error(err);
 	});
 };
 
