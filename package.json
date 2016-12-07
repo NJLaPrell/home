@@ -1,7 +1,7 @@
 {
   "name": "laprell-home",
   "version": "1.0.0",
-  "description": "Some misc. scripts for home automation. Based on my own hardward, so really only useful as examples.",
+  "description": "Some misc. scripts for home automation. Based on my own hardware, so really only useful as examples.",
   "main": "._config.js",
   "dependencies": {},
   "devDependencies": {
@@ -12,10 +12,9 @@
 	"fauxmojs": ">=0.2.0",
 	"xml2js": ">=0.4.17",
 	"node-schedule": ">=1.2.0",
-  "stack-trace": "*",
   "forever": "*",
   "smtp-connection": "*",
-  "mail-listener": "*"
+  "mail-listener2": "*"
   },
   "scripts": {
     "test": "node server.js | node jobs.js | node wemo.js",
