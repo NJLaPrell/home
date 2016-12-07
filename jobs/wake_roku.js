@@ -15,7 +15,7 @@ module.exports = {
 					if(response.status >=200 && response.status < 400){
 						log.info("Found Roku powered off. Successfully woke it up.");	
 					} else {
-						log.error("Found Roku powered off. Can't wake it. He's dead, Jim.");
+						log.warning("Found Roku powered off. Can't wake it. He's dead, Jim.");
 					}	
 				});
 			}
