@@ -6,7 +6,7 @@ var MailListener = require("mail-listener");
 
 log.startup("MailListener has started.");
 
-module.exports = function(eventEmitter){
+module.exports = function(house){
 	var mailListener = new MailListener(conf.imap);
 
 	mailListener.start();
@@ -16,7 +16,7 @@ module.exports = function(eventEmitter){
 	});
 
 	mailListener.on("mail:parsed", function(mail){
-		eventEmitter.emit('email-received', mail);
+		house.triggerEvent('email-received', mail);
 	});
 };
 

@@ -1,16 +1,12 @@
 // Config
 var  conf = require('./config');
-
-var houseStatus = require('./helpers/house-status');
-
+var house = require('./helpers/house-status');
 var express = require('express');
 var app =  new express();
 var bodyParser = require('body-parser');
 var auth = require('basic-auth');
 var hueAnimation = require("./helpers/hue-animation");
 var log = require("./helpers/log.js");
-var events = require('events');
-var eventEmitter = new events.EventEmitter();
 var roku = require('./helpers/roku');
 
 log.startup();
@@ -21,13 +17,13 @@ log.startup("STARTING SERVICE: server.js on port: " + conf.port);
 // Register Event Listeners
 ////////////////////////////////////////////////////////////
 var registerListeners = require('./listeners/');
-registerListeners(eventEmitter);
+registerListeners(house);
 
 ////////////////////////////////////////////////////////////
 // Register Event Listeners
 ////////////////////////////////////////////////////////////
 var registerMailListener = require('./helpers/mail-listener');
-registerMailListener(eventEmitter);
+registerMailListener(house);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -98,13 +94,13 @@ router.route('/trigger-event').post(function(req, res){
 		res.status(400).send({"error": "Event Not Defined - An 'event' parameter was not sent."});
 	} else {
 		var args = req.body.args ? req.body.args : {};
-		eventEmitter.emit(req.body.event, args, houseStatus);
+		house.triggerEvent(req.body.event, args);
 		res.status(200).send({"message": "Event '" + req.body.event + "' has been triggered with " + args + "."});	
 	}
 });
 
 router.route('/status').get(function(req, res){
-	res.status(200).send(houseStatus);
+	res.status(200).send(house.getStatusReport());
 });
 
 
