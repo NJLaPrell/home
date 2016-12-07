@@ -10,9 +10,8 @@ module.exports = {
 		}
 	},
 	log: function(msg, type, script){
-		var currentDate = new Date();
 		script = this.getScript(script);
-		console.log(currentDate.toString() + "\r\n" + type + ": " + script + "\r\n" + msg + "\r\n\r\n");
+		console.log(this.getDate() + "\r\n" + type + ": " + script + "\r\n" + msg + "\r\n");
 	},
 	error: function(msg, script){
 		//var trace = "\r\nTRACE -- file: " + stackTrace.getFileName() + " Function: " + stackTrace.getFunctionName() + " Line: " + stackTrace.getLineNumber();		
@@ -23,5 +22,21 @@ module.exports = {
 	},
 	info: function(msg, script){
 		this.log(msg, "INFO", script);
+	},
+	getDate: function(){
+		var datePieces = {};
+		var date = new Date();
+		datePieces.y = date.getFullYear().toString();
+		datePieces.m = (date.getMonth()+1).toString();
+		datePieces.d = date.getDay().toString();
+		datePieces.h = date.getHours();
+		datePieces.mi = date.getMinutes();
+		datePieces.s = date.getSeconds();
+		for (var piece in datePieces){
+			if(datePieces.hasOwnProperty(piece)){
+				datePieces[piece] = datePieces[piece] < 10 ? '0' + datePieces[piece] : datePieces[piece];
+			}
+		}
+		return datePieces.y + '-' + datePieces.m + '-' + datePieces.d + ' ' + datePieces.h + ':' + datePieces.mi + ':' + datePieces.s;
 	}
 };
