@@ -19,7 +19,8 @@ module.exports = {
 		powered: true,
 		powerOutSince: null,
 		internetAccess: null,
-		upsStatus: null
+		upsStatus: null,
+		tvStatus: null
 	},
 	getStatus: function(status){
 		if(typeof this.status[status] !== undefined){

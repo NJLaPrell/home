@@ -96,6 +96,19 @@ module.exports = {
 		});
 	},
 
+	getScreenSaverMode: function(response){
+		this.sendRequest("/query/active-app", "GET", function(res){
+			var parseString = require('xml2js').parseString;
+			parseString(res.body, function (err, result) {
+				var screensaver = null;
+				if(result){
+					screensaver = typeof result["active-app"].screensaver === 'undefined' ? false : true;
+				}
+                response(screensaver);
+              });
+		});
+	},
+
 	sendRequest: function(path, method, response){
 		var conf = require('../config');
 		var ops = {
@@ -114,14 +127,14 @@ module.exports = {
             res.on('data', function(chunk) {
               body += chunk;
             });
-            res.on('end', function(res){
+            res.on('end', function(){
               response({
               	status:200,
               	message: "Success - The TV command '" + self.cmd + "' has been executed.",
               	body: body
               });
             });
-		}).on('error', function(res){
+		}).on('error', function(){
 			response({status:500, message:"Unknown Error - The HTTP request to Roku failed."});
 		}).end();
 	}
