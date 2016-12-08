@@ -1,7 +1,7 @@
 // Imported Modules
 var request = require('request');
 var roku = require('../helpers/roku');
-log = require('../helpers/log.js');
+var log = require('../helpers/log.js');
 
 // Log the started schedule
 log.startup("Job Scheduled");

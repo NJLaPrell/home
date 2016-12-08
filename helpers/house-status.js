@@ -17,7 +17,9 @@ module.exports = {
 		brendaslocation: null,
 		motionLastDetected: null,
 		powered: true,
-		internetAccess: null
+		powerOutSince: null,
+		internetAccess: null,
+		upsStatus: null
 	},
 	getStatus: function(status){
 		if(typeof this.status[status] !== undefined){
