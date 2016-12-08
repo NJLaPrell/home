@@ -11,8 +11,8 @@ house.log.startup();
 house.log.startup("STARTING SERVICE: server.js on port: " + house.conf.port);
 
 
-var startJobs = require('./jobs/');
-startJobs(house);
+//var startJobs = require('./jobs/');
+//startJobs(house);
 
 
 ////////////////////////////////////////////////////////////
