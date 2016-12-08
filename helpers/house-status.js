@@ -55,10 +55,10 @@ module.exports = {
 	},
 	getDebugInfo: function(){
 		return {
+			status: this.status,
 			eventsFired: this.eventsFired,
 			listenersTriggered: this.listenersTriggered,
-			listenersRegistered: this.listenersRegistered,
-			status: this.status
+			listenersRegistered: this.listenersRegistered
 		};
 	},
 	getScript: function(script){
