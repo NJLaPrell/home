@@ -1,6 +1,6 @@
 // Imported Modules
 var log = require('../helpers/log.js');
-var request = require('request');
+var triggerEvent = require('../helpers/trigger-event.js');
 
 // Log the started schedule
 log.startup("Job Scheduled");
@@ -29,22 +29,7 @@ module.exports = {
 		  		batteryVoltage: status.BATTV,
 		  		timeOnBattery: status.TONBATT
 		  	};
-			var conf = require('../config.js'); 
-			var payload = {
-				overrideUser: conf.uName,
-				overridePassword: conf.password,
-				event: "ups-status",
-				args: simpleStatus
-			};
-			request.post(
-			    'http://localhost/home/trigger-event',
-			    {json: payload},
-			    function (error, response, body) {
-			        if (error) {
-			            log.error("Unable to trigger ups-status event: " + error);
-			        } 
-			    }
-			);
+		  	triggerEvent('ups-status', simpleStatus);
 		});
 	}
 };
