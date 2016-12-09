@@ -16,7 +16,8 @@
   "smtp-connection": "*",
   "mail-listener2": "*",
   "request": "*",
-  "handlebars": "*"
+  "handlebars": "*",
+  "ping": "*"
   },
   "scripts": {
     "test": "node server.js | node jobs.js | node wemo.js",
