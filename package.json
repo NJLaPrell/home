@@ -15,7 +15,8 @@
   "forever": "*",
   "smtp-connection": "*",
   "mail-listener2": "*",
-  "request": "*"
+  "request": "*",
+  "handlebars": "*"
   },
   "scripts": {
     "test": "node server.js | node jobs.js | node wemo.js",

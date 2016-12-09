@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 var auth = require('basic-auth');
 var hueAnimation = require("./helpers/hue-animation");
 var roku = require('./helpers/roku');
+var Handlebars = require('handlebars');
+var fs = require('fs');
 
 house.log.startup();
 house.log.startup("STARTING SERVICE: server.js on port: " + house.conf.port);
@@ -36,12 +38,13 @@ var router = express.Router();
 // MODERATOR ROUTE
 ////////////////////////////////////////////////////////////
 router.use(function(req, res, next){
+
 	// Check for basic authentication
 	var credentials = auth(req);
-	if(req.body.overrideUser){
+	if(req.body.overrideUser || req.query.overrideUser){
 		credentials = {
-			name: req.body.overrideUser,
-			pass: req.body.overridePassword
+			name: req.body.overrideUser ? req.body.overrideUser : req.query.overrideUser,
+			pass: req.body.overridePassword ? req.body.overridePassword : req.query.overridePassword
 		};
 	} 
 	if(!credentials || credentials.name !== house.conf.uName || credentials.pass !== house.conf.password){
@@ -110,9 +113,21 @@ router.route('/debug').get(function(req, res){
 });
 
 
+
+
+
+
+router.route('/dashboard').get(function(req, res){
+	fs.readFile(__dirname + '/templates/dashboard.html', 'utf8', function(err, html){
+		var template = Handlebars.compile(html);
+		res.send(template(house.getDebugInfo()));
+	});
+});
+
 // Rout all the calls through /home
 app.use('/home', router);
 
 app.use(express.static('static'));
+
 app.listen(house.conf.port);
 

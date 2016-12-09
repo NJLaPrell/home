@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Home Dashboard</title>
+	<meta charset="utf-8"  />
+</head>
+
+<body>
+
+    <p><b>Time:</b> {{#if status.daytime}}Day{{else if status.nighttime}}Night{{else}}<i>Unknown</i>{{/if}}</p>
+    {{#each status as |stat|}}
+    	<p><b>{{@key}}:</b> {{stat}}</p>
+    {{/each}}
+    <hr />
+    {{#each status.upsStatus as |stat|}}
+    	{{#if stat}}
+    	<p><b>{{@key}}:</b> {{stat}}</p>
+    	{{/if}}
+    {{/each}}
+
+</body>
+</html>
