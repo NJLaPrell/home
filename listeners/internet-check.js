@@ -1,11 +1,25 @@
+var HueAnimation = require('../helpers/hue-animation.js');
+
 module.exports = function(house){
 	house.listenForEvent('internetCheck', function(args){
 		house.recordTriggeredListener('internetCheck');
+
+		// Set the internetAccess status variable
 		house.setStatus('internetAccess', args.pass);
-		if(house.getStatus('internetDownSince') && args.pass){
-			house.setStatus('internetDownSince', null);
-		} else if(house.getStatus('internetDownSince') == null && args.fail){
-			house.setStatus('internetDownSince', date.toString());
+		
+		var outSince = house.getStatus('internetOutSince');
+		var date = new Date();
+
+		// The internet just came back up
+		if(outSince !== null && args.pass){
+			house.setStatus('internetOutSince', null);
+			house.log.info("Internet just came back up");
+		// The internet just went down
+		} else if(outSince === null && !args.pass){
+			house.log.info("Internet just went down");
+			house.setStatus('internetOutSince', date.toString());
+			var animation = new HueAnimation();
+			animation.trigger("panic");
 		}	
 	});
 };
