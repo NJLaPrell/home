@@ -19,6 +19,7 @@ module.exports = {
 		powered: true,
 		powerOutSince: null,
 		internetAccess: null,
+		internetOutSince: null,
 		upsStatus: null,
 		tvStatus: null
 	},

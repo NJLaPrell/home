@@ -6,14 +6,18 @@ module.exports = function(house){
 
 		// Set the internetAccess status variable
 		house.setStatus('internetAccess', args.pass);
+		
+		var outSince = house.getStatus('internetOutSince');
+		var date = new Date();
 
 		// The internet just came back up
-		if(house.getStatus('internetDownSince') && args.pass){
-			house.setStatus('internetDownSince', null);
-			
+		if(outSince !== null && args.pass){
+			house.setStatus('internetOutSince', null);
+			house.log.info("Internet just came back up");
 		// The internet just went down
-		} else if(house.getStatus('internetDownSince') == null && args.fail){
-			house.setStatus('internetDownSince', date.toString());
+		} else if(outSince === null && !args.pass){
+			house.log.info("Internet just went down");
+			house.setStatus('internetOutSince', date.toString());
 			var animation = new HueAnimation();
 			animation.trigger("panic");
 		}	
