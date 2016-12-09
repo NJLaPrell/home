@@ -78,12 +78,23 @@ module.exports = {
 	    Error.prepareStackTrace = originalFunc; 
 	    return callerfile;
 	},
-	recordTriggeredListener(event){
+	recordTriggeredListener: function(event){
 		var date = new Date();
 		this.listenersTriggered.push({
 			time: date.toString(),
 			listener: this.getScript(),
 			triggeredBy: event	
 		});
+		this.trimDebugHistory();
+	},
+	trimDebugHistory: function(){
+		if(this.listenersTriggered.length > this.conf.maxDebugHistory || this.eventsFired.length > this.conf.maxDebugHistory){
+			if(this.listenersTriggered.length > this.conf.minDebugHistory){
+				this.listenersTriggered.splice(0,(this.listenersTriggered.length - this.conf.minDebugHistory));
+			}
+			if(this.eventsFired.length > this.conf.minDebugHistory){
+				this.eventsFired.splice(0,(this.eventsFired.length - this.conf.minDebugHistory));
+			}
+		}
 	}
 };
