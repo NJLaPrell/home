@@ -2,6 +2,7 @@
 var request = require('request');
 var roku = require('../helpers/roku');
 var log = require('../helpers/log.js');
+var ping = require('ping');
 
 // Log the started schedule
 log.startup("Job Scheduled");
@@ -39,11 +40,8 @@ module.exports = {
 			    }
 			);
 		};
-
-		http.request(ops,function(res){
-			triggerEvent(true);
-		}).on('error', function(res){
-			triggerEvent(false);
-		}).end();
+		ping.sys.probe("8.8.8.8", function(isAlive){
+			triggerEvent(isAlive);
+		});
 	}
 };
