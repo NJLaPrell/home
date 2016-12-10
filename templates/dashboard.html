@@ -83,24 +83,49 @@
 
 
     <div class="ui-grid-b">
+
         <div class="ui-block-a">
-            <div class="ui-bar ui-bar-a" style="text-align:center;">
-            Internet <br />
-            (Content coming soon)
-            </div>
+            {{#unless status.internet}}
+                <div class="ui-bar ui-bar-a alert alert-danger" style="text-align:center;padding:5px;">
+                    Internet <br />
+                    <img src="/images/internet.png" /><br />
+                    Down
+                </div>
+            {{/unless}}    
+            {{#if status.internet}}
+               <div class="ui-bar ui-bar-a" style="text-align:center;">
+                    Internet <br />
+                    <img src="/images/internet.png" /><br />
+                    Up
+                </div>
+            {{/if}}
         </div>
+
         <div class="ui-block-b">
-            <div class="ui-bar ui-bar-a" style="text-align:center;">
-            Power <br />
-            (Content coming soon)
-            </div>
+            {{#unless status.powered}}
+                <div class="ui-bar ui-bar-a alert alert-danger" style="text-align:center;padding:5px;">
+                    Power <br />
+                    <img src="/images/power.png" /><br />
+                    Offline
+                </div>
+            {{/unless}}
+            {{#if status.powered}}
+                <div class="ui-bar ui-bar-a" style="text-align:center;">
+                    Power <br />
+                    <img src="/images/power.png" /><br />
+                    Online
+                </div>
+            {{/if}}
         </div>
+
         <div class="ui-block-c">
             <div class="ui-bar ui-bar-a" style="text-align:center;">
             UPS <br />
-            (Content coming soon)
+            <img src="/images/ups.png" /><br />
+            {{status.ups.status}}
             </div>
         </div>
+
     </div>
 
     <div data-role="collapsible">
