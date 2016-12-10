@@ -21,7 +21,15 @@ module.exports = {
 		internetAccess: null,
 		internetOutSince: null,
 		upsStatus: null,
-		tvStatus: null
+		tvStatus: null,
+		currentWeather: {
+			description: null,
+			temp: null,
+			humidity: null,
+			wind: null,
+			clouds: null,
+			icon: null
+		}
 	},
 	getStatus: function(status){
 		if(typeof this.status[status] !== undefined){
