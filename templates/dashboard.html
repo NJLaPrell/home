@@ -2,22 +2,88 @@
 <html>
 
 <head>
-	<title>Home Dashboard</title>
-	<meta charset="utf-8"  />
-</head>
+    <title>Home Dashboard</title>
+    <meta charset="utf-8"  />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </head>
 
 <body>
+<div data-role="page">
+    <div data-role="header">Home Dashboard</div>
+    <div role="main" class="ui-content">
 
-    <p><b>Time:</b> {{#if status.daytime}}Day{{else if status.nighttime}}Night{{else}}<i>Unknown</i>{{/if}}</p>
-    {{#each status as |stat|}}
-    	<p><b>{{@key}}:</b> {{stat}}</p>
-    {{/each}}
-    <hr />
-    {{#each status.upsStatus as |stat|}}
-    	{{#if stat}}
-    	<p><b>{{@key}}:</b> {{stat}}</p>
-    	{{/if}}
-    {{/each}}
 
+    {{#unless status.powered}}
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+          The power is out! Running on backup power.<br />
+          <b>Estimated time remaining:</b> {{status.ups.timeLeft}} ({{status.ups.batteryCharge}})<br />
+          <b>Outage Duration:</b> {{status.ups.timeOnBattery}}
+        </div>
+    {{/unless}}
+
+    {{#unless status.internet}}
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+          The connection to the internet is down!
+        </div>
+    {{/unless}}
+
+    <div class="ui-grid-b">
+        <div class="ui-block-a">
+            <div class="ui-bar ui-bar-a" style="text-align:center;">
+            It is currently
+                {{#if status.daytime}}
+                    <img src="/images/day.png" /><br />Daytime
+                {{/if}}
+                {{#if status.nighttime}}
+                    <img src="/images/night.png" /><br />Night
+                {{/if}}   
+            </div>
+        </div>
+        <div class="ui-block-b">
+            <div class="ui-bar ui-bar-a" style="text-align:center;">Nick Is
+                {{#if status.nickIsAway}}
+                    <img src="/images/away.png" /><br />Away
+                {{/if}}
+                {{#if status.nickIsHome}}
+                    <img src="/images/home.png" /><br />Home
+                {{/if}}  
+                {{#if status.nickIsUnknown}}
+                    <img src="/images/unknown.png" /><br />Unknown
+                {{/if}}  
+            </div>
+        </div>
+        <div class="ui-block-c">
+            <div class="ui-bar ui-bar-a" style="text-align:center;">Brenda Is
+                {{#if status.brendaIsAway}}
+                    <img src="/images/away.png" /><br />Away
+                {{/if}}
+                {{#if status.brendaIsHome}}
+                    <img src="/images/home.png" /><br />Home
+                {{/if}}  
+                {{#if status.brendaIsUnknown}}
+                    <img src="/images/unknown.png" /><br />Unknown
+                {{/if}}  
+            </div>
+        </div>
+    </div>
+    
+ 
+
+    </div>
+    <div data-role="footer">{{status.serverTime}}</div>
+</div>
 </body>
 </html>

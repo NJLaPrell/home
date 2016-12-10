@@ -113,14 +113,11 @@ router.route('/debug').get(function(req, res){
 });
 
 
-
-
-
-
 router.route('/dashboard').get(function(req, res){
 	fs.readFile(__dirname + '/templates/dashboard.html', 'utf8', function(err, html){
 		var template = Handlebars.compile(html);
-		res.send(template(house.getDebugInfo()));
+		var model = require("./models/dashboard.js");
+		res.send(template(model(house)));
 	});
 });
 
