@@ -31,6 +31,7 @@ module.exports = function(house){
 	model.status.ups.timeLeft = house.status.upsStatus ? house.status.upsStatus.timeLeft : 'Unknown';
 	model.status.ups.batteryVoltage = house.status.upsStatus ? house.status.upsStatus.batteryVoltage : 'Unknown';
 	model.status.ups.timeOnBattery = house.status.upsStatus ? house.status.upsStatus.timeOnBattery : 'Unknown';
+	model.status.currentWeather = house.status.currentWeather;
 	model.debug = {
 		listenersTriggered: house.listenersTriggered,
 		listenersRegistered: house.listenersRegistered,
