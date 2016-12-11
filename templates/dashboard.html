@@ -19,7 +19,7 @@
     </head>
 
 <body>
-<div data-role="page">
+<div data-role="page" id="dashboard">
     <div data-role="header">Home Dashboard</div>
     <div role="main" class="ui-content">
 
@@ -149,9 +149,29 @@
         <p>Coming soon...</p>
     </div>
 
+    <a href="#event-log" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left" data-rel="dialog" data-transition="pop">Event Log</a>
+    <a href="#error-log" class="ui-btn ui-btn-inline ui-icon-bars ui-btn-icon-left" data-rel="dialog" data-transition="pop">Error Log</a>
 
     </div>
     <div data-role="footer">{{status.serverTime}}</div>
+</div>
+
+<div data-role="page" dialog="true" id="error-log">
+    <div data-role="header" data-theme="b">
+        <h1>Error Log</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <pre>{{errorLog}}</pre>
+    </div>
+</div>
+
+<div data-role="page" dialog="true" id="event-log">
+    <div data-role="header" data-theme="b">
+        <h1>event Log</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <pre>Coming soon...</pre>
+    </div>
 </div>
 </body>
 </html>

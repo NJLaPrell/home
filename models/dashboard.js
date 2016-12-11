@@ -1,4 +1,5 @@
 var date = require('../helpers/date-time');
+var fs = require('fs');
 
 module.exports = function(house){
 	var model = {}
@@ -38,5 +39,13 @@ module.exports = function(house){
 		listenersRegistered: house.listenersRegistered,
 		eventsFired: house.eventsFired
 	};
+
+
+
+var contents = fs.readFileSync(__dirname + '/../logs/log.log');
+model.errorLog = contents;
+		//model.errorLog = contents.replace(/(?:\r\n|\r|\n)/g, '<br />');
+
+
 	return model;
 }
