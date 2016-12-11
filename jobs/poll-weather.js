@@ -23,9 +23,9 @@ module.exports = {
 		        var response = JSON.parse(body);
 		        var args = {
 		        	description: response.weather[0].main,
-		        	temp: response.main.temp,
+		        	temp: Math.round(response.main.temp),
 		        	humidity: response.main.humidity,
-		        	wind: response.wind.speed,
+		        	wind: Math.round(response.wind.speed),
 		        	clouds: response.clouds.all,
 		        	icon: response.weather[0].icon
 		        };
