@@ -1,4 +1,5 @@
 var HueAnimation = require('../helpers/hue-animation.js');
+var date = require('../helpers/date-time.js');
 
 module.exports = function(house){
 	house.listenForEvent('internetCheck', function(args){
@@ -8,7 +9,6 @@ module.exports = function(house){
 		house.setStatus('internetAccess', args.pass);
 		
 		var outSince = house.getStatus('internetOutSince');
-		var date = new Date();
 
 		// The internet just came back up
 		if(outSince !== null && args.pass){
@@ -17,7 +17,7 @@ module.exports = function(house){
 		// The internet just went down
 		} else if(outSince === null && !args.pass){
 			house.log.info("Internet just went down");
-			house.setStatus('internetOutSince', date.toString());
+			house.setStatus('internetOutSince', date.getDateTime());
 			var animation = new HueAnimation();
 			animation.trigger("panic");
 		}	

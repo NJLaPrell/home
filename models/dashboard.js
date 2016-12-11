@@ -1,8 +1,9 @@
+var date = require('../helpers/date-time');
+
 module.exports = function(house){
-	var date = new Date();
 	var model = {}
 	model.status = {};
-	model.status.serverTime = date.toString();
+	model.status.serverTime = date.getDateTime();
 	model.status.daytime = house.status.daytime 
 	model.status.nighttime = house.status.nighttime;
 	model.status.nickIsHome = house.status.nickslocation == 'home' ? true : false;

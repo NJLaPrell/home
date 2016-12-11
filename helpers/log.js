@@ -1,3 +1,4 @@
+var date = require('./date-time.js');
 module.exports = {
 	getScript: function(script){
 		var originalFunc = Error.prepareStackTrace;
@@ -17,7 +18,7 @@ module.exports = {
 	},
 	log: function(msg, type, script){
 		script = this.getScript(script);
-		console.log(this.getDate() + "\r\n" + type + ": " + script + "\r\n" + msg + "\r\n");
+		console.log(date.getDatTime() + "\r\n" + type + ": " + script + "\r\n" + msg + "\r\n");
 	},
 	error: function(msg, script){
 		//var trace = "\r\nTRACE -- file: " + stackTrace.getFileName() + " Function: " + stackTrace.getFunctionName() + " Line: " + stackTrace.getLineNumber();		
@@ -31,25 +32,9 @@ module.exports = {
 	},
 	startup: function(msg, script){
 		if(!msg){
-			console.log('********** STARTING SERVER ********** (' + this.getDate(script) + ')');
+			console.log('********** STARTING SERVER ********** (' + date.getDateTime() + ')');
 		} else {
 			console.log(msg + " (" + this.getScript() + ")");
 		}
-	},
-	getDate: function(){
-		var datePieces = {};
-		var date = new Date();
-		datePieces.y = date.getFullYear().toString();
-		datePieces.m = (date.getMonth()+1).toString();
-		datePieces.d = date.getDate().toString();
-		datePieces.h = date.getHours();
-		datePieces.mi = date.getMinutes();
-		datePieces.s = date.getSeconds();
-		for (var piece in datePieces){
-			if(datePieces.hasOwnProperty(piece)){
-				datePieces[piece] = datePieces[piece] < 10 ? '0' + datePieces[piece] : datePieces[piece];
-			}
-		}
-		return datePieces.y + '-' + datePieces.m + '-' + datePieces.d + ' ' + datePieces.h + ':' + datePieces.mi + ':' + datePieces.s;
 	}
 };

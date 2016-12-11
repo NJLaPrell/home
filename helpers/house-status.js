@@ -2,6 +2,7 @@ var conf = require('../config.js');
 var log = require('./log');
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
+var date = require('./date-time.js');
 
 module.exports = {
 	eventEmitter: eventEmitter,
@@ -45,14 +46,12 @@ module.exports = {
 		this.status[status] = value;
 	},
 	triggerEvent: function(eventName, args){
-		var date = new Date();
-		this.eventsFired.push({"time": date.toString(), "event": eventName});
+		this.eventsFired.push({"time": date.getDateTime(), "event": eventName});
 		this.eventEmitter.emit(eventName, args);	
 	},
 	listenForEvent: function(eventName, eventAction){
-		var date = new Date();
 		this.listenersRegistered.push({
-			time: date.toString(),
+			time: date.getDateTime(),
 			listener: this.getScript(),
 			event: eventName
 		});
@@ -88,9 +87,8 @@ module.exports = {
 	    return callerfile;
 	},
 	recordTriggeredListener: function(event){
-		var date = new Date();
 		this.listenersTriggered.push({
-			time: date.toString(),
+			time: date.getDateTime(),
 			listener: this.getScript(),
 			triggeredBy: event	
 		});
