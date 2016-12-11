@@ -3,6 +3,7 @@ module.exports = function(house){
 		house.recordTriggeredListener('weather');
 		if(args.status == 'freezeing'){
 			house.log.info("LISTENER: It is below freezing.");
+			house.logHistory("Outside temperature dropped below freezing.");
 		}
 	});
 };

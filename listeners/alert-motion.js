@@ -7,6 +7,7 @@ module.exports = function(house){
 		house.setStatus('motionLastDetected', date.toString());
 		if(args.subject.indexOf('Alarm:Cam_495920') != -1 && house.getStatus('nickslocation') == 'away' && house.getStatus('brendaslocation') == 'away'){
 			alert("Motion detected on Camera 495920");
+			house.logHistory("Motion was detected when nobody was home.");
 		}		
 	});
 };

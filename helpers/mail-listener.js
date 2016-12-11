@@ -6,13 +6,14 @@ var MailListener = require("mail-listener2");
 
 
 module.exports = function(house){
-
+	
 	house.log.startup("MailListener has started.");
 	var mailListener = new MailListener(conf.imap);
 
 	mailListener.start();
 
 	mailListener.on("server:connected",function(){
+		house.logHistory("MailListener has connected.");
 		house.log.startup("MailListener has connected.");
 	});
 
@@ -21,6 +22,7 @@ module.exports = function(house){
 	});
 
 	mailListener.on("error", function(err){
+		house.logHistory("MailListener threw an error.");
 		house.log.error(err);
 	});
 };

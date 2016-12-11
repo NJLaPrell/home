@@ -12,9 +12,11 @@ module.exports = function(house){
 
 		// The internet just came back up
 		if(outSince !== null && args.pass){
+			house.logHistory("The internet is back online.");
 			house.setStatus('internetOutSince', null);
 		// The internet just went down
 		} else if(outSince === null && !args.pass){
+			house.logHistory("The internet is out.");
 			house.setStatus('internetOutSince', date.getDateTime());
 			var animation = new HueAnimation();
 			animation.trigger("panic", 30);

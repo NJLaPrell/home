@@ -40,12 +40,9 @@ module.exports = function(house){
 		eventsFired: house.eventsFired
 	};
 
+	model.errorLog  = fs.readFileSync(__dirname + '/../logs/log.log');
 
-
-var contents = fs.readFileSync(__dirname + '/../logs/log.log');
-model.errorLog = contents;
-		//model.errorLog = contents.replace(/(?:\r\n|\r|\n)/g, '<br />');
-
+	model.status.eventHistory = house.status.eventHistory;
 
 	return model;
 }

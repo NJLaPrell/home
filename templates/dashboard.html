@@ -170,7 +170,16 @@
         <h1>event Log</h1>
     </div>
     <div role="main" class="ui-content">
-        <pre>Coming soon...</pre>
+        
+        {{#each status.eventHistory as |day|}}
+            <hr />
+            <p><b>{{@key}}</b></p>
+            <ul>
+            {{#each day as |event|}}
+                <li>{{event.time}} - {{event.event}}</li>
+            {{/each}}
+            </ul>   
+       {{/each}}
     </div>
 </div>
 </body>

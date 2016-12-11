@@ -6,9 +6,11 @@ module.exports = function(house){
 		var powered = args.powerStatus == 'off' ? false : true;
 		house.setStatus('powered', powered);
 		if(!powered){
+			house.logHistory("Power was lost.");
 			alert("POWER LOSS - The UPS has been triggered, indicating a power outage.");
 			house.setStatus('powerOutSince', date.toString());
 		} else {
+			house.logHistory("Power was restored.");
 			alert("POWER RESTORED - The UPS has detected that power has been restored.");
 			house.setStatus('powerOutSince', null);
 		}

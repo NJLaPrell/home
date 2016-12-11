@@ -30,7 +30,8 @@ module.exports = {
 			wind: null,
 			clouds: null,
 			icon: null
-		}
+		},
+		eventHistory: {}
 	},
 	getStatus: function(status){
 		if(typeof this.status[status] !== undefined){
@@ -103,5 +104,13 @@ module.exports = {
 				this.eventsFired.splice(0,(this.eventsFired.length - this.conf.minDebugHistory));
 			}
 		}
+	},
+	logHistory: function(text){
+		var day = date.getDate();
+		var time = date.getTime();
+		if(!this.status.eventHistory[day]){
+			this.status.eventHistory[day] = [];
+		}
+		this.status.eventHistory[day].push({time: time, event: text});
 	}
 };
