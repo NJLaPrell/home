@@ -82,7 +82,10 @@ var HueAnimation = (function() {
 		});
 	};
 
-	this.panic = function(){
+	this.panic = function(duration){
+		if(duration){
+			this.intervalMax = 2 * 5 * duration;
+		}
 		var self = this;
 		var lowerLampOff = this.lightState.create().off().transitionInstant();
 		var lampsOn = this.lightState.create().on().rgb(255, 255, 255).bri(255).sat(255).transitionInstant();
@@ -100,11 +103,11 @@ var HueAnimation = (function() {
 		});
 	};
 
-	this.trigger = function(mode){
+	this.trigger = function(mode, duration){
 		var self = this;
 		this.setInitialState([1,3,4]).then(function(){
 			if(mode == "panic"){
-				self.panic();
+				self.panic(duration);
 			}
 		}).catch(function(reason){
 			console.log(reason);

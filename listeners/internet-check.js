@@ -13,13 +13,11 @@ module.exports = function(house){
 		// The internet just came back up
 		if(outSince !== null && args.pass){
 			house.setStatus('internetOutSince', null);
-			house.log.info("Internet just came back up");
 		// The internet just went down
 		} else if(outSince === null && !args.pass){
-			house.log.info("Internet just went down");
 			house.setStatus('internetOutSince', date.getDateTime());
 			var animation = new HueAnimation();
-			animation.trigger("panic");
+			animation.trigger("panic", 30);
 		}	
 	});
 };
