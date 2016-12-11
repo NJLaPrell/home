@@ -18,7 +18,7 @@ module.exports = {
 	},
 	log: function(msg, type, script){
 		script = this.getScript(script);
-		console.log(date.getDatTime() + "\r\n" + type + ": " + script + "\r\n" + msg + "\r\n");
+		console.log(date.getDateTime() + "\r\n" + type + ": " + script + "\r\n" + msg + "\r\n");
 	},
 	error: function(msg, script){
 		//var trace = "\r\nTRACE -- file: " + stackTrace.getFileName() + " Function: " + stackTrace.getFunctionName() + " Line: " + stackTrace.getLineNumber();		
