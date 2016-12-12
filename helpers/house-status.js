@@ -31,7 +31,8 @@ module.exports = {
 			clouds: null,
 			icon: null
 		},
-		eventHistory: {}
+		eventHistory: {},
+		motionWhileAway: false
 	},
 	getStatus: function(status){
 		if(typeof this.status[status] !== undefined){
