@@ -17,8 +17,6 @@ var fauxMo = new FauxMo(
             var payload = {};
             if(response.status!=200){
               log.error("Failed to execute faux tv switch: " + action + "- " + response.message);
-            } else {
-              log.info("Executed faux tv switch: " + action);
             }
           });
         }
@@ -31,8 +29,6 @@ var fauxMo = new FauxMo(
             var payload = {};
             if(response.status!=200){
               log.error("Failed to execute Netflix switch - " + response.message);
-            } else {
-              log.info("Executed Netflix switch.");
             }
           });
         }
@@ -45,8 +41,6 @@ var fauxMo = new FauxMo(
             var payload = {};
             if(response.status!=200){
               log.error("Failed to execute Hulu switch - " + response.message);
-            } else {
-              log.info("Executed Hulu switch.");
             }
           });
         }
@@ -59,8 +53,6 @@ var fauxMo = new FauxMo(
             var payload = {};
             if(response.status!=200){
               log.error("Failed to execute Plex switch - " + response.message);
-            } else {
-              log.info("Executed Plex switch.");
             }
           });
         }
@@ -73,8 +65,6 @@ var fauxMo = new FauxMo(
             var payload = {};
             if(response.status!=200){
               log.error("Failed to execute Amazon switch - " + response.message);
-            } else {
-              log.info("Executed Amazon switch.");
             }
           });
         }
