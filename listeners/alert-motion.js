@@ -1,10 +1,10 @@
 var alert = require("../helpers/text-alert.js");
+var date = require("../helpers/date-time.js");
 
 module.exports = function(house){
 	house.listenForEvent('email-received', function(args){
 		house.recordTriggeredListener('email-received');
-		var date = new Date();
-		house.setStatus('motionLastDetected', date.toString());
+		house.setStatus('motionLastDetected', date.getDateTime());
 
 		var away = house.getStatus('nickslocation') == 'away' && house.getStatus('brendaslocation') == 'away' ? true : false;
 		var motion = args.subject.indexOf('Alarm:Cam_495920') != -1 ? true : false;
