@@ -1,5 +1,4 @@
 var alert = require("../helpers/text-alert.js");
-var date = require("../helpers/date-time.js");
 
 module.exports = function(house){
 	house.listenForEvent('email-received', function(args){
@@ -12,7 +11,7 @@ module.exports = function(house){
 		if(motion && away){
 			alert("Motion detected on Camera 495920");
 			house.logHistory("Motion was detected when nobody was home.");
-			house.setStatus('motionWhileAway', date.getDateTime());
+			house.setStatus('motionWhileAway', true);
 		} else if(motion && !away){
 			house.setStatus('motionWhileAway', false);
 		}	

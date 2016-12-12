@@ -44,5 +44,7 @@ module.exports = function(house){
 
 	model.status.eventHistory = house.status.eventHistory;
 
+	model.status.motionWhileAway = house.status.motionWhileAway;
+
 	return model;
 }
