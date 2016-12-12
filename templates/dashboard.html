@@ -25,6 +25,13 @@
 
     <img src="http://openweathermap.org/img/w/{{status.currentWeather.icon}}.png" /> {{status.currentWeather.description}} - {{status.currentWeather.temp}}°F / Wind: {{status.currentWeather.wind}} mph
 
+    {{unless status.motionWhileAway}}
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+          Motion has been detected while nobody is home.<br />
+          <b>Motion Last Detected:</b> {{status.motionLastDetected}}
+        </div>
+    {{/unless}}
 
     {{#unless status.powered}}
         <div class="alert alert-danger" role="alert">
@@ -128,6 +135,12 @@
             </div>
         </div>
 
+    </div>
+
+
+    <div data-role="collapsible">
+        <h4>Camera</h4>
+        <p><b>Motion Last Detected:</b> {{status.motionLastDetected}}</p>
     </div>
 
     <div data-role="collapsible">
