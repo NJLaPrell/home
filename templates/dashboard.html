@@ -25,7 +25,7 @@
 
     <img src="http://openweathermap.org/img/w/{{status.currentWeather.icon}}.png" /> {{status.currentWeather.description}} - {{status.currentWeather.temp}}°F / Wind: {{status.currentWeather.wind}} mph
 
-    {{unless status.motionWhileAway}}
+    {{#unless status.motionWhileAway}}
         <div class="alert alert-danger" role="alert">
           <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
           Motion has been detected while nobody is home.<br />
