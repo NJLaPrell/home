@@ -23,17 +23,25 @@ module.exports = {
 		return opts;
 	},
 	toggle: function(name,state){
-		//TODO: get current state and set state to inverse if not defined
+		if(typeof state === 'undefined'){
+			state = !this.getState(name);
+		}
 		smartplug.setSwitchState(state, this.getOptions(name)).catch(function(e) {
-			console.log("Request failed: ", e)
+			console.log("Request failed: ", e);
 		});
-
 	},
 	turnOn: function(name){
 		this.toggle(name,true);
 	},
 	turnOff: function(name){
 		this.toggle(name,false);
+	},
+	getState: function(name){
+		smartplug.getSwitchState(this.getOptions(name)).then(function (state) {
+    		return state;
+		}).catch(function(e) {
+			console.log("Request failed: ", e);
+		});
 	}
 
 };
