@@ -10,7 +10,9 @@ module.exports = function(house){
 		var motion = args.subject.indexOf('Alarm:Cam_495920') != -1 ? true : false;
 		if(motion && away){
 			alert("Motion detected on Camera 495920");
-			house.logHistory("Motion was detected when nobody was home.");
+			if(!house.getStatus('motionWhileAway')){
+				house.logHistory("Motion was detected when nobody was home.");	
+			}
 			house.setStatus('motionWhileAway', true);
 		} else if(motion && !away){
 			house.setStatus('motionWhileAway', false);
