@@ -128,11 +128,19 @@
         </div>
 
         <div class="ui-block-c">
-            <div class="ui-bar ui-bar-a" style="text-align:center;">
-            UPS <br />
-            <img src="/images/ups.png" /><br />
-            {{status.ups.status}}
-            </div>
+            {{#if status.ups.onBattery}}
+                <div class="ui-bar ui-bar-a alert alert-success" style="text-align:center;padding:5px;">
+                    UPS <br />
+                    <img src="/images/ups.png" /><br />
+                    On Battery
+                </div>
+            {{else}}
+                <div class="ui-bar ui-bar-a" style="text-align:center;">
+                    UPS <br />
+                    <img src="/images/ups.png" /><br />
+                    Online
+                </div>
+            {{/if}}
         </div>
 
     </div>
