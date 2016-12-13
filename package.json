@@ -17,7 +17,8 @@
   "mail-listener2": "*",
   "request": "*",
   "handlebars": "*",
-  "ping": "*"
+  "ping": "*",
+  "edimax-smartplug": "*"
   },
   "scripts": {
     "test": "node server.js | node jobs.js | node wemo.js",
