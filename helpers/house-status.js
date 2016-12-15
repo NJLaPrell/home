@@ -11,6 +11,7 @@ module.exports = {
 	eventsFired: [],
 	listenersTriggered: [],
 	listenersRegistered: [],
+	pollsRegistered: {},
 	status: {
 		daytime: null,
 		nighttime: null,
@@ -61,6 +62,10 @@ module.exports = {
 			eventAction(args);
 		});
 	},
+	startPoll: function(poll){
+		this.pollsRegistered[poll.name] = poll;
+		poll.execute();
+	},
 	getStatusReport: function(){
 		return this.status;
 	},
@@ -69,7 +74,8 @@ module.exports = {
 			status: this.status,
 			eventsFired: this.eventsFired,
 			listenersTriggered: this.listenersTriggered,
-			listenersRegistered: this.listenersRegistered
+			listenersRegistered: this.listenersRegistered,
+			pollsRegistered: Object.keys(this.pollsRegistered)
 		};
 	},
 	getScript: function(script){

@@ -28,7 +28,7 @@ poll.setJob(function(){
 	        	humidity: response.main.humidity,
 	        	wind: Math.round(response.wind.speed),
 	        	clouds: response.clouds.all,
-	        	icon: response.weather[0].,
+	        	icon: response.weather[0].icon,
 	        	sunrise: response.sys.sunrise,
 	        	sunset: response.sys.sunset
 	        };
