@@ -9,14 +9,18 @@ var roku = require('./helpers/roku');
 var Handlebars = require('handlebars');
 var fs = require('fs');
 
+////////////////////////////////////////////////////////////
+// Log the Start Sequence
+////////////////////////////////////////////////////////////
 house.log.startup();
 house.log.startup("STARTING SERVICE: server.js on port: " + house.conf.port);
 house.logHistory("Server started.");
 
-
-//var startJobs = require('./jobs/');
-//startJobs(house);
-
+////////////////////////////////////////////////////////////
+// Register Jobs
+////////////////////////////////////////////////////////////
+var startJobs = require('./jobs/');
+startJobs(house);
 
 ////////////////////////////////////////////////////////////
 // Register Event Listeners
@@ -111,15 +115,23 @@ router.route('/trigger-event').post(function(req, res){
 	}
 });
 
+////////////////////////////////////////////////////////////
+// Status Route
+////////////////////////////////////////////////////////////
 router.route('/status').get(function(req, res){
 	res.status(200).send(house.getStatusReport());
 });
 
+////////////////////////////////////////////////////////////
+// Debug Route
+////////////////////////////////////////////////////////////
 router.route('/debug').get(function(req, res){
 	res.status(200).send(house.getDebugInfo());
 });
 
-
+////////////////////////////////////////////////////////////
+// Dashboard Route
+////////////////////////////////////////////////////////////
 router.route('/dashboard').get(function(req, res){
 	fs.readFile(__dirname + '/templates/dashboard.html', 'utf8', function(err, html){
 		var template = Handlebars.compile(html);
@@ -127,6 +139,8 @@ router.route('/dashboard').get(function(req, res){
 		res.send(template(model(house)));
 	});
 });
+
+
 
 // Rout all the calls through /home
 app.use('/home', router);
