@@ -37,7 +37,7 @@ module.exports = {
 		this.toggle(name,false);
 	},
 	getState: function(name){
-		smartplug.getSwitchState(this.getOptions(name)).then(function (state) {
+		return smartplug.getSwitchState(this.getOptions(name)).then(function (state) {
     		return state;
 		}).catch(function(e) {
 			console.log("Request failed: ", e);
