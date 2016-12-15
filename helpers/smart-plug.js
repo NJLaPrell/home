@@ -24,11 +24,20 @@ module.exports = {
 	},
 	toggle: function(name,state){
 		if(typeof state === 'undefined'){
-			state = !this.getState(name);
+			var self = this;
+			state = this.getState(name).then(function(state){
+				smartplug.setSwitchState(!state, self.getOptions(name)).catch(function(e) {
+					console.log("Request failed: ", e);
+				});
+			});
+
+		} else {
+			state = state == 'on' ? true : false;
+				smartplug.setSwitchState(state, this.getOptions(name)).catch(function(e) {
+				console.log("Request failed: ", e);
+			});
 		}
-		smartplug.setSwitchState(state, this.getOptions(name)).catch(function(e) {
-			console.log("Request failed: ", e);
-		});
+		
 	},
 	turnOn: function(name){
 		this.toggle(name,true);
