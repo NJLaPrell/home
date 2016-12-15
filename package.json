@@ -18,7 +18,11 @@
   "request": "*",
   "handlebars": "*",
   "ping": "*",
-  "edimax-smartplug": "*"
+  "edimax-smartplug": "*",
+  "passport": "*",
+  "passport-local": "*",
+  "express-session": "*",
+  "cookie-parser": "*"
   },
   "scripts": {
     "test": "node server.js | node jobs.js | node wemo.js",
