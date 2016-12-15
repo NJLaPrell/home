@@ -9,6 +9,40 @@ var roku = require('./helpers/roku');
 var Handlebars = require('handlebars');
 var fs = require('fs');
 
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+var passport = require('passport');
+var LocalStrategy = require('passport-local');
+
+var funct = function(username, password){
+	return true;
+};
+
+//===============PASSPORT=================
+// Use the LocalStrategy within Passport to login/"signin" users.
+passport.use('local-signin', new LocalStrategy(
+	function(username, password, done) {
+		if(username != house.conf.uName){
+			return done(null, false);
+		}
+		if(password != house.conf.uPass){
+			return done(null, false);
+		}
+		return done(null, username);
+	  }	
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+
+
+
 ////////////////////////////////////////////////////////////
 // Log the Start Sequence
 ////////////////////////////////////////////////////////////
@@ -43,27 +77,63 @@ registerMailListener(house);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(cookieParser());
+app.use(session({secret: 'supernova', saveUninitialized: true, resave: true}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Session-persisted message middleware
+app.use(function(req, res, next){
+  var err = req.session.error,
+      msg = req.session.notice,
+      success = req.session.success;
+
+  delete req.session.error;
+  delete req.session.success;
+  delete req.session.notice;
+
+  if (err) res.locals.error = err;
+  if (msg) res.locals.notice = msg;
+  if (success) res.locals.success = success;
+
+  next();
+});
+
+
+
+
+
 var router = express.Router();
 
 ////////////////////////////////////////////////////////////
 // MODERATOR ROUTE
 ////////////////////////////////////////////////////////////
-router.use(function(req, res, next){
 
-	// Check for basic authentication
+router.use(function(req, res, next){
 	var credentials = auth(req);
-	if(req.body.overrideUser || req.query.overrideUser){
-		credentials = {
-			name: req.body.overrideUser ? req.body.overrideUser : req.query.overrideUser,
-			pass: req.body.overridePassword ? req.body.overridePassword : req.query.overridePassword
-		};
-	} 
-	if(!credentials || credentials.name !== house.conf.uName || credentials.pass !== house.conf.password){
-		res.status(401).send({"error": "Access Denied - Invalid authentication credentials."});
+	// Check for basic authentication
+	if(req.body.overrideUser || req.query.overrideUser || credentials){
+		if(req.body.overrideUser || req.query.overrideUser){
+			credentials = {
+				name: req.body.overrideUser ? req.body.overrideUser : req.query.overrideUser,
+				pass: req.body.overridePassword ? req.body.overridePassword : req.query.overridePassword
+			};
+		}
+		if(credentials.name == house.conf.uName && credentials.pass == house.conf.password){
+			next();
+		} else {
+			res.status(401).send({"error": "Access Denied - Invalid authentication credentials."});
+		}
+	// Check for passport authentication
+	} else if (req.isAuthenticated() || req.url == '/signin') { 
+		next(); 
 	} else {
-		next();	
+	  req.session.error = 'Please sign in!';
+	  res.redirect('/home/signin');
 	}
+	
 });
+
 
 ////////////////////////////////////////////////////////////
 // HUE ANIMATION ROUTES
@@ -139,6 +209,27 @@ router.route('/dashboard').get(function(req, res){
 		res.send(template(model(house)));
 	});
 });
+
+////////////////////////////////////////////////////////////
+// Signin Route
+////////////////////////////////////////////////////////////
+router.route('/signin').get(function(req, res){
+	fs.readFile(__dirname + '/templates/signin.html', 'utf8', function(err, html){
+		var template = Handlebars.compile(html);
+		res.send(template({user: req.user}));
+	});
+});
+
+//sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
+app.post('/home/login', passport.authenticate('local-signin', {
+  successRedirect: '/home/dashboard',
+  failureRedirect: '/home/signin'
+  })
+);
+
+
+
+  
 
 
 
