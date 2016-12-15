@@ -4,8 +4,6 @@ function Poll(settings){
 	this.conf = require('../config.js');
 	this.log = require('./log.js');
 
-	console.log(this.conf);
-
 	this.name = settings.name;
 	this.intervalString = settings.interval;
 	this.executeOnStartup = settings.executeOnStartup;
@@ -39,12 +37,9 @@ Poll.prototype.execute = function(){
 	this.log.startup("Polling scheduled for " + this.name + " to trigger every " + this.intervalString);
 	var self = this;
 	setInterval(function(){self.job();}, this.interval);
-
 	if(this.executeOnStartup){
 		this.job();
 	}
 };
-
-
 
 module.exports = Poll;

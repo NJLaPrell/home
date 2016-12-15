@@ -11,7 +11,6 @@ var settings = {
 var poll = new Poll(settings);
 
 poll.setJob(function(){
-	console.log(JSON.stringify(this));
 	var url = 'http://api.openweathermap.org/data/2.5/weather?id=5318313&APPID=' + this.conf.weatherAPIKey + '&units=imperial';
 	var self = this;
 	http.get(url, function(res){
