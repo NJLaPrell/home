@@ -15,10 +15,10 @@ module.exports = {
 	status: {
 		daytime: null,
 		nighttime: null,
-		nickslocation: null,
-		brendaslocation: null,
+		nickslocation: 'home',
+		brendaslocation: 'home',
 		motionLastDetected: null,
-		powered: true,
+		powered: null,
 		powerOutSince: null,
 		internetAccess: null,
 		internetOutSince: null,
