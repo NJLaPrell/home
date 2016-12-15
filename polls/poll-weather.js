@@ -11,6 +11,7 @@ var settings = {
 var poll = new Poll(settings);
 
 poll.setJob(function(){
+	console.log(JSON.stringify(this));
 	var url = 'http://api.openweathermap.org/data/2.5/weather?id=5318313&APPID=' + this.conf.weatherAPIKey + '&units=imperial';
 	var self = this;
 	http.get(url, function(res){
@@ -28,12 +29,14 @@ poll.setJob(function(){
 	        	humidity: response.main.humidity,
 	        	wind: Math.round(response.wind.speed),
 	        	clouds: response.clouds.all,
-	        	icon: response.weather[0].icon
+	        	icon: response.weather[0].,
+	        	sunrise: response.sys.sunrise,
+	        	sunset: response.sys.sunset
 	        };
 	        self.triggerEvent('weather-status', args);
 	    });
 	}).on('error', function(e){
-	      console.log("Got an error: ", e);
+	      self.log.error("Got an error: ", e);
 	});	
 });
 
