@@ -216,7 +216,7 @@ router.route('/dashboard').get(function(req, res){
 router.route('/signin').get(function(req, res){
 	fs.readFile(__dirname + '/templates/signin.html', 'utf8', function(err, html){
 		var template = Handlebars.compile(html);
-		res.send(template({user: req.user}));
+		res.send(template());
 	});
 });
 
