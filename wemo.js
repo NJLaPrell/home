@@ -74,7 +74,7 @@ var fauxMo = new FauxMo(
         name: 'Tiffany Lamp',
         port: 11006,
         handler: (action) => {
-          triggerEvent('toggleSwitch', {name: "Tiffany Lamp", direction: action});
+          triggerEvent('trigger-toggleSwitch', {name: "Tiffany Lamp", direction: action});
         }
       }
     ]

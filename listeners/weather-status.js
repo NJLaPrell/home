@@ -1,4 +1,15 @@
-module.exports = function(house){
+// Imported Modules
+var Listener = require('../helpers/listener.js');
+
+var settings = {
+	name: 'Weather Status',
+	eventsListened: ['weather-status'],
+	eventsTriggered: ['sunset','sunrise']
+};
+
+var listener = new Listener(settings);
+
+listener.setListener(function(house){
 	house.listenForEvent('weather-status', function(args){
 		house.recordTriggeredListener('weather-status');
 		house.setStatus('currentWeather', args);
@@ -23,4 +34,6 @@ module.exports = function(house){
 			house.triggerEvent('sunrise');
 		}
 	});
-};
+});
+
+module.exports = listener;

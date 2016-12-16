@@ -30,11 +30,11 @@ module.exports = {
 	info: function(msg, script){
 		this.log(msg, "INFO", script);
 	},
-	startup: function(msg, script){
+	startup: function(msg){
 		if(!msg){
 			console.log('********** STARTING SERVER ********** (' + date.getDateTime() + ')');
 		} else {
-			console.log(msg + " (" + this.getScript() + ")");
+			console.log(msg);
 		}
 	}
 };

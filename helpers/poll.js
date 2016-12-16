@@ -34,7 +34,7 @@ Poll.prototype.setJob = function(job){
 };
 
 Poll.prototype.execute = function(){
-	this.log.startup("Polling scheduled for " + this.name + " to trigger every " + this.intervalString);
+	this.log.startup("     Polling scheduled for " + this.name + " to trigger every " + this.intervalString);
 	var self = this;
 	setInterval(function(){self.job();}, this.interval);
 	if(this.executeOnStartup){

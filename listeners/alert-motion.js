@@ -1,7 +1,16 @@
+// Imported Modules
+var Listener = require('../helpers/listener.js');
 var alert = require("../helpers/text-alert.js");
 var date = require("../helpers/date-time.js");
 
-module.exports = function(house){
+var settings = {
+	name: 'Motion Detection',
+	eventsListened: ['email-received']
+};
+
+var listener = new Listener(settings);
+
+listener.setListener(function(house){
 	house.listenForEvent('email-received', function(args){
 		house.recordTriggeredListener('email-received');
 		house.setStatus('motionLastDetected', date.getDateTime());
@@ -18,4 +27,6 @@ module.exports = function(house){
 			house.setStatus('motionWhileAway', false);
 		}	
 	});
-};
+});
+
+module.exports = listener;

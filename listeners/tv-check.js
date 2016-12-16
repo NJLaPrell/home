@@ -1,6 +1,15 @@
+// Imported Modules
+var Listener = require('../helpers/listener.js');
 var roku = require('../helpers/roku'); 
 
-module.exports = function(house){
+var settings = {
+	name: 'TV Check',
+	eventsListened: ['tv-status']
+};
+
+var listener = new Listener(settings);
+
+listener.setListener(function(house){
 	house.listenForEvent('tv-status', function(args){
 		house.recordTriggeredListener('tv-status');
 		house.setStatus('tvStatus', args.status);
@@ -12,4 +21,6 @@ module.exports = function(house){
 			});
 		}
 	});
-};
+});
+
+module.exports = listener;
