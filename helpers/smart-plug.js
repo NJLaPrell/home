@@ -1,5 +1,6 @@
 var conf = require('../config.js');
 var smartplug = require('edimax-smartplug');
+var log = require('./log.js');
 
 module.exports = {
 	options: {
@@ -27,14 +28,14 @@ module.exports = {
 			var self = this;
 			state = this.getState(name).then(function(state){
 				smartplug.setSwitchState(!state, self.getOptions(name)).catch(function(e) {
-					console.log("Request failed: ", e);
+					log.warning("Failed to get the state of switch: " + name);
 				});
 			});
 
 		} else {
 			state = state == 'on' ? true : false;
 				smartplug.setSwitchState(state, this.getOptions(name)).catch(function(e) {
-				console.log("Request failed: ", e);
+				log.warning("Failed to toggle switch " + name + " to " + state + ".");
 			});
 		}
 		
@@ -49,7 +50,7 @@ module.exports = {
 		return smartplug.getSwitchState(this.getOptions(name)).then(function (state) {
     		return state;
 		}).catch(function(e) {
-			console.log("Request failed: ", e);
+			log.warning("Failed to get the state of switch: " + name);
 		});
 	}
 
