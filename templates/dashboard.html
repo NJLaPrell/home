@@ -193,10 +193,14 @@
         <h4>Smart Plugs</h4>
         <fieldset>
             <div data-role="fieldcontain">
+                <ul data-role="listview" data-inset="true" data-divider-theme="a">
                 {{#each status.plugs as |state|}}
-                    <label for="{{@key}}">{{@key}}:</label>
-                    <input class="smartPlugSwitch" type="checkbox" data-role="flipswitch" name="{{@key}}" id="{{@key}}" value="{{@key}}" {{state 'checked="checked"'}} />
+                    <li>
+                        <label for="{{@key}}">{{@key}}:</label>
+                        <input class="smartPlugSwitch" type="checkbox" data-role="flipswitch" name="{{@key}}" id="{{@key}}" value="{{@key}}" {{state 'checked="checked"'}} />
+                    </li>
                 {{/each}}
+                </ul>
             </div>
         </fieldset>
     </div>
