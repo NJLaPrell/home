@@ -185,8 +185,22 @@
     </div>
  
     <div data-role="collapsible">
-        <h4>Hue Lights</h4>
-        <p>Coming soon...</p>
+       <h4>Hue Lights</h4>
+        <fieldset>
+            <div data-role="fieldcontain">
+                <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                {{#each status.hue.groups as |group|}}
+                    <li data-role="list-divider">{{group.name}}</li>
+                    {{#each group.lights as |light|}}
+                    <li>
+                        <label for="{{@key}}">{{light.name}}:</label>
+                        <input class="hueSwitch" type="checkbox" data-role="flipswitch" name="{{@key}}" id="{{@key}}" value="{{@key}}" {{#if light.on}}checked="checked"{{/if}} />
+                    </li>
+                    {{/each}}                      
+                {{/each}}
+                </ul>
+            </div>
+        </fieldset>
     </div>
 
     <div data-role="collapsible">

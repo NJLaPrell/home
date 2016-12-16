@@ -76,14 +76,21 @@ module.exports = function(house){
 	}
 	model.status.hue.groups = {};
 	var group;
-	for(var groupID in house.status.hue.group){
-		group.name = house.status.hue.group[groupID].name;
+	var lightID;
+	for(var groupID in house.status.hue.groups){
+		group = {};
+		group.name = house.status.hue.groups[groupID].name;
 		group.lights = {};
-		for(var id in house.status.hue.group[groupID].lights){
-			group.lights[id] = model.status.hue.lights[id];
+		for(var i = 0; i < house.status.hue.groups[groupID].lights.length; i++){
+			lightID = house.status.hue.groups[groupID].lights[i]
+			if(model.status.hue.lights[lightID]){
+				group.lights[lightID] = model.status.hue.lights[lightID];	
+			}
+			
 		}
 		model.status.hue.groups[groupID] = group;
 	}
+
 
 	// History Information
 	model.status.eventHistory = house.status.eventHistory;
