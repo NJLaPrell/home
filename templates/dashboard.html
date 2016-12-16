@@ -16,6 +16,25 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".smartPlugSwitch").on('change',function(){
+                var name = $(this).val();
+                var direction = this.checked ? 'on' : 'off';
+                $.ajax({
+                    url: '/home/trigger-event',
+                    type: 'POST',
+                    data: {
+                        event: "toggleSwitch",
+                        args: {
+                            name: name,
+                            direction: direction
+                        }
+                    }
+                });
+            });
+        });
+    </script>
     </head>
 
 <body>
@@ -176,7 +195,7 @@
             <div data-role="fieldcontain">
                 {{#each status.plugs as |state|}}
                     <label for="{{@key}}">{{@key}}:</label>
-                    <input type="checkbox" data-role="flipswitch" name="{{@key}}" id="{{@key}}" checked="{{state 'checked'}}" />
+                    <input class="smartPlugSwitch" type="checkbox" data-role="flipswitch" name="{{@key}}" id="{{@key}}" value="{{@key}}" {{state 'checked="checked"'}} />
                 {{/each}}
             </div>
         </fieldset>
