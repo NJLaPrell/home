@@ -41,6 +41,8 @@ module.exports = function(house){
 		eventsFired: house.eventsFired
 	};
 
+	model.status.plugs = house.status.plugs;
+
 	model.errorLog  = fs.readFileSync(__dirname + '/../logs/log.log');
 
 	model.status.eventHistory = house.status.eventHistory;

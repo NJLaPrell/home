@@ -170,6 +170,18 @@
         <p>Coming soon...</p>
     </div>
 
+    <div data-role="collapsible">
+        <h4>Smart Plugs</h4>
+        <fieldset>
+            <div data-role="fieldcontain">
+                {{#each status.plugs as |state|}}
+                    <label for="{{@key}}">{{@key}}:</label>
+                    <input type="checkbox" data-role="flipswitch" name="{{@key}}" id="{{@key}}" checked="{{state 'checked'}}" />
+                {{/each}}
+            </div>
+        </fieldset>
+    </div>
+
     <a href="#event-log" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left" data-rel="dialog" data-transition="pop">Event Log</a>
     <a href="#error-log" class="ui-btn ui-btn-inline ui-icon-bars ui-btn-icon-left" data-rel="dialog" data-transition="pop">Error Log</a>
 
