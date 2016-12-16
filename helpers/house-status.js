@@ -34,7 +34,8 @@ module.exports = {
 		},
 		eventHistory: {},
 		motionWhileAway: false,
-		plugs: {}
+		plugs: {},
+		hue: {}
 	},
 	getStatus: function(status){
 		if(typeof this.status[status] !== undefined){
