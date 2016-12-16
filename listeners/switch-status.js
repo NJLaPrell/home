@@ -1,4 +1,14 @@
-module.exports = function(house){
+// Imported Modules
+var Listener = require('../helpers/listener.js');
+
+var settings = {
+	name: 'Edimax Switch Status',
+	eventsListened: ['switchStatus']
+};
+
+var listener = new Listener(settings);
+
+listener.setListener(function(house){
 	house.listenForEvent('switchStatus', function(args){
 		house.recordTriggeredListener('switchStatus');
 		// Log the history
@@ -12,4 +22,6 @@ module.exports = function(house){
 		}	
 		house.setStatus('plugs', args);
 	});
-};
+});
+
+module.exports = listener;

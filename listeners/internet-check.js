@@ -1,7 +1,16 @@
+// Imported Modules
+var Listener = require('../helpers/listener.js');
 var HueAnimation = require('../helpers/hue-animation.js');
 var date = require('../helpers/date-time.js');
 
-module.exports = function(house){
+var settings = {
+	name: 'Internet Status',
+	eventsListened: ['internetCheck']
+};
+
+var listener = new Listener(settings);
+
+listener.setListener(function(house){
 	house.listenForEvent('internetCheck', function(args){
 		house.recordTriggeredListener('internetCheck');
 
@@ -22,4 +31,6 @@ module.exports = function(house){
 			animation.trigger("panic", 30);
 		}	
 	});
-};
+});
+
+module.exports = listener;

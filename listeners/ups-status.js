@@ -1,4 +1,14 @@
-module.exports = function(house){
+// Imported Modules
+var Listener = require('../helpers/listener.js');
+
+var settings = {
+	name: 'UPS Status',
+	eventsListened: ['ups-status']
+};
+
+var listener = new Listener(settings);
+
+listener.setListener(function(house){
 	house.listenForEvent('ups-status', function(args){
 		house.recordTriggeredListener('ups-status');
 		house.setStatus('upsStatus', args);
@@ -8,4 +18,6 @@ module.exports = function(house){
 			house.setStatus('powered', true);
 		}
 	});
-};
+});
+
+module.exports = listener;
