@@ -2,6 +2,7 @@ var log = require("./helpers/log");
 var conf = require('./config');
 var FauxMo = require('fauxmojs');
 var roku = require('./helpers/roku');
+var triggerEvent = require('./helpers/trigger-event.js');
 
 log.startup("STARTING SERVICE");
 
@@ -67,6 +68,13 @@ var fauxMo = new FauxMo(
               log.error("Failed to execute Amazon switch - " + response.message);
             }
           });
+        }
+      },
+      {
+        name: 'Tiffany Lamp',
+        port: 11006,
+        handler: (action) => {
+          triggerEvent('toggleSwitch', {name: "Tiffany Lamp", direction: action});
         }
       }
     ]
