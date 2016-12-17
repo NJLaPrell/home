@@ -66,7 +66,7 @@ module.exports = {
 	},
 	startPoll: function(poll){
 		this.pollsRegistered[poll.name] = poll;
-		poll.execute();
+		poll.execute(this);
 	},
 	startListener: function(listener){
 		listener.listen(this);
