@@ -10,6 +10,17 @@ module.exports = function(house) {
 		});
 	};
 
+	this.getLightState = function(lightID){
+		return api.lightStatus(lightID).then(function(result){
+			return result;
+		});
+	};
+
+	this.getAllLightStates = function(){
+		var lights = {};
+		return api.lights();
+	};
+
 	this.turnOn = function(light){
 		this.toggleState(light, 'on');
 	};

@@ -15,7 +15,6 @@ listener.setListener(function(house){
 	// Make sure we have Hue Light data available
 	hue.getState().then(function(response){
 		house.setStatus('hue', response);
-		house.log.startup("Retrieved Hue status data.");
 	});
 
 	house.listenForEvent('trigger-hueLights', function(args){
