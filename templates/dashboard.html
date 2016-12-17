@@ -18,6 +18,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function(){
+            
             $(".smartPlugSwitch").on('change',function(){
                 var name = $(this).val();
                 var direction = this.checked ? 'on' : 'off';
@@ -28,6 +29,22 @@
                         event: "trigger-toggleSwitch",
                         args: {
                             name: name,
+                            direction: direction
+                        }
+                    }
+                });
+            });
+
+            $(".hueSwitch").on('change',function(){
+                var name = $(this).val();
+                var direction = this.checked ? 'on' : 'off';
+                $.ajax({
+                    url: '/home/trigger-event',
+                    type: 'POST',
+                    data: {
+                        event: "trigger-hueLights",
+                        args: {
+                            lightID: name,
                             direction: direction
                         }
                     }
@@ -211,7 +228,7 @@
                 {{#each status.plugs as |state|}}
                     <li>
                         <label for="{{@key}}">{{@key}}:</label>
-                        <input class="smartPlugSwitch" type="checkbox" data-role="flipswitch" name="{{@key}}" id="{{@key}}" value="{{@key}}" {{state 'checked="checked"'}} />
+                        <input class="smartPlugSwitch" type="checkbox" data-role="flipswitch" name="{{@key}}" id="{{@key}}" value="{{@key}}" {{#if state}}checked="checked"{{/if}} />
                     </li>
                 {{/each}}
                 </ul>

@@ -20,6 +20,7 @@ listener.setListener(function(house){
 
 	house.listenForEvent('trigger-hueLights', function(args){
 		house.recordTriggeredListener('trigger-hueLights');
+		hue.toggleState(args.lightID, args.direction);
 	});
 });
 
