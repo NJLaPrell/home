@@ -13,7 +13,10 @@ listener.setListener(function(house){
 	house.listenForEvent('status-hueLightStates', function(args){
 		house.recordTriggeredListener('status-hueLightStates');
 		var hue = house.getStatus('hue');
-		hue.lights = args;
+		hue.lights = {};
+		for(var i = 0; i < args.length; i++){
+			hue.lights[args[i].id] = args[i];
+		}
 		house.setStatus('hue', hue);
 	});
 });
