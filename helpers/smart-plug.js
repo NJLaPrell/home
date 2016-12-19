@@ -1,29 +1,33 @@
-var conf = require('../config.js');
 var smartplug = require('edimax-smartplug');
 var log = require('./log.js');
 
-module.exports = {
-	options: {
-		timeout: conf.smartPlugConfig.timeout,
-		username: conf.smartPlugConfig.username,
-		password: conf.smartPlugConfig.password
-	},
-	plugs: conf.smartPlugConfig.plugs,
-	getHost: function(name){
+module.exports = function(house){
+
+	this.options = {
+		timeout: house.conf.smartPlugConfig.timeout,
+		username: house.conf.smartPlugConfig.username,
+		password: house.conf.smartPlugConfig.password
+	};
+
+	this.plugs = house.conf.smartPlugConfig.plugs;
+
+	this.getHost = function(name){
 		for(var i = 0; i < this.plugs.length; i++){
 			if(this.plugs[i].name == name){
 				return this.plugs[i].host;
 			}
 		}
 		return false;
-	},
-	getOptions: function(name){
+	};
+
+	this.getOptions = function(name){
 		var opts = this.options;
 		opts.name = name;
 		opts.host = this.getHost(name);
 		return opts;
-	},
-	toggle: function(name,state){
+	};
+
+	this.toggle = function(name,state){
 		if(typeof state === 'undefined'){
 			var self = this;
 			state = this.getState(name).then(function(state){
@@ -39,18 +43,23 @@ module.exports = {
 			});
 		}
 		
-	},
-	turnOn: function(name){
+	};
+
+	this.turnOn = function(name){
 		this.toggle(name,true);
-	},
-	turnOff: function(name){
+	};
+
+	this.turnOff = function(name){
 		this.toggle(name,false);
-	},
-	getState: function(name){
+	};
+
+	this.getState = function(name){
 		return smartplug.getSwitchState(this.getOptions(name)).then(function (state) {
     		return state;
 		});
-	}
+	};
+
+	return this;
 
 };
 

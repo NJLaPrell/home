@@ -1,6 +1,6 @@
 // Imported Modules
 var Poll = require('../helpers/poll.js');
-var plug = require('../helpers/smart-plug.js');
+var Plug = require('../helpers/smart-plug.js');
 
 var settings = {
 	name: 'Switch Status',
@@ -10,10 +10,11 @@ var settings = {
 
 var poll = new Poll(settings);
 
-poll.setJob(function(){
+poll.setJob(function(house){
 	var status = {};
 	var stateResults = [];
 	var self = this;
+	var plug = new Plug(house);
 	for(var i=0; i < plug.plugs.length; i++){
 		stateResults.push(plug.getState(plug.plugs[i].name));
 	}
