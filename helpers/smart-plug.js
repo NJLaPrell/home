@@ -27,9 +27,7 @@ module.exports = {
 		if(typeof state === 'undefined'){
 			var self = this;
 			state = this.getState(name).then(function(state){
-				smartplug.setSwitchState(!state, self.getOptions(name)).catch(function(e) {
-					log.warning("Failed to get the state of switch: " + name);
-				});
+				smartplug.setSwitchState(!state, self.getOptions(name));
 			});
 
 		} else {
