@@ -4,7 +4,7 @@ var FauxMo = require('fauxmojs');
 var roku = require('./helpers/roku');
 var triggerEvent = require('./helpers/trigger-event.js');
 
-log.startup("STARTING SERVICE");
+log.startup("STARTING SERVICE: wemo.js");
 
 var fauxMo = new FauxMo(
   {

@@ -19,7 +19,12 @@ listener.setListener(function(house){
 
 	house.listenForEvent('trigger-hueLights', function(args){
 		house.recordTriggeredListener('trigger-hueLights');
-		hue.toggleState(args.lightID, args.direction);
+		if(args.direction){
+			hue.toggleState(args.lightID, args.direction);
+		} else if(args.bri){
+			hue.setBrightness(args.lightID, args.bri);
+		}
+		
 	});
 });
 

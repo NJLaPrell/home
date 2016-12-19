@@ -50,8 +50,35 @@
                     }
                 });
             });
+
+            $( ".hueBri" ).slider({
+              stop: function( event, ui ) {
+                var name = this.id.split("-");
+                name = name[1];
+                var bri = $(this).val();
+                $.ajax({
+                    url: '/home/trigger-event',
+                    type: 'POST',
+                    data: {
+                        event: "trigger-hueLights",
+                        args: {
+                            lightID: name,
+                            bri: bri
+                        }
+                    }
+                });
+              }
+            });
         });
     </script>
+    <style>
+        input.ui-slider-input {
+            display : none !important;
+        }
+        .ui-slider-track {
+            margin: 0 15px 0 15px !important;
+        }
+    </style>
     </head>
 
 <body>
@@ -210,11 +237,22 @@
                     <li data-role="list-divider">{{group.name}}</li>
                     {{#each group.lights as |light|}}
                     <li>
-                        <label for="{{@key}}">{{light.name}}:</label>
-                        <select class="hueSwitch" name="{{@key}}" id="{{@key}}" data-role="slider">
-                            <option value="off"{{#unless light.on}} selected="selected"{{/unless}}>Off</option>
-                            <option value="on"{{#if light.on}} selected="selected"{{/if}}>On</option>
-                        </select>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <label for="{{@key}}">{{light.name}}:</label>
+                                <select class="hueSwitch" name="{{@key}}" id="{{@key}}" data-role="slider">
+                                    <option value="off"{{#unless light.on}} selected="selected"{{/unless}}>Off</option>
+                                    <option value="on"{{#if light.on}} selected="selected"{{/if}}>On</option>
+                                </select>   
+                            </div>
+                            <div class="ui-block-b">
+                               <!-- space reserved for color picker --> 
+                            </div>       
+                        </div>
+                        <div class="ui-grid-solo">
+                            <label for="brightness-{{@key}}">Brightness</label>
+                            <input class="hueBri" type="range" name="brightness-{{@key}}" id="brightness-{{@key}}" value="{{light.bri}}" min="0" max="254" data-highlight="true" /> 
+                        </div>
                     </li>
                     {{/each}}                      
                 {{/each}}

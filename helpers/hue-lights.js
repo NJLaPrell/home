@@ -46,5 +46,18 @@ module.exports = function(house) {
 		});
 	};
 
+	this.setBrightness = function(light, brightness){
+		var state = hue.lightState.create();
+		var self = this;
+		api.setLightState(light, state.bri(brightness), function(err, result){
+			if(err) {
+				self.house.log.error(err);
+			} else {
+				var friendlyBri = Math.round((brightness/2.54));
+				house.logHistory("Hue Light" + light + " was set to " + friendlyBri + "%.");
+			}
+		});
+	};
+
 	return this;
 };
