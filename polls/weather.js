@@ -34,8 +34,6 @@ poll.setJob(function(){
 	        };
 	        self.triggerEvent('weather-status', args);
 	    });
-	}).on('error', function(e){
-	      self.log.error("Got an error: ", e);
 	});	
 });
 
