@@ -1,5 +1,4 @@
 var smartplug = require('edimax-smartplug');
-var log = require('./log.js');
 
 module.exports = function(house){
 
@@ -31,15 +30,27 @@ module.exports = function(house){
 		if(typeof state === 'undefined'){
 			var self = this;
 			state = this.getState(name).then(function(state){
+				var plugs = house.getStatus('plugs');
+				plugs[name] = !state
+				house.setStatus('plugs', plugs);
 				smartplug.setSwitchState(!state, self.getOptions(name)).catch(function(e) {
-					log.warning("Failed to get the state of switch: " + name);
+					house.log.warning("Failed to get the state of switch: " + name);
+					var plugs = house.getStatus('plugs');
+					plugs[name] = state
+					house.setStatus('plugs', plugs);
 				});
 			});
 
 		} else {
 			state = state == 'on' ? true : false;
-				smartplug.setSwitchState(state, this.getOptions(name)).catch(function(e) {
-				log.warning("Failed to toggle switch " + name + " to " + state + ".");
+			var plugs = house.getStatus('plugs');
+			plugs[name] = state
+			house.setStatus('plugs', plugs);
+			smartplug.setSwitchState(state, this.getOptions(name)).catch(function(e) {
+				house.log.warning("Failed to toggle switch " + name + " to " + state + ".");
+				var plugs = house.getStatus('plugs');
+				plugs[name] = !state
+				house.setStatus('plugs', plugs);
 			});
 		}
 		
