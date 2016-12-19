@@ -42,6 +42,8 @@ module.exports = function(house) {
 		    	self.house.log.error(err);
 		    } else {
 		    	house.logHistory("Hue Light " + light + " was turned " + direction + ".");
+		    	var hueStatus = house.getStatus('hue');
+				hueStatus.lights[light].state.on = direction == 'on' ? true : false;
 		    }
 		});
 	};
@@ -55,6 +57,8 @@ module.exports = function(house) {
 			} else {
 				var friendlyBri = Math.round((brightness/2.54));
 				house.logHistory("Hue Light" + light + " was set to " + friendlyBri + "%.");
+				var hueStatus = house.getStatus('hue');
+				hueStatus.lights[light].state.bri = brightness;
 			}
 		});
 	};
