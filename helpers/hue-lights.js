@@ -63,6 +63,7 @@ module.exports = function(house) {
 		    	house.logHistory("Hue Light " + light + " was turned " + direction + ".");
 		    	var hueStatus = house.getStatus('hue');
 				hueStatus.lights[light].state.on = direction == 'on' ? true : false;
+				house.setStatus('hue', hueStatus);
 		    }
 		});
 	};
@@ -78,9 +79,26 @@ module.exports = function(house) {
 				house.logHistory("Hue Light" + light + " was set to " + friendlyBri + "%.");
 				var hueStatus = house.getStatus('hue');
 				hueStatus.lights[light].state.bri = brightness;
+				house.setStatus('hue', hueStatus);
 			}
 		});
 	};
+
+	this.setRGB = function(light, rgb){
+		var state = hue.lightState.create();
+		var self = this;
+		api.setLightState(light, state.rgb(rgb), function(err, result){
+			if(err) {
+				self.house.log.error(err);
+			} else {
+				var friendlyRGB = 'rgb(' + rgb[0] + ', ' + rgb[1] + ', ' + rgb[2] + ')';
+				house.logHistory("Hue Light" + light + " was set to " + friendlyRGB + ".");
+				var hueStatus = house.getStatus('hue');
+				hueStatus.lights[light].state.rgb = rgb;
+				house.setStatus('hue', hueStatus);
+			}
+		});
+	}
 
 	return this;
 };

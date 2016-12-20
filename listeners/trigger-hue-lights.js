@@ -17,6 +17,9 @@ listener.setListener(function(house){
 			hue.toggleState(args.lightID, args.direction);
 		} else if(args.bri){
 			hue.setBrightness(args.lightID, args.bri);
+		} else if(args.rgb){
+			var rgb = [args.rgb.r, args.rgb.g, args.rgb.b];
+			hue.setRGB(args.lightID, rgb);
 		}
 		
 	});

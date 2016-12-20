@@ -77,7 +77,21 @@
 
 
             $(".hueColor").spectrum({
-                
+                change: function(color){
+                    var name = this.id.split("-");
+                    name = name[1];
+                    $.ajax({
+                        url: '/home/trigger-event',
+                        type: 'POST',
+                        data: {
+                            event: "trigger-hueLights",
+                            args: {
+                                lightID: name,
+                                rgb: color.toRgb()
+                            }
+                        }
+                    });
+                }
             });
 
 
@@ -259,9 +273,10 @@
                                 </select>   
                             </div>
                             <div class="ui-block-b">
-                               <!-- space reserved for color picker --> 
-                               <label for="color-{{@key}}">Color</label>
-                               <input class="hueColor" type="text" id="color-{{@key}}" name="color-{{@key}}" />
+                               {{#if light.rgb}}
+                                   <label for="color-{{@key}}">Color</label>
+                                   <input class="hueColor" type="text" id="color-{{@key}}" name="color-{{@key}}" value="{{light.rgb}}" />
+                               {{/if}}
                             </div>       
                         </div>
                         <div class="ui-grid-solo">
@@ -295,7 +310,12 @@
         </fieldset>
     </div>
 
+    <a href="#event-log" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left" data-rel="dialog" data-transition="pop">Event Log</a>
+    <a href="#error-log" class="ui-btn ui-btn-inline ui-icon-bars ui-btn-icon-left" data-rel="dialog" data-transition="pop">Error Log</a>
 
+    </div>
+    <div data-role="footer">{{status.serverTime}}</div>
+</div>
 
 <div data-role="page" dialog="true" id="error-log">
     <div data-role="header" data-theme="b">
@@ -330,12 +350,7 @@
 </div>
 
 
-    <a href="#event-log" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left" data-rel="dialog" data-transition="pop">Event Log</a>
-    <a href="#error-log" class="ui-btn ui-btn-inline ui-icon-bars ui-btn-icon-left" data-rel="dialog" data-transition="pop">Error Log</a>
 
-    </div>
-    <div data-role="footer">{{status.serverTime}}</div>
-</div>
 
 </body>
 </html>
