@@ -14,7 +14,7 @@ listener.setListener(function(house){
 		house.logHistory("The sun rose.");
 
 		// Turn off the Christmas lights
-		house.logHistory("The Christmas lights were turned on.");
+		house.logHistory("The Christmas lights were turned off.");
 		house.triggerEvent("trigger-toggleSwitch", {name: "Christmas Lights 1", direction: "off"});
 		house.triggerEvent("trigger-toggleSwitch", {name: "Christmas Lights 2", direction: "off"});
 	});
