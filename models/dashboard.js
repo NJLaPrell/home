@@ -73,11 +73,19 @@ module.exports = function(house){
 		light.hue = house.status.hue.lights[lightID].state.hue ? house.status.hue.lights[lightID].state.hue : false;
 		light.sat = house.status.hue.lights[lightID].state.sat ? house.status.hue.lights[lightID].state.sat : false;
 		light.rgb = false;
+		light.colorPreset = {};
 		if(house.status.hue.lights[lightID].state.rgb){
 			var r = house.status.hue.lights[lightID].state.rgb[0];
 			var g = house.status.hue.lights[lightID].state.rgb[1];
 			var b = house.status.hue.lights[lightID].state.rgb[2];
 			light.rgb = 'rgb ' + r + ' ' + g + ' ' + b;
+			for(var color in house.colorPreset){
+				if(house.colorPreset[color][0] == r && house.colorPreset[color][1] == g && house.colorPreset[color][2] == b ){
+					light.colorPreset[color] == true;
+				} else {
+					light.colorPreset[color] == false;
+				}
+			}
 		}
 		model.status.hue.lights[lightID] = light;
 	}

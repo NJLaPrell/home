@@ -20,6 +20,8 @@ listener.setListener(function(house){
 		} else if(args.rgb){
 			var rgb = [args.rgb.r, args.rgb.g, args.rgb.b];
 			hue.setRGB(args.lightID, rgb);
+		} else if(args.colorPreset){
+			hue.setRGB(args.lightID, house.colorPreset[args.colorPreset]);
 		}
 		
 	});

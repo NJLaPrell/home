@@ -91,7 +91,27 @@
                             }
                         }
                     });
-                }
+                },
+                replacerClassName: 'colorPicker'
+            });
+
+            $(".hueColorButton").on('click', function(){
+                var components = this.id.split("-");
+                var name = components[0];
+                var preset = components[1];
+                $(this).parents(".hueColorBlock").find(".ui-btn-active").removeClass('ui-btn-active');
+                $(this).addClass('ui-btn-active');
+                $.ajax({
+                    url: '/home/trigger-event',
+                    type: 'POST',
+                    data: {
+                        event: "trigger-hueLights",
+                        args: {
+                            lightID: name,
+                            colorPreset: preset
+                        }
+                    }
+                });    
             });
 
 
@@ -105,6 +125,34 @@
         .ui-slider-track {
             margin: 0 15px 0 15px !important;
         }
+        .hueColorButton {
+            padding: 4px ! important;
+            margin-top:4px;
+        }
+        .hueColorBlock .ui-input-text {
+            width:36px;
+            padding:2px ! important;
+        }
+
+        .sp-replacer {
+            padding:0px;
+            width:30px;
+        }
+        .sp-preview {
+            width: 10px;
+        }
+        .sp-preview-inner {
+            width: 12px;
+        }
+
+        .sp-dd {
+            width:5px;
+            padding:0px;
+            margin:0px;
+        }
+
+
+
     </style>
     </head>
 
@@ -265,17 +313,66 @@
                     {{#each group.lights as |light|}}
                     <li>
                         <div class="ui-grid-a">
-                            <div class="ui-block-a">
+                            <div class="ui-block-a" style="width:35%">
                                 <label for="{{@key}}">{{light.name}}:</label>
                                 <select class="hueSwitch" name="{{@key}}" id="{{@key}}" data-role="slider">
                                     <option value="off"{{#unless light.on}} selected="selected"{{/unless}}>Off</option>
                                     <option value="on"{{#if light.on}} selected="selected"{{/if}}>On</option>
                                 </select>   
                             </div>
-                            <div class="ui-block-b">
+                            <div class="ui-block-b hueColorBlock" style="width:65%">
                                {{#if light.rgb}}
-                                   <label for="color-{{@key}}">Color</label>
-                                   <input class="hueColor" type="text" id="color-{{@key}}" name="color-{{@key}}" value="{{light.rgb}}" />
+
+
+
+<div class="ui-grid-d">
+    <label for="color-{{@key}}">Color</label>
+    <div class="ui-block-a">
+        <input class="hueColor" type="text" id="color-{{@key}}" name="color-{{@key}}" value="{{light.rgb}}" />
+    </div>
+    <div class="ui-block-b">
+        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.warm}}ui-btn-active{{/if}}" id="{{@key}}-warm"><span style="background-color:#FFD19D;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+    </div>
+    <div class="ui-block-c">
+        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.red}}ui-btn-active{{/if}}" id="{{@key}}-red"><span style="background-color:#FF5300;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+    </div>
+    <div class="ui-block-d">
+        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.purple}}ui-btn-active{{/if}}" id="{{@key}}-purple"><span style="background-color:#FF6BD3;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+    </div>
+    <div class="ui-block-e">
+        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.yellow}}ui-btn-active{{/if}}" id="{{@key}}-yellow"><span style="background-color:#FF9524;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+    </div>
+</div>
+<!-- ***************** ROW TWO  ***************** -->
+<div class="ui-grid-d">
+    <div class="ui-block-a">
+        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.white}}ui-btn-active{{/if}}" id="{{@key}}-white"><span style="background-color:#FFFFFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+    </div>
+    <div class="ui-block-b">
+        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.cold}}ui-btn-active{{/if}}" id="{{@key}}-cold"><span style="background-color:#CFEFFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+    </div>
+    <div class="ui-block-c">
+        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.green}}ui-btn-active{{/if}}" id="{{@key}}-green"><span style="background-color:#72FF53;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+    </div>
+    <div class="ui-block-d">
+        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.blue}}ui-btn-active{{/if}}" id="{{@key}}-blue"><span style="background-color:#319EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+    </div>
+    <div class="ui-block-e">
+        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.orange}}ui-btn-active{{/if}}" id="{{@key}}-orange"><span style="background-color:#FF9825;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+    </div>
+</div>
+
+
+                               
+
+
+                                  
+
+
+
+
+
+
                                {{/if}}
                             </div>       
                         </div>

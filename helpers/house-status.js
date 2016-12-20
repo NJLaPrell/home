@@ -37,6 +37,17 @@ module.exports = {
 		plugs: {},
 		hue: {}
 	},
+	colorPreset: {
+		red: [255, 83, 0],
+		yellow: [255, 149, 36],
+		green: [114, 255, 83],
+		blue: [49, 158, 255],
+		white: [255, 255, 255],
+		orange: [255, 152, 37],
+		purple: [255, 105, 210],
+		warm: [255, 209, 157],
+		cold: [207, 239, 255]
+	},
 	getStatus: function(status){
 		if(typeof this.status[status] !== undefined){
 			return this.status[status];
