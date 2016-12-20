@@ -78,7 +78,7 @@ var fauxMo = new FauxMo(
         }
       },
       {
-        name: 'Christmas Lights',
+        name: 'Outside Lights',
         port: 11007,
         handler: (action) => {
           triggerEvent('trigger-toggleSwitch', {name: "Christmas Lights 1", direction: action});
@@ -86,8 +86,16 @@ var fauxMo = new FauxMo(
         }
       },
       {
+        name: 'Christmas',
+        port: 11010,
+        handler: (action) => {
+          triggerEvent('trigger-hueLights', {christmasMode: true, toggle: action});
+          triggerEvent('trigger-hueLights', {christmasMode: true, toggle: action});
+        }
+      },
+      {
         name: 'Volume',
-        port: 11008,
+        port: 11011,
         handler: (action) => {
           var cmd = action == 'on' ? 'volume-up' : 'volume-down';
           roku.executeCommand(cmd);

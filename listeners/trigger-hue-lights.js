@@ -22,6 +22,20 @@ listener.setListener(function(house){
 			hue.setRGB(args.lightID, rgb);
 		} else if(args.colorPreset){
 			hue.setRGB(args.lightID, house.colorPreset[args.colorPreset]);
+		} else if(args.christmasMode){
+			if(args.toggle == 'on'){
+				hue.setBrightness(1, 255);
+				hue.setBrightness(3, 255);
+				hue.setRGB(1, house.colorPreset.red);
+				hue.setRGB(3, house.colorPreset.green);
+				hue.toggleState(4, 'off');
+			} else {
+				hue.setBrightness(1, 255);
+				hue.setBrightness(3, 255);
+				hue.setRGB(1, house.colorPreset.warm);
+				hue.setRGB(3, house.colorPreset.warm);
+				hue.toggleState(4, 'on');
+			}
 		}
 		
 	});
