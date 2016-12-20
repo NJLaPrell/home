@@ -76,6 +76,29 @@ var fauxMo = new FauxMo(
         handler: (action) => {
           triggerEvent('trigger-toggleSwitch', {name: "Tiffany Lamp", direction: action});
         }
+      },
+      {
+        name: 'Christmas Lights',
+        port: 11007,
+        handler: (action) => {
+          triggerEvent('trigger-toggleSwitch', {name: "Christmas Lights 1", direction: action});
+          triggerEvent('trigger-toggleSwitch', {name: "Christmas Lights 2", direction: action});
+        }
+      },
+      {
+        name: 'Volume',
+        port: 11008,
+        handler: (action) => {
+          var cmd = action == 'on' ? 'volume-up' : 'volume-down';
+          roku.executeCommand(cmd);
+        }
+      },
+      {
+        name: 'Mute',
+        port: 11009,
+        handler: (action) => {
+          roku.executeCommand("mute");
+        }
       }
     ]
   });

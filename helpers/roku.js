@@ -45,11 +45,29 @@ module.exports = {
 			this.sendRequest("/launch/dev", "POST", response);
 			break;
 
-
 			case "power":
 			this.sendRequest("/keypress/power", "POST", response);
-			
 			break;
+
+			case "mute":
+			this.sendRequest("/keypress/VolumeMute", "POST", response);
+			break;	
+
+			case "volume-up":
+			this.sendRequest("/keypress/VolumeUp", "POST");
+			this.sendRequest("/keypress/VolumeUp", "POST");
+			this.sendRequest("/keypress/VolumeUp", "POST");
+			this.sendRequest("/keypress/VolumeUp", "POST");
+			this.sendRequest("/keypress/VolumeUp", "POST", response);
+			break;	
+
+			case "volume-down":
+			this.sendRequest("/keypress/VolumeDown", "POST");
+			this.sendRequest("/keypress/VolumeDown", "POST");
+			this.sendRequest("/keypress/VolumeDown", "POST");
+			this.sendRequest("/keypress/VolumeDown", "POST");
+			this.sendRequest("/keypress/VolumeDown", "POST", response);
+			break;	
 
 			case "netflix":
 			this.sendRequest("/launch/12", "POST", response);
@@ -128,14 +146,18 @@ module.exports = {
               body += chunk;
             });
             res.on('end', function(){
-              response({
-              	status:200,
-              	message: "Success - The TV command '" + self.cmd + "' has been executed.",
-              	body: body
-              });
+            	if(response){
+            		response({
+		              	status:200,
+		              	message: "Success - The TV command '" + self.cmd + "' has been executed.",
+		              	body: body
+		            });	
+            	}
             });
 		}).on('error', function(){
-			response({status:500, message:"Unknown Error - The HTTP request to Roku failed."});
+			if(response){
+				response({status:500, message:"Unknown Error - The HTTP request to Roku failed."});	
+			}
 		}).end();
 	}
 
