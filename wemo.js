@@ -1,7 +1,6 @@
 var log = require("./helpers/log");
 var conf = require('./config');
 var FauxMo = require('fauxmojs');
-var roku = require('./helpers/roku');
 var triggerEvent = require('./helpers/trigger-event.js');
 
 log.startup("STARTING SERVICE: wemo.js");
@@ -14,60 +13,35 @@ var fauxMo = new FauxMo(
         name: 'faux television switch',
         port: 11001,
         handler: (action) => {
-          roku.executeCommand("power-" + action, function(response){
-            var payload = {};
-            if(response.status!=200){
-              log.error("Failed to execute faux tv switch: " + action + "- " + response.message);
-            }
-          });
+          triggerEvent('trigger-roku', {command: "power-" + action});
         }
       },
       {
         name: 'Netflix',
         port: 11002,
         handler: (action) => {
-          roku.executeCommand("netflix", function(response){
-            var payload = {};
-            if(response.status!=200){
-              log.error("Failed to execute Netflix switch - " + response.message);
-            }
-          });
+          triggerEvent('trigger-roku', {command: "netflix"});
         }
       },
       {
         name: 'Hulu',
         port: 11003,
         handler: (action) => {
-          roku.executeCommand("hulu", function(response){
-            var payload = {};
-            if(response.status!=200){
-              log.error("Failed to execute Hulu switch - " + response.message);
-            }
-          });
+          triggerEvent('trigger-roku', {command: "hulu"});
         }
       },
       {
         name: 'Plex',
         port: 11004,
         handler: (action) => {
-          roku.executeCommand("plex", function(response){
-            var payload = {};
-            if(response.status!=200){
-              log.error("Failed to execute Plex switch - " + response.message);
-            }
-          });
+          triggerEvent('trigger-roku', {command: "plex"});
         }
       },
       {
         name: 'Amazon',
         port: 11005,
         handler: (action) => {
-          roku.executeCommand("amazon", function(response){
-            var payload = {};
-            if(response.status!=200){
-              log.error("Failed to execute Amazon switch - " + response.message);
-            }
-          });
+          triggerEvent('trigger-roku', {command: "amazon"});
         }
       },
       {
