@@ -7,6 +7,7 @@ var app =  new express();
 var bodyParser = require('body-parser');
 var auth = require('basic-auth');
 
+var roku = require('./helpers/roku');
 var Handlebars = require('handlebars');
 var fs = require('fs');
 
@@ -163,8 +164,15 @@ router.route('/animation').put(function(req, res){
 // ROKU TV ROUTES
 ////////////////////////////////////////////////////////////
 router.route('/tv').put(function(req, res){
-	house.triggerEvent('trigger-roku', {command: req.body.method});
-	res.status(200).send({message: "Command " + req.body.method + " was sent."});	
+	roku.executeCommand(req.body.method, function(response){
+		var payload = {};
+		if(response.status!=200){
+			payload.error = response.message;
+		} else {
+			payload.message = response.message;
+		}
+		res.status(response.status).send(payload);	
+	});
 });
 
 ////////////////////////////////////////////////////////////
