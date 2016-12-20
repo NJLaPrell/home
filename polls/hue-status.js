@@ -1,6 +1,7 @@
 // Imported Modules
 var Poll = require('../helpers/poll.js');
 var Hue = require('../helpers/hue-lights.js');
+var triggerEvent = require('../helpers/trigger-event.js');
 
 var settings = {
 	name: 'Hue Status',
@@ -15,9 +16,15 @@ poll.setJob(function(house){
 	var stateResults = [];
 	var self = this;	
 	hue = new Hue(house);
-	hue.getAllLightStates().then(function(results){
-		self.triggerEvent('status-hueLightStates', results.lights);
-	});	
+
+	// Make sure we have Hue Light data available
+	hue.getState().then(function(response){
+		house.setStatus('hue', response);
+		hue.getAllLightStates().then(function(results){
+			triggerEvent('status-hueLightStates', results);
+		});	
+	});
+	
 });
 
 module.exports = poll;

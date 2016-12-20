@@ -11,12 +11,6 @@ var listener = new Listener(settings);
 
 listener.setListener(function(house){
 	var hue = new Hue(house);
-
-	// Make sure we have Hue Light data available
-	hue.getState().then(function(response){
-		house.setStatus('hue', response);
-	});
-
 	house.listenForEvent('trigger-hueLights', function(args){
 		house.recordTriggeredListener('trigger-hueLights');
 		if(args.direction){

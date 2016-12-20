@@ -17,8 +17,27 @@ module.exports = function(house) {
 	};
 
 	this.getAllLightStates = function(){
-		var lights = {};
-		return api.lights();
+		// To support colors, we have to retrieve the light states, then re-retrieve light states with RGB 
+		// only for lights that support it.
+		return api.lights().then(function(ret){
+			lights = {};
+			var colorLights = [];
+			var idMap = [];
+			for(var i = 0; i < ret.lights.length; i++){
+				if(ret.lights[i].type == 'Extended color light'){
+					colorLights.push(api.lightStatusWithRGB(ret.lights[i].id));	
+					idMap.push(ret.lights[i].id);
+				} else {
+					lights[ret.lights[i].id] = ret.lights[i];
+				}
+			}
+			return Promise.all(colorLights).then(function(res, error){
+				for(var i = 0; i < res.length; i++){
+					lights[idMap[i]] = res[i];
+				}
+				return lights;
+			});
+		});	
 	};
 
 	this.turnOn = function(light){
