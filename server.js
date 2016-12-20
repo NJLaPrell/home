@@ -1,10 +1,12 @@
 // Config
 var house = require('./helpers/house-status');
+
 var express = require('express');
 var app =  new express();
+
 var bodyParser = require('body-parser');
 var auth = require('basic-auth');
-var hueAnimation = require("./helpers/hue-animation");
+
 var roku = require('./helpers/roku');
 var Handlebars = require('handlebars');
 var fs = require('fs');
@@ -142,11 +144,11 @@ router.route('/animation').put(function(req, res){
 	if(!req.body.method){
 		res.status(400).send({"error": "Method Not Defined - A 'method' parameter was not sent."});
 	}
-	var animation = new hueAnimation();
+	args = {};
 	switch (req.body.method) {
 
 		case "panic":
-		animation.trigger("panic");
+			args.panic = true;
 		break;
 
 		default:
@@ -154,6 +156,7 @@ router.route('/animation').put(function(req, res){
 		break;
 
 	}
+	house.triggerEvent('trigger-hueAnimation', args);
 	res.status(200).send({"message": "Success - The animation '" + req.body.method + "' has been executed."});
 });
 
