@@ -113,7 +113,7 @@
     <div data-role="header">Home Dashboard</div>
     <div role="main" class="ui-content">
 
-    <img src="http://openweathermap.org/img/w/{{status.currentWeather.icon}}.png" /> {{status.currentWeather.description}} - {{status.currentWeather.temp}}°F / Wind: {{status.currentWeather.wind}} mph
+    <img src="http://openweathermap.org/img/w/{{status.currentWeather.icon}}.png" alt="" /> {{status.currentWeather.description}} - {{status.currentWeather.temp}}°F / Wind: {{status.currentWeather.wind}} mph
 
     {{#if status.motionWhileAway}}
         <div class="alert alert-danger" role="alert">
@@ -144,36 +144,36 @@
             <div class="ui-bar ui-bar-a" style="text-align:center;">
             It is currently
                 {{#if status.daytime}}
-                    <img src="/images/day.png" /><br />Daytime
+                    <img src="/img/day.png" alt="" /><br />Daytime
                 {{/if}}
                 {{#if status.nighttime}}
-                    <img src="/images/night.png" /><br />Night
+                    <img src="/img/night.png" alt="" /><br />Night
                 {{/if}}   
             </div>
         </div>
         <div class="ui-block-b">
             <div class="ui-bar ui-bar-a" style="text-align:center;">Nick Is
                 {{#if status.nickIsAway}}
-                    <img src="/images/away.png" /><br />Away
+                    <img src="/img/away.png" alt="" /><br />Away
                 {{/if}}
                 {{#if status.nickIsHome}}
-                    <img src="/images/home.png" /><br />Home
+                    <img src="/img/home.png" alt="" /><br />Home
                 {{/if}}  
                 {{#if status.nickIsUnknown}}
-                    <img src="/images/unknown.png" /><br />Unknown
+                    <img src="/img/unknown.png" alt="" /><br />Unknown
                 {{/if}}  
             </div>
         </div>
         <div class="ui-block-c">
             <div class="ui-bar ui-bar-a" style="text-align:center;">Brenda Is
                 {{#if status.brendaIsAway}}
-                    <img src="/images/away.png" /><br />Away
+                    <img src="/img/away.png" alt="" /><br />Away
                 {{/if}}
                 {{#if status.brendaIsHome}}
-                    <img src="/images/home.png" /><br />Home
+                    <img src="/img/home.png" alt="" /><br />Home
                 {{/if}}  
                 {{#if status.brendaIsUnknown}}
-                    <img src="/images/unknown.png" /><br />Unknown
+                    <img src="/img/unknown.png" alt="" /><br />Unknown
                 {{/if}}  
             </div>
         </div>
@@ -187,14 +187,14 @@
             {{#unless status.internet}}
                 <div class="ui-bar ui-bar-a alert alert-danger" style="text-align:center;padding:5px;">
                     Internet <br />
-                    <img src="/images/internet.png" /><br />
+                    <img src="/img/internet.png" alt="" /><br />
                     Down
                 </div>
             {{/unless}}    
             {{#if status.internet}}
                <div class="ui-bar ui-bar-a" style="text-align:center;">
                     Internet <br />
-                    <img src="/images/internet.png" /><br />
+                    <img src="/img/internet.png" alt="" /><br />
                     Up
                 </div>
             {{/if}}
@@ -204,14 +204,14 @@
             {{#unless status.powered}}
                 <div class="ui-bar ui-bar-a alert alert-danger" style="text-align:center;padding:5px;">
                     Power <br />
-                    <img src="/images/power.png" /><br />
+                    <img src="/img/power.png" alt="" /><br />
                     Offline
                 </div>
             {{/unless}}
             {{#if status.powered}}
                 <div class="ui-bar ui-bar-a" style="text-align:center;">
                     Power <br />
-                    <img src="/images/power.png" /><br />
+                    <img src="/img/power.png" alt="" /><br />
                     Online
                 </div>
             {{/if}}
@@ -221,13 +221,13 @@
             {{#if status.ups.onBattery}}
                 <div class="ui-bar ui-bar-a alert alert-success" style="text-align:center;padding:5px;">
                     UPS <br />
-                    <img src="/images/ups.png" /><br />
+                    <img src="/img/ups.png" alt="" /><br />
                     On Battery
                 </div>
             {{else}}
                 <div class="ui-bar ui-bar-a" style="text-align:center;">
                     UPS <br />
-                    <img src="/images/ups.png" /><br />
+                    <img src="/img/ups.png" alt="" /><br />
                     Online
                 </div>
             {{/if}}

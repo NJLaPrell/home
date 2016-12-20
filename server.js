@@ -227,12 +227,6 @@ app.post('/home/login', passport.authenticate('local-signin', {
   })
 );
 
-
-
-  
-
-
-
 // Rout all the calls through /home
 app.use('/home', router);
 
