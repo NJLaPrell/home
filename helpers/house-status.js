@@ -12,6 +12,7 @@ module.exports = {
 	listenersTriggered: [],
 	listenersRegistered: [],
 	pollsRegistered: {},
+	lutron: null,
 	status: {
 		daytime: null,
 		nighttime: null,
@@ -35,7 +36,10 @@ module.exports = {
 		eventHistory: {},
 		motionWhileAway: false,
 		plugs: {},
-		hue: {}
+		hue: {},
+		caseta: {
+			dimmers: conf.lutron.dimmers
+		}
 	},
 	colorPreset: {
 		red: [255, 0, 0],

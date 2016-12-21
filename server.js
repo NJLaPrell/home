@@ -16,6 +16,8 @@ var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 
+var Lutron = require('./helpers/lutron.js');
+
 var funct = function(username, password){
 	return true;
 };
@@ -51,6 +53,15 @@ passport.deserializeUser(function(obj, done) {
 house.log.startup();
 house.log.startup("STARTING SERVICE: server.js on port: " + house.conf.port);
 house.logHistory("Server started.");
+
+
+
+house.lutron = new Lutron(house);
+house.lutron.connect();
+
+
+
+
 
 ////////////////////////////////////////////////////////////
 // Register Jobs

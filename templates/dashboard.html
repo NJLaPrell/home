@@ -40,6 +40,22 @@
                 });
             });
 
+            $(".casetaDimmer").on('change',function(){
+                var name = this.id;
+                var direction = $(this).val();
+                $.ajax({
+                    url: '/home/trigger-event',
+                    type: 'POST',
+                    data: {
+                        event: "trigger-lutron",
+                        args: {
+                            light: name,
+                            direction: direction
+                        }
+                    }
+                });
+            });
+
             $(".hueSwitch").on('change',function(){
                 var name = this.id;
                 var direction = $(this).val();
@@ -69,6 +85,25 @@
                         args: {
                             lightID: name,
                             bri: bri
+                        }
+                    }
+                });
+              }
+            });
+
+            $( ".casetaBrightness" ).slider({
+              stop: function( event, ui ) {
+                var name = this.id.split("-");
+                name = name[1];
+                var bri = $(this).val();
+                $.ajax({
+                    url: '/home/trigger-event',
+                    type: 'POST',
+                    data: {
+                        event: "trigger-lutron",
+                        args: {
+                            light: name,
+                            brightness: bri
                         }
                     }
                 });
@@ -302,6 +337,8 @@
             <li><b>Time on Battery:</b> {{status.ups.timeOnBattery}}</li>
         </ul>
     </div>
+
+
  
     <div data-role="collapsible">
        <h4>Hue Lights</h4>
@@ -322,57 +359,42 @@
                             </div>
                             <div class="ui-block-b hueColorBlock" style="width:65%">
                                {{#if light.rgb}}
-
-
-
-<div class="ui-grid-d">
-    <label for="color-{{@key}}">Color</label>
-    <div class="ui-block-a">
-        <input class="hueColor" type="text" id="color-{{@key}}" name="color-{{@key}}" value="{{light.rgb}}" />
-    </div>
-    <div class="ui-block-b">
-        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.warm}}ui-btn-active{{/if}}" id="{{@key}}-warm"><span style="background-color:#FFD19D;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-    </div>
-    <div class="ui-block-c">
-        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.red}}ui-btn-active{{/if}}" id="{{@key}}-red"><span style="background-color:#FF5300;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-    </div>
-    <div class="ui-block-d">
-        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.purple}}ui-btn-active{{/if}}" id="{{@key}}-purple"><span style="background-color:#FF6BD3;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-    </div>
-    <div class="ui-block-e">
-        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.yellow}}ui-btn-active{{/if}}" id="{{@key}}-yellow"><span style="background-color:#FF9524;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-    </div>
-</div>
-<!-- ***************** ROW TWO  ***************** -->
-<div class="ui-grid-d">
-    <div class="ui-block-a">
-        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.white}}ui-btn-active{{/if}}" id="{{@key}}-white"><span style="background-color:#FFFFFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-    </div>
-    <div class="ui-block-b">
-        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.cold}}ui-btn-active{{/if}}" id="{{@key}}-cold"><span style="background-color:#CFEFFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-    </div>
-    <div class="ui-block-c">
-        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.green}}ui-btn-active{{/if}}" id="{{@key}}-green"><span style="background-color:#72FF53;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-    </div>
-    <div class="ui-block-d">
-        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.blue}}ui-btn-active{{/if}}" id="{{@key}}-blue"><span style="background-color:#319EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-    </div>
-    <div class="ui-block-e">
-        <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.orange}}ui-btn-active{{/if}}" id="{{@key}}-orange"><span style="background-color:#FF9825;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-    </div>
-</div>
-
-
-                               
-
-
-                                  
-
-
-
-
-
-
+                                    <div class="ui-grid-d">
+                                        <label for="color-{{@key}}">Color</label>
+                                        <div class="ui-block-a">
+                                            <input class="hueColor" type="text" id="color-{{@key}}" name="color-{{@key}}" value="{{light.rgb}}" />
+                                        </div>
+                                        <div class="ui-block-b">
+                                            <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.warm}}ui-btn-active{{/if}}" id="{{@key}}-warm"><span style="background-color:#FFD19D;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                        </div>
+                                        <div class="ui-block-c">
+                                            <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.red}}ui-btn-active{{/if}}" id="{{@key}}-red"><span style="background-color:#FF5300;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                        </div>
+                                        <div class="ui-block-d">
+                                            <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.purple}}ui-btn-active{{/if}}" id="{{@key}}-purple"><span style="background-color:#FF6BD3;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                        </div>
+                                        <div class="ui-block-e">
+                                            <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.yellow}}ui-btn-active{{/if}}" id="{{@key}}-yellow"><span style="background-color:#FF9524;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                        </div>
+                                    </div>
+                                    <!-- ***************** ROW TWO  ***************** -->
+                                    <div class="ui-grid-d">
+                                        <div class="ui-block-a">
+                                            <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.white}}ui-btn-active{{/if}}" id="{{@key}}-white"><span style="background-color:#FFFFFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                        </div>
+                                        <div class="ui-block-b">
+                                            <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.cold}}ui-btn-active{{/if}}" id="{{@key}}-cold"><span style="background-color:#CFEFFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                        </div>
+                                        <div class="ui-block-c">
+                                            <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.green}}ui-btn-active{{/if}}" id="{{@key}}-green"><span style="background-color:#72FF53;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                        </div>
+                                        <div class="ui-block-d">
+                                            <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.blue}}ui-btn-active{{/if}}" id="{{@key}}-blue"><span style="background-color:#319EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                        </div>
+                                        <div class="ui-block-e">
+                                            <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if light.colorPreset.orange}}ui-btn-active{{/if}}" id="{{@key}}-orange"><span style="background-color:#FF9825;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                        </div>
+                                    </div>
                                {{/if}}
                             </div>       
                         </div>
@@ -405,6 +427,31 @@
                 </ul>
             </div>
         </fieldset>
+    </div>
+
+    <div data-role="collapsible">
+        <h4>Dimmers</h4>
+        <div class="ui-field-contain">
+            <ul data-role="listview" data-inset="true" data-divider-theme="a">
+            {{#each status.caseta.dimmers as |dimmer|}}
+                <li>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <label for="{{dimmer.id}}">{{dimmer.name}}:</label>
+                            <select class="casetaDimmer" name="{{dimmer.id}}" id="{{dimmer.id}}" data-role="slider">
+                                <option value="off"{{#unless dimmer.on}} selected="selected"{{/unless}}>Off</option>
+                                <option value="on"{{#if dimmer.on}} selected="selected"{{/if}}>On</option>
+                            </select>
+                        </div>
+                        <div class="ui-block-b">
+                            <label for="casetabrightness-{{dimmer.id}}">Brightness</label>
+                            <input class="casetaBrightness" type="range" name="casetabrightness-{{dimmer.id}}" id="casetabrightness-{{dimmer.id}}" value="{{dimmer.brightness}}" min="0" max="100" data-highlight="true" /> 
+                        </div>
+                    </div>
+                 </li>
+            {{/each}}
+            </ul> 
+        </div>
     </div>
 
     <a href="#event-log" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left" data-rel="dialog" data-transition="pop">Event Log</a>

@@ -97,13 +97,20 @@ module.exports = function(house){
 		group.name = house.status.hue.groups[groupID].name;
 		group.lights = {};
 		for(var i = 0; i < house.status.hue.groups[groupID].lights.length; i++){
-			lightID = house.status.hue.groups[groupID].lights[i]
+			lightID = house.status.hue.groups[groupID].lights[i];
 			if(model.status.hue.lights[lightID]){
 				group.lights[lightID] = model.status.hue.lights[lightID];	
 			}
 			
 		}
 		model.status.hue.groups[groupID] = group;
+	}
+
+	// Caseta switch information
+	model.status.caseta = {};
+	model.status.caseta.dimmers = house.status.caseta.dimmers;
+	for(var i = 0; i < house.status.caseta.dimmers.length; i++){
+		model.status.caseta.dimmers[i].on = house.status.caseta.dimmers[i].brightness > 0 ? true : false;
 	}
 
 
