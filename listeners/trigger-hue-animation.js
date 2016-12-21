@@ -13,6 +13,7 @@ listener.setListener(function(house){
 	var animation = new HueAnimation();
 	house.listenForEvent('trigger-hueAnimation', function(args){
 		house.recordTriggeredListener('trigger-hueAnimation');
+		house.log.debug("Panic mode triggered.");
 		if(args.panic){
 			animation.trigger("panic");
 		}		

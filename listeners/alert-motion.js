@@ -18,8 +18,9 @@ listener.setListener(function(house){
 		var away = house.getStatus('nickslocation') == 'away' && house.getStatus('brendaslocation') == 'away' ? true : false;
 		var motion = args.subject.indexOf('Alarm:Cam_495920') != -1 ? true : false;
 		if(motion && away){
-			alert("Motion detected on Camera 495920");
+			house.log.debug("Motion detected while everyone was away.");
 			if(!house.getStatus('motionWhileAway')){
+				alert("Motion detected on Camera 495920");
 				house.logHistory("Motion was detected when nobody was home.");	
 			}
 			house.setStatus('motionWhileAway', true);
