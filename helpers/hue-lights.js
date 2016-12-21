@@ -60,7 +60,7 @@ module.exports = function(house) {
 		    if (err) {
 		    	self.house.log.error(err);
 		    } else {
-		    	house.logHistory("Hue Light " + light + " was turned " + direction + ".");
+		    	house.log.debug("Hue Light " + light + " was turned " + direction + ".");
 		    	var hueStatus = house.getStatus('hue');
 				hueStatus.lights[light].state.on = direction == 'on' ? true : false;
 				house.setStatus('hue', hueStatus);
@@ -76,7 +76,7 @@ module.exports = function(house) {
 				self.house.log.error(err);
 			} else {
 				var friendlyBri = Math.round((brightness/2.54));
-				house.logHistory("Hue Light" + light + " was set to " + friendlyBri + "%.");
+				house.log.debug("Hue Light" + light + " was set to " + friendlyBri + "%.");
 				var hueStatus = house.getStatus('hue');
 				hueStatus.lights[light].state.bri = brightness;
 				house.setStatus('hue', hueStatus);
@@ -92,7 +92,7 @@ module.exports = function(house) {
 				self.house.log.error(err);
 			} else {
 				var friendlyRGB = 'rgb(' + rgb[0] + ', ' + rgb[1] + ', ' + rgb[2] + ')';
-				house.logHistory("Hue Light" + light + " was set to " + friendlyRGB + ".");
+				house.log.debug("Hue Light" + light + " was set to " + friendlyRGB + ".");
 				var hueStatus = house.getStatus('hue');
 				hueStatus.lights[light].state.rgb = rgb;
 				house.setStatus('hue', hueStatus);

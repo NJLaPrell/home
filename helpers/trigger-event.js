@@ -1,8 +1,10 @@
 var request = require('request');
 var conf = require('../config.js'); 
-var log = require('../helpers/log.js');
+var Log = require('../helpers/log.js');
+var log = new Log(conf.debug);
 
 module.exports = function(event, args){
+	log.debug("Triggering " + event + " via REST with args: " + JSON.stringify(args));
 	var payload = {
 		overrideUser: conf.uName,
 		overridePassword: conf.password,

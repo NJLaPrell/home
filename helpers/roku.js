@@ -1,3 +1,7 @@
+var conf = require("../config.js");
+var Log = require("./log.js");
+var log = new Log(conf.debug);
+
 module.exports = {
 
 	cmd: null,
@@ -147,6 +151,7 @@ module.exports = {
             });
             res.on('end', function(){
             	if(response){
+            		log.debug("The TV command '" + self.cmd + "' has been executed.");
             		response({
 		              	status:200,
 		              	message: "Success - The TV command '" + self.cmd + "' has been executed.",
@@ -156,6 +161,7 @@ module.exports = {
             });
 		}).on('error', function(){
 			if(response){
+				log.error("Unknown Error - The HTTP request to Roku failed.");
 				response({status:500, message:"Unknown Error - The HTTP request to Roku failed."});	
 			}
 		}).end();

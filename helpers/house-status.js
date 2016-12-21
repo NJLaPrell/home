@@ -68,6 +68,7 @@ module.exports = {
 	triggerEvent: function(eventName, args){
 		this.eventsFired.push({"time": date.getDateTime(), "event": eventName});
 		this.eventEmitter.emit(eventName, args);	
+		this.log.debug("Event Triggered: " + eventName + " - " + JSON.stringify(args));
 	},
 	listenForEvent: function(eventName, eventAction){
 		this.listenersRegistered.push({

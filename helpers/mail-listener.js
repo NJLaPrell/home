@@ -13,7 +13,6 @@ module.exports = function(house){
 	mailListener.start();
 
 	mailListener.on("server:connected",function(){
-		house.logHistory("MailListener has connected.");
 		house.log.startup("MailListener has connected.");
 	});
 
