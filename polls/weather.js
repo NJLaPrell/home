@@ -10,7 +10,7 @@ var settings = {
 
 var poll = new Poll(settings);
 
-poll.setJob(function(){
+poll.setJob(function(house){
 	var url = 'http://api.openweathermap.org/data/2.5/weather?id=5318313&APPID=' + this.conf.weatherAPIKey + '&units=imperial';
 	var self = this;
 	http.get(url, function(res){
@@ -33,6 +33,10 @@ poll.setJob(function(){
 	        	sunset: response.sys.sunset
 	        };
 	        self.triggerEvent('weather-status', args);
+	    });
+
+	    res.on('error', function(error){
+	    	house.logError(error);
 	    });
 	});	
 });
