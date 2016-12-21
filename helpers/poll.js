@@ -1,8 +1,9 @@
+var Log = require('./log.js');
 
 function Poll(settings){
 	this.triggerEvent = require('./trigger-event.js');
 	this.conf = require('../config.js');
-	this.log = require('./log.js');
+	this.log = new Log(this.conf.debug);
 
 	this.name = settings.name;
 	this.intervalString = settings.interval;

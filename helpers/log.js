@@ -1,6 +1,9 @@
 var date = require('./date-time.js');
-module.exports = {
-	getScript: function(script){
+module.exports = function(debug){
+
+	this.debugState = debug ? debug : false;
+
+	this.getScript = function(script){
 		var originalFunc = Error.prepareStackTrace;
 	    var callerfile;
 	    try {
@@ -15,26 +18,42 @@ module.exports = {
 	    } catch (e) {}
 	    Error.prepareStackTrace = originalFunc; 
 	    return callerfile;
-	},
-	log: function(msg, type, script){
+	};
+
+	this.log = function(msg, type, script){
 		script = this.getScript(script);
 		console.log(date.getDateTime() + "\r\n" + type + ": " + script + "\r\n" + msg + "\r\n");
-	},
-	error: function(msg, script){
-		//var trace = "\r\nTRACE -- file: " + stackTrace.getFileName() + " Function: " + stackTrace.getFunctionName() + " Line: " + stackTrace.getLineNumber();		
+	};
+
+	this.error = function(msg, script){	
 		this.log(msg, "ERROR", script);
-	},
-	warning: function(msg, script){
+	};
+
+	this.warning = function(msg, script){
 		this.log(msg, "WARNING", script);
-	},
-	info: function(msg, script){
+	};
+
+	this.info = function(msg, script){
 		this.log(msg, "INFO", script);
-	},
-	startup: function(msg){
+	};
+
+	this.startup = function(msg){
 		if(!msg){
 			console.log('********** STARTING SERVER ********** (' + date.getDateTime() + ')');
 		} else {
 			console.log(msg);
 		}
+	};
+
+	this.debug = function(msg){
+		if(this.debugState){
+			console.log(date.getDateTime() + " - DEBUG: " + msg + "\r");
+		}
 	}
+
+	this.setDebug = function(debug){
+		this.debugState = debug;
+	};
+
+	return this;
 };

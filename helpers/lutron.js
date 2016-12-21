@@ -17,8 +17,14 @@ module.exports = function(house){
 
 	this.connect = function(){
 
+		house.log.startup("Connecting to Lutron Caseta hub.");
+		
 		// Make a telnet connection
 		this.lutron = net.connect(23, this.host);
+
+		this.lutron.on('error', function(error){
+			house.log.error(error);
+		});
 
 		self = this;
 
@@ -27,9 +33,7 @@ module.exports = function(house){
 
 			self.readyForCommand = true;
 
-			if(house.conf.debug){
-				console.log("<<< " + String(data));
-			}
+			house.log.debug("Lutron Data Received: " + String(data));
 
 			// Login prompt
 			if(String(data) == 'login: '){
@@ -100,9 +104,7 @@ module.exports = function(house){
 			this.readyForCommand = false;
 			var cmd = this.commandQueue.shift();
 			this.lutron.write(cmd + "\r\n");
-			if(house.conf.debug){
-				console.log(">>> " + cmd);	
-			}
+			house.log.debug("Lutron Data Sent: " + cmd);
 		}
 	};
 

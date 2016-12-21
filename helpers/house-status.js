@@ -1,13 +1,13 @@
 var conf = require('../config.js');
-var log = require('./log');
+var Log = require('./log');
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
 var date = require('./date-time.js');
 
 module.exports = {
 	eventEmitter: eventEmitter,
-	log: log,
 	conf: conf,
+	log: new Log(conf.debug),
 	eventsFired: [],
 	listenersTriggered: [],
 	listenersRegistered: [],

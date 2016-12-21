@@ -1,6 +1,8 @@
+var Log = require('./log.js');
+var conf = require('../config.js');
 
 function Listener(settings){
-	this.log = require('./log.js');
+	this.log = new Log(conf.debug);
 
 	this.name = settings.name;
 	this.eventsListened = settings.eventsListened ? settings.eventsListened : [];

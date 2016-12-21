@@ -1,5 +1,6 @@
-var log = require("./helpers/log");
+var Log = require("./helpers/log");
 var conf = require('./config');
+var log = new Log(conf.debug);
 var FauxMo = require('fauxmojs');
 var roku = require('./helpers/roku');
 var triggerEvent = require('./helpers/trigger-event.js');
@@ -18,6 +19,8 @@ var fauxMo = new FauxMo(
             var payload = {};
             if(response.status!=200){
               log.error("Failed to execute faux tv switch: " + action + "- " + response.message);
+            } else {
+              log.debug("Executed faux tv switch: " + action);
             }
           });
         }
@@ -30,6 +33,8 @@ var fauxMo = new FauxMo(
             var payload = {};
             if(response.status!=200){
               log.error("Failed to execute Netflix switch - " + response.message);
+            } else {
+              log.debug("Executed Netflix switch.");
             }
           });
         }
@@ -42,6 +47,8 @@ var fauxMo = new FauxMo(
             var payload = {};
             if(response.status!=200){
               log.error("Failed to execute Hulu switch - " + response.message);
+            } else {
+              log.debug("Executed Hulu switch.");
             }
           });
         }
@@ -54,6 +61,8 @@ var fauxMo = new FauxMo(
             var payload = {};
             if(response.status!=200){
               log.error("Failed to execute Plex switch - " + response.message);
+            } else {
+              log.debug("Executed Plex switch.");
             }
           });
         }
@@ -66,6 +75,8 @@ var fauxMo = new FauxMo(
             var payload = {};
             if(response.status!=200){
               log.error("Failed to execute Amazon switch - " + response.message);
+            } else {
+              log.debug("Executed Amazon switch.");
             }
           });
         }
@@ -98,14 +109,28 @@ var fauxMo = new FauxMo(
         port: 11011,
         handler: (action) => {
           var cmd = action == 'on' ? 'volume-up' : 'volume-down';
-          roku.executeCommand(cmd);
+          roku.executeCommand(cmd, function(response){
+            var payload = {};
+            if(response.status!=200){
+              log.error("Failed to execute Volume switch: " + action + " - " + response.message);
+            } else {
+              log.debug("Executed Volume: " + action + ".");
+            }
+          });
         }
       },
       {
         name: 'Mute',
         port: 11009,
         handler: (action) => {
-          roku.executeCommand("mute");
+          roku.executeCommand("mute", function(response){
+            var payload = {};
+            if(response.status!=200){
+              log.error("Failed to execute mute switch: " + response.message);
+            } else {
+              log.debug("Executed Mute switch.");
+            }
+          });
         }
       }
     ]
