@@ -81,9 +81,9 @@ module.exports = function(house){
 			light.rgb = 'rgb ' + r + ' ' + g + ' ' + b;
 			for(var color in house.colorPreset){
 				if(house.colorPreset[color][0] == r && house.colorPreset[color][1] == g && house.colorPreset[color][2] == b ){
-					light.colorPreset[color] == true;
+					light.colorPreset[color] = true;
 				} else {
-					light.colorPreset[color] == false;
+					light.colorPreset[color] = false;
 				}
 			}
 		}
@@ -91,7 +91,6 @@ module.exports = function(house){
 	}
 	model.status.hue.groups = {};
 	var group;
-	var lightID;
 	for(var groupID in house.status.hue.groups){
 		group = {};
 		group.name = house.status.hue.groups[groupID].name;
@@ -116,6 +115,31 @@ module.exports = function(house){
 
 	// History Information
 	model.status.eventHistory = house.status.eventHistory;
+
+
+
+	var devices = house.conf.deviceLayout;
+	for(var i = 0; i < devices.length; i++){
+		for(var ii = 0; ii < devices[i].devices.length; ii++){
+			devices[i].devices[ii].hue = devices[i].devices[ii].type == 'hue' || devices[i].devices[ii].type == 'hue-color' ? true : false;
+			devices[i].devices[ii].hueColor = devices[i].devices[ii].type == 'hue-color' ? true : false;
+			devices[i].devices[ii].edimaxSwitch = devices[i].devices[ii].type == 'edimax-switch' ? true : false;
+			devices[i].devices[ii].casetaDimmer = devices[i].devices[ii].type == 'caseta-dimmer' ? true : false;
+			if(devices[i].devices[ii].type == 'hue' || devices[i].devices[ii].type == 'hue-color'){
+				devices[i].devices[ii].device = model.status.hue.lights[devices[i].devices[ii].identifyer];
+			} else if(devices[i].devices[ii].type == 'edimax-switch'){
+				devices[i].devices[ii].device = model.status.plugs[devices[i].devices[ii].identifyer];
+			} else if(devices[i].devices[ii].type == 'caseta-dimmer'){
+				for(var iii = 0; iii < model.status.caseta.dimmers.length; iii++){
+					if (model.status.caseta.dimmers[iii].id == devices[i].devices[ii].identifyer){
+						devices[i].devices[ii].device = model.status.caseta.dimmers[iii];
+					}
+				}
+			}
+		}
+	}
+
+	model.status.devices = devices;
 
 	return model;
 };
