@@ -56,7 +56,6 @@ module.exports = function(house){
 		listenersRegistered: house.listenersRegistered,
 		eventsFired: house.eventsFired
 	};
-	model.errorLog  = fs.readFileSync(__dirname + '/../logs/log.log');
 
 	// Edimax Smart Plug Information
 	model.status.plugs = house.status.plugs;

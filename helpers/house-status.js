@@ -61,7 +61,7 @@ module.exports = {
 	},
 	setStatus: function(status, value){
 		if(typeof this.status[status] == 'undefined'){
-			log.warning("Setting a house status for '" + status + ",' but the status did not previously exist.");
+			this.log.warning("Setting a house status for '" + status + ",' but the status did not previously exist.");
 		}
 		this.status[status] = value;
 	},

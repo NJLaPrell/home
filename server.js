@@ -214,7 +214,7 @@ router.route('/debug').get(function(req, res){
 });
 
 ////////////////////////////////////////////////////////////
-// Dashboard Route
+// Dashboard Routes
 ////////////////////////////////////////////////////////////
 router.route('/dashboard').get(function(req, res){
 	fs.readFile(__dirname + '/templates/dashboard.html', 'utf8', function(err, html){
@@ -222,6 +222,40 @@ router.route('/dashboard').get(function(req, res){
 		var model = require("./models/dashboard.js");
 		res.send(template(model(house)));
 	});
+});
+
+router.route('/dashboard/log').get(function(req, res){
+	fs.readFile(__dirname + '/logs/log.log', 'utf8', function(err, html){
+		var model = {errorLog:html};
+		fs.readFile(__dirname + '/templates/log.html', 'utf8', function(err, html){
+			var template = Handlebars.compile(html);
+			res.send(template(model));
+		});
+	});
+});
+
+router.route('/dashboard/events').get(function(req, res){
+	var eventHistory = house.status.eventHistory;
+	var model = {};
+	model.events = [];
+	var history = null;
+	var historyElement = null;
+	for(var key in eventHistory){
+		history = [];
+		for(var i = 0; i < eventHistory[key].length; i++){
+			history.unshift(eventHistory[key][i]);
+		}
+		historyElement = {};
+		historyElement[key] = history;
+		model.events.unshift(historyElement);
+	}
+	console.log(model);
+
+	fs.readFile(__dirname + '/templates/events.html', 'utf8', function(err, html){
+		var template = Handlebars.compile(html);
+		res.send(template(model));
+	});
+
 });
 
 ////////////////////////////////////////////////////////////

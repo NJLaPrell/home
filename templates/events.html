@@ -1,0 +1,19 @@
+<div data-role="page" dialog="true" id="event-log">
+    <div data-role="header" data-theme="b">
+        <h1>Event Log</h1>
+    </div>
+    <div role="main" class="ui-content">
+        {{#each events}}
+            {{#each this}}
+                <hr />
+                <p><b>{{@key}}</b></p>
+                <ul>
+                    {{#each this as |event|}}
+                        <li>{{event.time}} - {{event.event}}</li>
+                    {{/each}}
+                </ul>   
+            {{/each}}
+       {{/each}}
+        <a href="#" class="ui-btn" data-rel="back">Close</a>
+    </div>
+</div>

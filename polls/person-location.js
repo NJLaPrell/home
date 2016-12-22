@@ -24,12 +24,12 @@ poll.setJob(function(house){
 	}, {timeout: 10});
 
 	ping.sys.probe(house.conf.brendasPhoneIP, function(isAlive){
-		if(!house.getStatus('brendalocation')){
-			house.setStatus('brendalocation', (isAlive ? 'home' : 'away'));
+		if(!house.getStatus('brendaslocation')){
+			house.setStatus('brendaslocation', (isAlive ? 'home' : 'away'));
 		}
-		if(isAlive && house.getStatus('brendalocation') == 'away'){
+		if(isAlive && house.getStatus('brendaslocation') == 'away'){
 			self.triggerEvent('gps', {person:'brenda', location: 'home'});
-		} else if(!isAlive && house.getStatus('brendalocation') == 'home'){
+		} else if(!isAlive && house.getStatus('brendaslocation') == 'home'){
 			self.triggerEvent('gps', {person:'brenda', location: 'away'});
 		}
 	}, {timeout: 10});
