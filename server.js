@@ -249,8 +249,6 @@ router.route('/dashboard/events').get(function(req, res){
 		historyElement[key] = history;
 		model.events.unshift(historyElement);
 	}
-	console.log(model);
-
 	fs.readFile(__dirname + '/templates/events.html', 'utf8', function(err, html){
 		var template = Handlebars.compile(html);
 		res.send(template(model));
