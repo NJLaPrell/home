@@ -16,8 +16,8 @@ module.exports = {
 	status: {
 		daytime: null,
 		nighttime: null,
-		nickslocation: 'home',
-		brendaslocation: 'home',
+		nickslocation: null,
+		brendaslocation: null,
 		motionLastDetected: null,
 		powered: null,
 		powerOutSince: null,
