@@ -31,7 +31,9 @@ Poll.prototype.execute = function(house){
 	}
 	
 	if(this.executeOnStartup){
-		this.job(house);
+		house.listenForEvent('startup-complete',function(){
+			this.job(house);
+		}.bind(this));
 	}
 };
 
