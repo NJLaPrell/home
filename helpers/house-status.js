@@ -12,9 +12,10 @@ module.exports = {
 	log: new Log(conf.debug),
 	eventsFired: [],
 	listenersTriggered: [],
-	listenersRegistered: [],
+	listenersRegistered: {},
 	pollsRegistered: {},
 	servicesRegistered: {},
+	jobsRegistered: {},
 	lutron: null,
 	status: {
 		daytime: null,
@@ -74,11 +75,6 @@ module.exports = {
 		this.log.debug("Event Triggered: " + eventName + " - " + JSON.stringify(args));
 	},
 	listenForEvent: function(eventName, eventAction){
-		this.listenersRegistered.push({
-			time: date.getDateTime(),
-			listener: this.getScript(),
-			event: eventName
-		});
 		eventEmitter.on(eventName, function(args){
 			eventAction(args);
 		});
@@ -93,13 +89,16 @@ module.exports = {
 	initializeListeners: function(){
 		var listeners = this.getComponents('Listeners');
 		for(var i = 0; i < listeners.length; i++){
-			listeners[i].listen(this);
+			this.listenersRegistered[listeners[i].name] = listeners[i];
+			this.listenersRegistered[listeners[i].name].listen(this);
 		}
 	},
 	initializeJobs: function(){
 		var jobs = this.getComponents('Jobs');
 		for(var i = 0; i < jobs.length; i++){
 			jobs[i].scheduleJob(this);
+			this.jobsRegistered[jobs[i].name] = jobs[i];
+			this.jobsRegistered[jobs[i].name].scheduleJob(this);
 		}
 	},
 	initializeServices: function(){
@@ -130,7 +129,9 @@ module.exports = {
 			eventsFired: this.eventsFired,
 			listenersTriggered: this.listenersTriggered,
 			listenersRegistered: this.listenersRegistered,
-			pollsRegistered: Object.keys(this.pollsRegistered)
+			pollsRegistered: this.pollsRegistered,
+			jobsRegistered: this.jobsRegistered,
+			servicesRegistered: this.servicesRegistered
 		};
 	},
 	getScript: function(script){

@@ -215,6 +215,14 @@ router.route('/dashboard/log').get(function(req, res){
 	});
 });
 
+router.route('/dashboard/details').get(function(req, res){
+	var model = {};
+	fs.readFile(__dirname + '/templates/details.html', 'utf8', function(err, html){
+		var template = Handlebars.compile(html);
+		res.send(template(model));
+	});
+});
+
 router.route('/dashboard/events').get(function(req, res){
 	var eventHistory = house.status.eventHistory;
 	var model = {};
@@ -235,6 +243,38 @@ router.route('/dashboard/events').get(function(req, res){
 		res.send(template(model));
 	});
 
+});
+
+router.route('/dashboard/details/jobs-registered').get(function(req, res){
+	fs.readFile(__dirname + '/templates/jobs-registered.html', 'utf8', function(err, html){
+		var template = Handlebars.compile(html);
+		var model = require("./models/jobs-registered.js");
+		res.send(template(model(house)));
+	});
+});
+
+router.route('/dashboard/details/services-registered').get(function(req, res){
+	fs.readFile(__dirname + '/templates/services-registered.html', 'utf8', function(err, html){
+		var template = Handlebars.compile(html);
+		var model = require("./models/services-registered.js");
+		res.send(template(model(house)));
+	});
+});
+
+router.route('/dashboard/details/polls-registered').get(function(req, res){
+	fs.readFile(__dirname + '/templates/polls-registered.html', 'utf8', function(err, html){
+		var template = Handlebars.compile(html);
+		var model = require("./models/polls-registered.js");
+		res.send(template(model(house)));
+	});
+});
+
+router.route('/dashboard/details/listeners-registered').get(function(req, res){
+	fs.readFile(__dirname + '/templates/listeners-registered.html', 'utf8', function(err, html){
+		var template = Handlebars.compile(html);
+		var model = require("./models/listeners-registered.js");
+		res.send(template(model(house)));
+	});
 });
 
 ////////////////////////////////////////////////////////////
