@@ -34,7 +34,7 @@ module.exports = function(house){
 				plugs[name] = !state
 				house.setStatus('plugs', plugs);
 				smartplug.setSwitchState(!state, self.getOptions(name)).then(function(){
-					house.log.debug("Edimax switch " + name + " turned " (state ? 'off' : 'on') + ".");
+					house.log.debug("Edimax switch " + name + " turned " + (state ? 'off' : 'on') + ".");
 				}).catch(function(e) {
 					house.log.warning("Failed to get the state of switch: " + name + "\rError: " + e);
 					var plugs = house.getStatus('plugs');
@@ -49,7 +49,7 @@ module.exports = function(house){
 			plugs[name] = state
 			house.setStatus('plugs', plugs);
 			smartplug.setSwitchState(state, this.getOptions(name)).then(function(){
-				house.log.debug("Edimax switch " + name + " turned " (state ? 'on' : 'off') + ".");
+				house.log.debug("Edimax switch " + name + " turned " + (state ? 'on' : 'off') + ".");
 			}).catch(function(e) {
 				house.log.warning("Failed to toggle switch " + name + " to " + state + ".\rError " + e);
 				var plugs = house.getStatus('plugs');
