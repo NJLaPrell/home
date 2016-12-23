@@ -12,7 +12,7 @@ module.exports = function(house){
 	mailListener.start();
 
 	mailListener.on("server:connected",function(){
-		house.log.startup("MailListener has connected.");
+		
 	});
 
 	mailListener.on("mail", function(mail, seqno, attributes){
