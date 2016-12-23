@@ -16,8 +16,6 @@ var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 
-var Lutron = require('./helpers/lutron.js');
-
 var funct = function(username, password){
 	return true;
 };
@@ -54,40 +52,21 @@ house.log.startup();
 house.log.startup("STARTING SERVICE: server.js on port: " + house.conf.port);
 house.logHistory("Server started.");
 
-
-
-//house.lutron = new Lutron(house);
-//house.lutron.connect();
-
-
 ////////////////////////////////////////////////////////////
-// Register Jobs
+// Run Startup Sequence
 ////////////////////////////////////////////////////////////
-//var startJobs = require('./jobs/');
-//startJobs(house);
 
-////////////////////////////////////////////////////////////
-// Register Event Listeners
-////////////////////////////////////////////////////////////
-//var registerListeners = require('./listeners/');
-//registerListeners(house);
-
-////////////////////////////////////////////////////////////
-// Register Polls
-////////////////////////////////////////////////////////////
-//var registerPolls = require('./polls/');
-//registerPolls(house);
 house.initializePolls();
 house.initializeListeners();
 house.initializeJobs();
 house.initializeServices();
 
 
-////////////////////////////////////////////////////////////
-// Register Event Listeners
-////////////////////////////////////////////////////////////
-var registerMailListener = require('./helpers/mail-listener');
-registerMailListener(house);
+
+
+
+
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

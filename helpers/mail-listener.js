@@ -7,7 +7,6 @@ var MailListener = require("mail-listener2");
 
 module.exports = function(house){
 	
-	house.log.startup("MailListener has started.");
 	var mailListener = new MailListener(conf.imap);
 
 	mailListener.start();
