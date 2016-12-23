@@ -10,7 +10,6 @@ var settings = {
 var listener = new Listener(settings);
 
 listener.setListener(function(house){
-	console.log("listener loaded...");
 	house.listenForEvent('status-hueLightStates', function(args){
 		house.recordTriggeredListener('status-hueLightStates');
 		var hue = house.getStatus('hue');
