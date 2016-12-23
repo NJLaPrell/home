@@ -25,8 +25,8 @@
   "cookie-parser": "*"
   },
   "scripts": {
-    "test": "node server.js | node jobs.js | node wemo.js",
-    "start": "node server.js | node jobs.js | node wemo.js"
+    "test": "node server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

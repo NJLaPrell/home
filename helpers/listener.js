@@ -1,5 +1,5 @@
-var Log = require('./log.js');
-var conf = require('../config.js');
+var Log = require.main.require('./helpers/log.js');
+var conf = require.main.require('./config.js');
 
 function Listener(settings){
 	this.log = new Log(conf.debug);
