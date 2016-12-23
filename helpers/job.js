@@ -21,7 +21,7 @@ Job.prototype.scheduleJob = function(house){
 	this.log.startup("     Job scheduled for " + this.name + ": " + this.schedule);
 	var self = this;
 	
-	schedule.scheduleJob(this.schedule, this.job(house));
+	schedule.scheduleJob(self.schedule, function(){self.job(house)});
 	
 	if(this.executeOnStartup){
 		this.job(house);

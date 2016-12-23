@@ -5,7 +5,7 @@ var Imap = require('imap');
 
 var settings = {
 	name: 'Purge Read Mail from home@laprell.org',
-	schedule: '5 * * * *',
+	schedule: '10 * * * *',
 	executeOnStartup: true
 };
 
@@ -13,7 +13,9 @@ var job = new Job(settings);
 
 
 job.setJob(function(house){
-	console.log("Purge mail job running");
+
+	house.log.info("Purge mail job running");
+	
 	var settings = house.conf.imap;
 	settings.searchFilter = ['SEEN'];
 	settings.user = settings.username;
