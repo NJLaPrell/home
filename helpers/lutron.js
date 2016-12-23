@@ -16,8 +16,6 @@ module.exports = function(house){
 	}
 
 	this.connect = function(){
-
-		house.log.startup("Connecting to Lutron Caseta hub.");
 		
 		// Make a telnet connection
 		this.lutron = net.connect(23, this.host);
@@ -25,8 +23,6 @@ module.exports = function(house){
 		this.lutron.on('error', function(error){
 			house.log.error(error);
 		});
-
-		
 
 		// Respond to incomming data
 		this.lutron.on('data', function(data){

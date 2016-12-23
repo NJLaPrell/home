@@ -56,8 +56,8 @@ house.logHistory("Server started.");
 
 
 
-house.lutron = new Lutron(house);
-house.lutron.connect();
+//house.lutron = new Lutron(house);
+//house.lutron.connect();
 
 
 ////////////////////////////////////////////////////////////
@@ -80,6 +80,7 @@ house.lutron.connect();
 house.initializePolls();
 house.initializeListeners();
 house.initializeJobs();
+house.initializeServices();
 
 
 ////////////////////////////////////////////////////////////

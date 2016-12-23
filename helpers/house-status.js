@@ -14,6 +14,7 @@ module.exports = {
 	listenersTriggered: [],
 	listenersRegistered: [],
 	pollsRegistered: {},
+	servicesRegistered: {},
 	lutron: null,
 	status: {
 		daytime: null,
@@ -87,34 +88,34 @@ module.exports = {
 		fs.readdirSync(__dirname + "/../polls").forEach(function (file) {
 		  if (file == 'index.js' || file.split("._").length > 1 || fs.lstatSync(__dirname + "/../polls/" + file).isDirectory()) return;
 		  	var poll = require('../polls/' + file);
-		  	this.startPoll(poll);
+		  	this.pollsRegistered[poll.name] = poll;
+			poll.execute(this);
 		}.bind(this));
-	},
-	startPoll: function(poll){
-		this.pollsRegistered[poll.name] = poll;
-		poll.execute(this);
 	},
 	initializeListeners: function(){
 		this.log.startup("Registering Listeners");
 		fs.readdirSync(__dirname + "/../listeners").forEach(function (file) {
 		  if (file == 'index.js' || file.split("._").length > 1 || fs.lstatSync(__dirname + "/../listeners/" + file).isDirectory()) return;
 		  	var listener = require('../listeners/' + file);
-		  	this.startListener(listener);
+		  	listener.listen(this);
 		}.bind(this));
-	},
-	startListener: function(listener){
-		listener.listen(this);
 	},
 	initializeJobs: function(){
 		this.log.startup("Registering Jobs");
 		fs.readdirSync(__dirname + "/../jobs").forEach(function (file) {
 		  if (file == 'index.js' || file.split("._").length > 1 || fs.lstatSync(__dirname + "/../jobs/" + file).isDirectory()) return;
 		  	var job = require('../jobs/' + file);
-		  	this.startJob(job);
+		  	job.scheduleJob(this);
 		}.bind(this));
 	},
-	startJob: function(job){
-		job.scheduleJob(this);
+	initializeServices: function(){
+		this.log.startup("Starting Services");
+		fs.readdirSync(__dirname + "/../services").forEach(function (file) {
+		  if (file == 'index.js' || file.split("._").length > 1 || fs.lstatSync(__dirname + "/../services/" + file).isDirectory()) return;
+		  	var service = require('../services/' + file);
+		  	this.servicesRegistered[service.name] = service;
+			service.start(this);
+		}.bind(this));
 	},
 	getStatusReport: function(){
 		return this.status;
