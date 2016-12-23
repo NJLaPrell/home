@@ -84,38 +84,42 @@ module.exports = {
 		});
 	},
 	initializePolls: function(){
-		this.log.startup("Registering Polls");
-		fs.readdirSync(__dirname + "/../polls").forEach(function (file) {
-		  if (file == 'index.js' || file.split("._").length > 1 || fs.lstatSync(__dirname + "/../polls/" + file).isDirectory()) return;
-		  	var poll = require('../polls/' + file);
-		  	this.pollsRegistered[poll.name] = poll;
-			poll.execute(this);
-		}.bind(this));
+		var polls = this.getComponents('Polls');
+		for(var i = 0; i < polls.length; i++){
+			this.pollsRegistered[polls[i].name] = polls[i];
+			this.pollsRegistered[polls[i].name].execute(this);
+		}
 	},
 	initializeListeners: function(){
-		this.log.startup("Registering Listeners");
-		fs.readdirSync(__dirname + "/../listeners").forEach(function (file) {
-		  if (file == 'index.js' || file.split("._").length > 1 || fs.lstatSync(__dirname + "/../listeners/" + file).isDirectory()) return;
-		  	var listener = require('../listeners/' + file);
-		  	listener.listen(this);
-		}.bind(this));
+		var listeners = this.getComponents('Listeners');
+		for(var i = 0; i < listeners.length; i++){
+			listeners[i].listen(this);
+		}
 	},
 	initializeJobs: function(){
-		this.log.startup("Registering Jobs");
-		fs.readdirSync(__dirname + "/../jobs").forEach(function (file) {
-		  if (file == 'index.js' || file.split("._").length > 1 || fs.lstatSync(__dirname + "/../jobs/" + file).isDirectory()) return;
-		  	var job = require('../jobs/' + file);
-		  	job.scheduleJob(this);
-		}.bind(this));
+		var jobs = this.getComponents('Jobs');
+		for(var i = 0; i < jobs.length; i++){
+			jobs[i].scheduleJob(this);
+		}
 	},
 	initializeServices: function(){
-		this.log.startup("Starting Services");
-		fs.readdirSync(__dirname + "/../services").forEach(function (file) {
-		  if (file == 'index.js' || file.split("._").length > 1 || fs.lstatSync(__dirname + "/../services/" + file).isDirectory()) return;
-		  	var service = require('../services/' + file);
-		  	this.servicesRegistered[service.name] = service;
-			service.start(this);
-		}.bind(this));
+		var services = this.getComponents('Services');
+		for(var i = 0; i < services.length; i++){
+			this.servicesRegistered[services[i].name] = services[i];
+			this.servicesRegistered[services[i].name].start(this);
+			
+		}
+	},
+	getComponents: function(type){
+		this.log.startup("Starting " + type);
+		var components = [];
+		fs.readdirSync(__dirname + "/../components/" + type.toLowerCase()).forEach(function (file) {
+			if (file.indexOf("._") != -1 || file.indexOf(".js") == -1){
+				return;
+			} 
+		  	components.push(require.main.require('./components/' + type.toLowerCase() + '/' + file));
+		});
+		return components;
 	},
 	getStatusReport: function(){
 		return this.status;
