@@ -282,5 +282,7 @@ app.use(express.static('static'));
 
 app.listen(house.conf.port);
 
+
+console.log('********* STARTUP COMPLETE **********\r\n\r\n');
 house.triggerEvent('startup-complete');
 
