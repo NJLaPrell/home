@@ -24,7 +24,9 @@ Job.prototype.scheduleJob = function(house){
 	schedule.scheduleJob(self.schedule, function(){self.job(house)});
 	
 	if(this.executeOnStartup){
-		this.job(house);
+		house.listenForEvent('startup-complete',function(){
+			this.job(house);
+		}.bind(this));
 	}
 };
 

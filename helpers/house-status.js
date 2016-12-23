@@ -84,7 +84,6 @@ module.exports = {
 	},
 	initializePolls: function(){
 		this.log.startup("Registering Polls");
-		var self = this;
 		fs.readdirSync(__dirname + "/../polls").forEach(function (file) {
 		  if (file == 'index.js' || file.split("._").length > 1 || fs.lstatSync(__dirname + "/../polls/" + file).isDirectory()) return;
 		  	var poll = require('../polls/' + file);
@@ -95,8 +94,24 @@ module.exports = {
 		this.pollsRegistered[poll.name] = poll;
 		poll.execute(this);
 	},
+	initializeListeners: function(){
+		this.log.startup("Registering Listeners");
+		fs.readdirSync(__dirname + "/../listeners").forEach(function (file) {
+		  if (file == 'index.js' || file.split("._").length > 1 || fs.lstatSync(__dirname + "/../listeners/" + file).isDirectory()) return;
+		  	var listener = require('../listeners/' + file);
+		  	this.startListener(listener);
+		}.bind(this));
+	},
 	startListener: function(listener){
 		listener.listen(this);
+	},
+	initializeJobs: function(){
+		this.log.startup("Registering Jobs");
+		fs.readdirSync(__dirname + "/../jobs").forEach(function (file) {
+		  if (file == 'index.js' || file.split("._").length > 1 || fs.lstatSync(__dirname + "/../jobs/" + file).isDirectory()) return;
+		  	var job = require('../jobs/' + file);
+		  	this.startJob(job);
+		}.bind(this));
 	},
 	startJob: function(job){
 		job.scheduleJob(this);

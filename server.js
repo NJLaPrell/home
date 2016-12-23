@@ -63,14 +63,14 @@ house.lutron.connect();
 ////////////////////////////////////////////////////////////
 // Register Jobs
 ////////////////////////////////////////////////////////////
-var startJobs = require('./jobs/');
-startJobs(house);
+//var startJobs = require('./jobs/');
+//startJobs(house);
 
 ////////////////////////////////////////////////////////////
 // Register Event Listeners
 ////////////////////////////////////////////////////////////
-var registerListeners = require('./listeners/');
-registerListeners(house);
+//var registerListeners = require('./listeners/');
+//registerListeners(house);
 
 ////////////////////////////////////////////////////////////
 // Register Polls
@@ -78,6 +78,8 @@ registerListeners(house);
 //var registerPolls = require('./polls/');
 //registerPolls(house);
 house.initializePolls();
+house.initializeListeners();
+house.initializeJobs();
 
 
 ////////////////////////////////////////////////////////////
@@ -278,4 +280,6 @@ app.use('/home', router);
 app.use(express.static('static'));
 
 app.listen(house.conf.port);
+
+house.triggerEvent('startup-complete');
 
