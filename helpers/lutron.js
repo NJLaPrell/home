@@ -26,29 +26,29 @@ module.exports = function(house){
 			house.log.error(error);
 		});
 
-		self = this;
+		
 
 		// Respond to incomming data
 		this.lutron.on('data', function(data){
 
-			self.readyForCommand = true;
+			this.readyForCommand = true;
 
 			house.log.debug("Lutron Data Received: " + String(data));
 
 			// Login prompt
 			if(String(data) == 'login: '){
-				self.sendCommand(self.username);	
+				this.sendCommand(this.username);	
 
 			// Password prompt
 			} else if(String(data) == 'password: '){
-				self.sendCommand(self.password);
+				this.sendCommand(this.password);
 
 			// General prompt
 			} else if(String(data) == 'GNET> '){
 
 			// Device state changed
 			} else if(String(data).indexOf('~OUTPUT') != -1) {
-				self.updateDeviceStatus(String(data));
+				this.updateDeviceStatus(String(data));
 
 			// Remote button pressed
 			} else if(String(data).indexOf('~DEVICE') != -1) {
@@ -59,9 +59,9 @@ module.exports = function(house){
 			}
 
 			// Process any queued commands
-			self.processCommandQueue();
+			this.processCommandQueue();
 
-		});
+		}.bind(this));
 	};
 
 	this.updateDeviceStatus = function(output){

@@ -4,6 +4,7 @@ var Log = require('./log');
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
 var date = require('./date-time.js');
+var fs = require('fs');
 
 module.exports = {
 	eventEmitter: eventEmitter,
@@ -80,6 +81,15 @@ module.exports = {
 		eventEmitter.on(eventName, function(args){
 			eventAction(args);
 		});
+	},
+	initializePolls: function(){
+		this.log.startup("Registering Polls");
+		var self = this;
+		fs.readdirSync(__dirname + "/../polls").forEach(function (file) {
+		  if (file == 'index.js' || file.split("._").length > 1 || fs.lstatSync(__dirname + "/../polls/" + file).isDirectory()) return;
+		  	var poll = require('../polls/' + file);
+		  	this.startPoll(poll);
+		}.bind(this));
 	},
 	startPoll: function(poll){
 		this.pollsRegistered[poll.name] = poll;
