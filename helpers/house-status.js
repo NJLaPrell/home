@@ -1,3 +1,4 @@
+
 var conf = require('../config.js');
 var Log = require('./log');
 var events = require('events');
@@ -86,6 +87,9 @@ module.exports = {
 	},
 	startListener: function(listener){
 		listener.listen(this);
+	},
+	startJob: function(job){
+		job.scheduleJob(this);
 	},
 	getStatusReport: function(){
 		return this.status;
