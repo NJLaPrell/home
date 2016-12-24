@@ -3,6 +3,7 @@ var Listener = require.main.require('./helpers/listener.js');
 
 var settings = {
 	name: 'Rain',
+	description: 'Checks the weather event to see if it is raining and logs history.',
 	eventsListened: ['weather']
 };
 

@@ -6,8 +6,11 @@ function Poll(settings){
 	this.log = new Log(this.conf.debug);
 
 	this.name = settings.name;
+	this.description = settings.description ? settings.description : null;
 	this.intervalString = settings.interval;
 	this.executeOnStartup = settings.executeOnStartup;
+	this.eventsTriggered = settings.eventsTriggered ? settings.eventsTriggered : [],
+	this.lastRun = null;
 	this.job = null;
 
 	var parts = settings.interval.split(" ");
@@ -27,12 +30,16 @@ Poll.prototype.execute = function(house){
 	var self = this;
 	
 	if(this.interval){
-		setInterval(function(){self.job(house);}, this.interval);	
+		setInterval(function(){
+			self.job(house);
+			self.lastRun = house.date.getDateTime();
+		}, this.interval);	
 	}
 	
 	if(this.executeOnStartup){
 		house.listenForEvent('startup-complete',function(){
 			this.job(house);
+			self.lastRun = house.date.getDateTime();
 		}.bind(this));
 	}
 };

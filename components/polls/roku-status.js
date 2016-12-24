@@ -4,7 +4,9 @@ var roku = require.main.require('./helpers/roku');
 
 var settings = {
 	name: 'Roku Status',
+	description: 'Checks the TV every minute and turns it on to the blank screen if the power is off in order to prevent it from becoming unreachable.',
 	interval: '1 m',
+	eventsTriggered: ['tv-status'],
 	executeOnStartup: true
 };
 

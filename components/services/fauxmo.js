@@ -5,7 +5,9 @@ var roku = require.main.require('./helpers/roku.js');
 
 var settings = {
 	name: 'FauxMo Switches',
-	type: 'TCP/IP'
+	type: 'TCP/IP',
+	description: 'Fake Wemo switch service. Each switch registered can be discovered by Amazon Alexa and is able to receive an action of "on" or "off."',
+	eventsTriggered: ['trigger-toggleSwitch', 'trigger-hueLights']
 };
 
 var service = new Service(settings);

@@ -8,6 +8,9 @@ function Job(settings){
 	this.name = settings.name;
 	this.schedule = settings.schedule;
 	this.executeOnStartup = settings.executeOnStartup;
+	this.description = settings.description ? settings.description : null;
+	this.eventsTriggered = settings.eventsTriggered ? settings.eventsTriggered : [],
+	this.lastRun = null;
 	this.job = null;
 
 	return this;
@@ -21,11 +24,15 @@ Job.prototype.scheduleJob = function(house){
 	this.log.startup("     Job scheduled for " + this.name + ": " + this.schedule);
 	var self = this;
 	
-	schedule.scheduleJob(self.schedule, function(){self.job(house)});
+	schedule.scheduleJob(self.schedule, function(){
+		self.lastRun = house.date.getDateTime();
+		self.job(house)}
+	);
 	
 	if(this.executeOnStartup){
 		house.listenForEvent('startup-complete',function(){
 			this.job(house);
+			self.lastRun = house.date.getDateTime();
 		}.bind(this));
 	}
 };

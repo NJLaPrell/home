@@ -5,6 +5,7 @@ var date = require.main.require("./helpers/date-time.js");
 
 var settings = {
 	name: 'Motion Detection',
+	description: 'Uses the IP camera email heard by the email-recieved listener to determine motion detection and fire an alert if nobody is home.',
 	eventsListened: ['email-received']
 };
 

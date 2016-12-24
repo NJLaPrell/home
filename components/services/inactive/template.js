@@ -3,7 +3,9 @@ var Service = require.main.require('./helpers/service.js');
 
 var settings = {
 	name: '***NAME***',
-	type: '**TYPE OF SERVICE***'
+	type: '***TYPE OF SERVICE***',
+	eventsTriggered: ['**EVENTS**'],
+	description: '***DESCRIPTION***'
 };
 
 var service = new Service(settings);

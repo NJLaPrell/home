@@ -5,8 +5,10 @@ var triggerEvent = require.main.require('./helpers/trigger-event.js');
 
 var settings = {
 	name: 'Hue Status',
+	description: 'Polls Hue light status every 10 seconds and syncs the house class.',
 	interval: '10 s',
-	executeOnStartup: true
+	executeOnStartup: true,
+	eventsTriggered: ['status-hueLightStates']
 };
 
 var poll = new Poll(settings);

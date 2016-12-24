@@ -5,8 +5,9 @@ function Listener(settings){
 	this.log = new Log(conf.debug);
 
 	this.name = settings.name;
+	this.description = settings.description ? settings.description : null;
 	this.eventsListened = settings.eventsListened ? settings.eventsListened : [];
-	this.eventsFired = settings.eventsFire ? settings.eventsFired : [];
+	this.eventsFired = settings.eventsFired ? settings.eventsFired : [];
 	this.listener = null;
 
 	this.log.startup("     Starting Listener: " + this.name);

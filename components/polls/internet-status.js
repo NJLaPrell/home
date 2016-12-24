@@ -4,7 +4,9 @@ var ping = require('ping');
 
 var settings = {
 	name: 'Internet Status',
+	description: 'Pings Google DNS server to report on internet connectivity.',
 	interval: '10 s',
+	eventsTriggered: 'internetCheck',
 	executeOnStartup: true
 };
 

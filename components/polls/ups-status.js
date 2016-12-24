@@ -3,7 +3,9 @@ var Poll = require.main.require('./helpers/poll.js');
 
 var settings = {
 	name: 'UPS Status',
+	description: 'Retrieves the current UPS status data ever minute and syncs it to the house status.',
 	interval: '1 m',
+	eventsTriggered: ['ups-status'],
 	executeOnStartup: true
 };
 

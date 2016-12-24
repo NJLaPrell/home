@@ -7,6 +7,7 @@ var date = require('./date-time.js');
 var fs = require('fs');
 
 module.exports = {
+	date: date,
 	eventEmitter: eventEmitter,
 	conf: conf,
 	log: new Log(conf.debug),

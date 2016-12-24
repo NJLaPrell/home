@@ -3,7 +3,9 @@ var Listener = require.main.require('./helpers/listener.js');
 
 var settings = {
 	name: 'Sunrise',
-	eventsListened: ['sunrise']
+	description: 'Listens for the sunrise event, logs history, and turns the outside lights off.',
+	eventsListened: ['sunrise'],
+	eventsFired: ['trigger-toggleSwitch']
 };
 
 var listener = new Listener(settings);

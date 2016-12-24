@@ -3,6 +3,7 @@ var Listener = require.main.require('./helpers/listener.js');
 
 var settings = {
 	name: 'Freezing',
+	description: 'Logs a history entry if the outside temperature drops below freezing.',
 	eventsListened: ['weather']
 };
 

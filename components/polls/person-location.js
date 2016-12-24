@@ -4,7 +4,9 @@ var ping = require('ping');
 
 var settings = {
 	name: 'Person Location',
+	description: 'Uses Away.py to detect home/away values. The script is run as a service, but polls every 30 seconds.',
 	interval: '0 s',
+	eventsTriggered: ['gps'],
 	executeOnStartup: true
 };
 

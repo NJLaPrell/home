@@ -3,6 +3,7 @@ var Listener = require.main.require('./helpers/listener.js');
 
 var settings = {
 	name: '***NAME***',
+	description: '***DESCRIPTION***',
 	eventsListened: ['***EVENTS***'],
 	eventsTriggered: ['***EVENTS TRIGGERED***']
 };

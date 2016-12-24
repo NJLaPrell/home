@@ -4,7 +4,9 @@ var triggerEvent = require.main.require('./helpers/trigger-event.js');
 
 var settings = {
 	name: '***NAME***',
+	description: '***DESCRIPTION***',
 	interval: '10 s',
+	eventsTriggered: ['**EVENTS**'],
 	executeOnStartup: true
 };
 

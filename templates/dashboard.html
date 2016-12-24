@@ -24,6 +24,8 @@
     <script type="text/javascript">
         $(document).ready(function(){
             
+            $(".checkboxInAppearanceOnly").on('click',function(){return false;});
+
             $(".smartPlugSwitch").on('change',function(){
                 var name = this.id;
                 var direction = $(this).val();

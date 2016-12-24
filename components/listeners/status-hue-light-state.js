@@ -4,6 +4,7 @@ var hue = require.main.require('./helpers/hue-lights.js');
 
 var settings = {
 	name: 'Hue Light Status',
+	description: 'Listens for the current status of the Hue lights and updates the house status object.',
 	eventsListened: ['status-hueLightStates']
 };
 

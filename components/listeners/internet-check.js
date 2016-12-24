@@ -5,6 +5,7 @@ var date = require.main.require('./helpers/date-time.js');
 
 var settings = {
 	name: 'Internet Status',
+	description: 'Recieves the internet polling data and updates the house status. If the internet goes out, Hue Animcation panic mode is triggered. Out and back states are logged in the history.',
 	eventsListened: ['internetCheck']
 };
 

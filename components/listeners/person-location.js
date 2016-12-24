@@ -3,6 +3,7 @@ var Listener = require.main.require('./helpers/listener.js');
 
 var settings = {
 	name: 'Person Location',
+	description: 'Listens for GPS updates and syncs house status and logs to history as appropriate.',
 	eventsListened: ['gps']
 };
 

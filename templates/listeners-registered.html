@@ -1,9 +1,34 @@
-<div data-role="page" dialog="true" id="error-log">
+<div data-role="page" id="jobs-registered">
     <div data-role="header" data-theme="b">
-        <h1>Log</h1>
+        <h1>Listeners Registered</h1>
     </div>
     <div role="main" class="ui-content">
-        <pre>{{errorLog}}</pre>
-        <a href="#" class="ui-btn" data-rel="back">Close</a>
+    	{{#each listeners}}
+    		<div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+    			<h4>{{name}}</h4>
+    			<ul data-role="listview" data-inset="true">
+    				<li style="white-space: normal !important;word-wrap:break-word;overflow-wrap: break-word;"><b>Description:</b> {{{description}}}</li>
+    				{{#if events}}
+    					<li><b>Events Triggered:</b>
+    					<ul>
+    						{{#each eventsTriggered as |event|}}
+    							<li>{{event}}</li>
+    						{{/each}}
+    					</ul>
+    					</li>
+    				{{/if}}
+    				{{#if eventsListenedPresent}}
+    					<li><b>Events Listened:</b>
+    					<ul>
+    						{{#each eventsListened as |event|}}
+    							<li>{{event}}</li>
+    						{{/each}}
+    					</ul>
+    					</li>
+    				{{/if}}
+    			</ul>
+    		</div>
+    	{{/each}}       
+       <a href="#" class="ui-shadow ui-btn ui-corner-all" data-rel="back">Back</a>
     </div>
 </div>

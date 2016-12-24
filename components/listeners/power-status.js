@@ -5,6 +5,7 @@ var date = require.main.require("./helpers/date-time.js");
 
 var settings = {
 	name: 'Power Status',
+	description: 'Listens for the power outage notifications triggered by the UPS and logs status and history and sends text alerts.',
 	eventsListened: ['ups']
 };
 
