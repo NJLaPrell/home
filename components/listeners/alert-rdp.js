@@ -16,6 +16,7 @@ listener.setListener(function(house){
 		house.recordTriggeredListener('RDP');
 		house.setStatus('lastRDPConnection', date.getDateTime());
 		alert("RDP Connection Detected");
+		house.logHistory("An RDP connection was made to 192.168.0.25");
 	});
 });
 
