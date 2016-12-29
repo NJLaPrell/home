@@ -5,6 +5,7 @@ var events = require('events');
 var eventEmitter = new events.EventEmitter();
 var date = require('./date-time.js');
 var fs = require('fs');
+var eventRoster = require('./event-roster.js')
 
 module.exports = {
 	date: date,
@@ -18,6 +19,7 @@ module.exports = {
 	servicesRegistered: {},
 	jobsRegistered: {},
 	lutron: null,
+	eventRoster: eventRoster,
 	status: {
 		daytime: null,
 		nighttime: null,
@@ -75,6 +77,11 @@ module.exports = {
 		this.eventsFired.push({"time": date.getDateTime(), "event": eventName});
 		this.eventEmitter.emit(eventName, args);	
 		this.log.debug("Event Triggered: " + eventName + " - " + JSON.stringify(args));
+		if(!this.eventRoster[eventName]){
+			this.log.warning("Event \"" + eventName + "\" was triggered, but is not on the Event Roster.");
+		} else {
+			this.eventRoster[eventName].lastTriggered = date.getDateTime();
+		}
 	},
 	listenForEvent: function(eventName, eventAction){
 		eventEmitter.on(eventName, function(args){

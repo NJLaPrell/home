@@ -277,6 +277,14 @@ router.route('/dashboard/details/listeners-registered').get(function(req, res){
 	});
 });
 
+router.route('/dashboard/details/event-roster').get(function(req, res){
+	fs.readFile(__dirname + '/templates/event-roster.html', 'utf8', function(err, html){
+		var template = Handlebars.compile(html);
+		var model = require("./models/event-roster.js");
+		res.send(template(model(house)));
+	});
+});
+
 ////////////////////////////////////////////////////////////
 // Signin Route
 ////////////////////////////////////////////////////////////

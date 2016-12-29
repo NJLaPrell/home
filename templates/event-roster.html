@@ -1,0 +1,27 @@
+<div data-role="page" id="event-roster">
+    <div data-role="header" data-theme="b">
+        <h1>Event Roster</h1>
+    </div>
+    <div role="main" class="ui-content">
+    	{{#each events}}
+    		<div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+    			<h4>{{name}}</h4>
+    			<ul data-role="listview" data-inset="true">
+    				<li style="white-space: normal !important;word-wrap:break-word;overflow-wrap: break-word;"><b>Description:</b> {{{description}}}</li>
+                    <li><b>Last Triggered:</b> {{{lastTriggered}}}</li>
+    				<li><b>Type:</b> {{type}}</li>
+    				<li><b>args:</b> {{#unless hasArgs}}<i>None</i>{{/unless}}
+                    {{#if hasArgs}}
+                        <ul>
+                        {{#each args as |arg|}}
+                            <li><b>{{@key}}:</b> {{arg}}</li>
+                        {{/each}}
+                        </ul>
+                    {{/if}}
+                    </li>
+    			</ul>
+    		</div>
+    	{{/each}}       
+       <a href="#" class="ui-shadow ui-btn ui-corner-all" data-rel="back">Back</a>
+    </div>
+</div>
