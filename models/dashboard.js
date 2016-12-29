@@ -25,6 +25,10 @@ module.exports = function(house){
 	model.status.motionDetected = house.status.motionLastDetected ? true : false;
 	model.status.motionWhileAway = house.status.motionWhileAway;
 
+	// RDP Login Information
+	model.status.lastRDPConnection = house.status.lastRDPConnection ? house.status.lastRDPConnection : null;
+	model.status.RDPConnectionDetected = house.status.lastRDPConnection ? true : false;
+
 	// Power Information
 	model.status.powered = house.status.powered;
 	model.status.powerOutSince = house.status.powerOutSince;	

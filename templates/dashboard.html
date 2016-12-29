@@ -324,9 +324,14 @@
 <!-- //// CAMERA PANEL ////////////////////////////////////////////////// -->
 <!-- //////////////////////////////////////////////////////////////////// -->
 
-    <div data-role="collapsible">
-        <h4>Camera</h4>
-        <p><b>Motion Last Detected:</b> {{status.motionLastDetected}}</p>
+    <div data-role="collapsible" data-content-theme="d">
+        <h4>Misc</h4>
+        <div class="ui-field-contain">
+            <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                <li><b>Motion Last Detected:</b> {{status.motionLastDetected}}</li>
+                <li><b>Last RDP Session:</b> {{#if status.RDPConnectionDetected}}{{status.lastRDPConnection}}{{else}}<i>Unknown</i>{{/if}}
+            </ul>
+        </div>
     </div>
 
 <!-- //////////////////////////////////////////////////////////////////// -->
