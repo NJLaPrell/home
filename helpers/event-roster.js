@@ -146,5 +146,9 @@ module.exports = {
 			lightID: "Integer ID of the light changed.",
 			rgb: "Array of RGB values 0-255"
 		}
+	},
+	"RDP": {
+		description: "An RDP Connection was made to 192.168.0.25",
+		type: "environmental"
 	}
 };
