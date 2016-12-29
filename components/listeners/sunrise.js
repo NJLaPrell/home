@@ -15,6 +15,10 @@ listener.setListener(function(house){
 		house.recordTriggeredListener('sunrise');
 		house.logHistory("The sun rose.");
 
+		// Toggle the status
+		house.setStatus('daytime', true);
+		house.setStatus('nighttime', false);
+
 		// Turn off the Christmas lights
 		house.logHistory("The Christmas lights were turned off.");
 		house.triggerEvent("trigger-toggleSwitch", {name: "Christmas Lights 1", direction: "off"});
