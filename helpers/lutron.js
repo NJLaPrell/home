@@ -70,6 +70,7 @@ module.exports = function(house){
 		for(var i = 0; i < house.status.caseta.dimmers.length; i++){
 			if(house.status.caseta.dimmers[i].id == deviceID){
 				house.status.caseta.dimmers[i].brightness = parseInt(params);
+				house.triggerEvent('lutron-changed', {deviceID: deviceID, brightness: parseInt(params)});
 			}
 		}
 	};

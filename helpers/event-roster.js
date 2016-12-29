@@ -102,5 +102,49 @@ module.exports = {
 		args: {
 			panic: "Boolean. Triggers panic animation."
 		}
+	},
+	"lutron-changed": {
+		description: "Lutron device changed",
+		type: "environmental",
+		args: {
+			lightID: "ID of the Lutron device that was controlled.",
+			brightness: "New brightness value."
+		}
+	},
+	"trigger-lutron": {
+		description: "Lutron device triggered by the home app.",
+		type: "environmental",
+		args: {
+			light: "Light ID",
+			direction: "on/off"
+		}
+	},
+	"motion-while-away": {
+		description: "Motion detected while the house was unoccupied.",
+		type: "environmental"
+	},
+	"hue-toggled": {
+		description: "Hue light turned on or off by the home app.",
+		type: "environmental",
+		args: {
+			lightID: "Integer ID of the light changed.",
+			direction: "on/off"
+		}
+	},
+	"hue-brightness-changed": {
+		description: "Hue light brightness was changed by the home app.",
+		type: "environmental",
+		args: {
+			lightID: "Integer ID of the light changed.",
+			bri: "Hue brightness level."
+		}
+	},
+	"hue-color-changed": {
+		description: "Hue light color was changed by the home app.",
+		type: "environmental",
+		args: {
+			lightID: "Integer ID of the light changed.",
+			rgb: "Array of RGB values 0-255"
+		}
 	}
 };

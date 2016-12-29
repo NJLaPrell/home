@@ -64,6 +64,7 @@ module.exports = function(house) {
 		    	var hueStatus = house.getStatus('hue');
 				hueStatus.lights[light].state.on = direction == 'on' ? true : false;
 				house.setStatus('hue', hueStatus);
+				house.triggerEvent('hue-toggled', {lightID: light, direction: direction});
 		    }
 		});
 	};
@@ -80,6 +81,7 @@ module.exports = function(house) {
 				var hueStatus = house.getStatus('hue');
 				hueStatus.lights[light].state.bri = brightness;
 				house.setStatus('hue', hueStatus);
+				house.triggerEvent('hue-brightness-changed', {lightID: light, bri: brightness});
 			}
 		});
 	};
@@ -96,6 +98,7 @@ module.exports = function(house) {
 				var hueStatus = house.getStatus('hue');
 				hueStatus.lights[light].state.rgb = rgb;
 				house.setStatus('hue', hueStatus);
+				house.triggerEvent('hue-color-changed', {lightID: light, rgb: rgb});
 			}
 		});
 	}

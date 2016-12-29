@@ -23,6 +23,7 @@ listener.setListener(function(house){
 			if(!house.getStatus('motionWhileAway')){
 				alert("Motion detected on Camera 495920");
 				house.logHistory("Motion was detected when nobody was home.");	
+				house.triggerEvent('motion-while-away');
 			}
 			house.setStatus('motionWhileAway', true);
 		} else if(motion && !away){
