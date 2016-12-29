@@ -450,9 +450,14 @@
         </div>
     {{/each}}
 
-    <a href="/home/dashboard/events/" class="ui-btn ui-btn-inline ui-icon-calendar ui-btn-icon-left" data-rel="dialog" data-transition="pop">Event Log</a>
-    <a href="/home/dashboard/details/" class="ui-btn ui-btn-inline ui-icon-bars ui-btn-icon-left" data-transition="flip">Details</a>
-    <a href="/home/dashboard/log/" class="ui-btn ui-btn-inline ui-icon-bars ui-btn-icon-left" data-rel="dialog" data-transition="pop">Log</a>
+    <div class="ui-grid-a">
+        <div class="ui-block-a">
+            <a href="/home/dashboard/events/" class="ui-btn ui-btn ui-icon-calendar ui-btn-icon-left" data-rel="dialog" data-transition="pop">Event Log</a>
+        </div>
+        <div class="ui-block-b">
+            <a href="/home/dashboard/details/" class="ui-btn ui-btn ui-icon-info ui-btn-icon-left" data-transition="flip">Details</a>
+        </div>
+    </div>
 
     </div>
     <div data-role="footer">{{status.serverTime}}</div>
