@@ -3,7 +3,9 @@ var Listener = require.main.require('./helpers/listener.js');
 
 var settings = {
 	name: 'UPS Status',
-	eventsListened: ['ups-status']
+	description: 'Listens to the ups-status event fired from the UPS poll and updates the house status with the args.',
+	eventsListened: ['ups-status'],
+	eventsFired: []
 };
 
 var listener = new Listener(settings);

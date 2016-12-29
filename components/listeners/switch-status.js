@@ -3,7 +3,9 @@ var Listener = require.main.require('./helpers/listener.js');
 
 var settings = {
 	name: 'Edimax Switch Status',
-	eventsListened: ['switchStatus']
+	description: 'Listens for the switchStatus event fired by the switch poll and updates the status in the house status object.',
+	eventsListened: ['switchStatus'],
+	eventsFired: []
 };
 
 var listener = new Listener(settings);

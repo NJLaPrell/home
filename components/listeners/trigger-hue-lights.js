@@ -4,7 +4,9 @@ var Hue = require.main.require('./helpers/hue-lights.js');
 
 var settings = {
 	name: 'Hue Lights Command',
-	eventsListened: ['trigger-hueLights']
+	description: 'Controls Hue lights.',
+	eventsListened: ['trigger-hueLights'],
+	eventsFired: []
 };
 
 var listener = new Listener(settings);

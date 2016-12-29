@@ -4,7 +4,9 @@ var roku = require.main.require('./helpers/roku');
 
 var settings = {
 	name: 'TV Check',
-	eventsListened: ['tv-status']
+	description: 'Checks to see if the TV is powered off. If it is, it is powered back on with the screen off so it continues to receive commands.',
+	eventsListened: ['tv-status'],
+	eventsFired: []
 };
 
 var listener = new Listener(settings);

@@ -3,8 +3,9 @@ var Listener = require.main.require('./helpers/listener.js');
 
 var settings = {
 	name: 'Weather Status',
+	description: 'Sets nighttime/daytime statuses on startup, updates the currentWeather status, and fires sunrise/sunset events.',
 	eventsListened: ['weather-status'],
-	eventsTriggered: ['sunset','sunrise']
+	eventsFired: ['sunset','sunrise']
 };
 
 var listener = new Listener(settings);

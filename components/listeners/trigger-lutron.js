@@ -2,8 +2,10 @@
 var Listener = require.main.require('./helpers/listener.js');
 
 var settings = {
-	name: 'Hue Lights Command',
-	eventsListened: ['trigger-hueLights']
+	name: 'Lutron Lights Command',
+	description: 'Turns Lutron lights on or off.',
+	eventsListened: ['trigger-hueLights'],
+	eventsFired: []
 };
 
 var listener = new Listener(settings);

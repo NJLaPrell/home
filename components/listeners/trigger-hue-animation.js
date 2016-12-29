@@ -4,7 +4,9 @@ var HueAnimation = require.main.require('./helpers/hue-animation.js');
 
 var settings = {
 	name: 'Hue Animation Command',
-	eventsListened: ['trigger-hueAnimation']
+	description: 'Triggers hue animations.',
+	eventsListened: ['trigger-hueAnimation'],
+	eventsFired: []
 };
 
 var listener = new Listener(settings);

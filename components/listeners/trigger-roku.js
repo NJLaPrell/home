@@ -4,7 +4,9 @@ var roku = require.main.require('./helpers/roku');
 
 var settings = {
 	name: 'Roku Commands',
-	eventsListened: ['trigger-roku']
+	description: 'Sends commands to Roku.',
+	eventsListened: ['trigger-roku'],
+	eventsFired: []
 };
 
 var listener = new Listener(settings);
