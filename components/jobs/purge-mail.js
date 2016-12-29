@@ -15,7 +15,7 @@ var job = new Job(settings);
 
 job.setJob(function(house){
 
-	house.log.info("Purge mail job running");
+	house.log.debug("Purge mail job running");
 	
 	var settings = house.conf.imap;
 	settings.searchFilter = ['SEEN'];
