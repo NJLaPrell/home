@@ -29,9 +29,13 @@ listener.setListener(function(house){
 		// The sun just set
 		} else if(args.sunrise && (time < args.sunrise || time > args.sunset) && house.getStatus('daytime')){
 			house.triggerEvent('sunset');
+			house.setStatus('daytime', false);
+			house.setStatus('nighttime', true);
 		// The sun just rose
 		} else if(args.sunrise && (time > args.sunrise && time < args.sunset) && house.getStatus('nighttime')){
 			house.triggerEvent('sunrise');
+			house.setStatus('daytime', true);
+			house.setStatus('nighttime', false);
 		}
 	});
 });
