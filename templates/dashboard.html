@@ -328,7 +328,7 @@
         <h4>Misc</h4>
         <div class="ui-field-contain">
             <ul data-role="listview" data-inset="true" data-divider-theme="a">
-                <li><b>Motion Last Detected:</b> {{status.motionLastDetected}}</li>
+                <li><b>Motion Last Detected:</b> {{#if status.motionDetected}}{{status.motionLastDetected}}{{else}}<i>Unknown</i>{{/if}}</li>
                 <li><b>Last RDP Session:</b> {{#if status.RDPConnectionDetected}}{{status.lastRDPConnection}}{{else}}<i>Unknown</i>{{/if}}
             </ul>
         </div>
