@@ -6,7 +6,7 @@ var settings = {
 	name: 'Person Location',
 	description: 'Uses Away.py to detect home/away values. The script is run as a service, but polls every 30 seconds.',
 	interval: '0 s',
-	eventsTriggered: ['gps'],
+	eventsTriggered: ['location'],
 	executeOnStartup: true
 };
 
@@ -18,7 +18,7 @@ poll.setJob(function(house){
 
 	var spawn = require('child_process').spawn;
 	
-	nickAway = spawn('./away.py', ['-d', house.conf.nicksPhoneIP, '-g', '0', '-os', '10'], {cwd: '/home/pi/webapps/home'});
+	nickAway = spawn('./away.py', ['-d', house.conf.nicksPhoneIP, '-g', '0', '-os', '10'], {cwd: '/home/pi/webapps/home/helpers/lib'});
 
 	nickAway.stdout.on('data', function(data){
 		if(data.indexOf("Startup status: Vacant") != -1){
@@ -26,9 +26,9 @@ poll.setJob(function(house){
 		} else if(data.indexOf("Startup status: Occupied") != -1){
 			house.setStatus('nickslocation', 'home');
 		} else if(data.indexOf("Property is occupied") != -1){
-			self.triggerEvent('gps', {person:'nick', location: 'home'});
+			self.triggerEvent('location', {person:'nick', location: 'home'});
 		} else if(data.indexOf("Property is vacant") != -1){
-			self.triggerEvent('gps', {person:'nick', location: 'away'});
+			self.triggerEvent('location', {person:'nick', location: 'away'});
 		} else {
 			house.log.warning("Unexpected output from away.py: " + String(data));
 		}
@@ -42,9 +42,9 @@ poll.setJob(function(house){
 		} else if(data.indexOf("Startup status: Occupied") != -1){
 			house.setStatus('brendaslocation', 'home');
 		} else if(data.indexOf("Property is occupied") != -1){
-			self.triggerEvent('gps', {person:'brenda', location: 'home'});
+			self.triggerEvent('location', {person:'brenda', location: 'home'});
 		} else if(data.indexOf("Property is vacant") != -1){
-			self.triggerEvent('gps', {person:'brenda', location: 'away'});
+			self.triggerEvent('location', {person:'brenda', location: 'away'});
 		} else {
 			house.log.warning("Unexpected output from away.py: " + String(data));
 		}

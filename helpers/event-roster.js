@@ -84,7 +84,7 @@ module.exports = {
 		description: "description",
 		type: "environmental"
 	},
-	"gps": {
+	"location": {
 		description: "description",
 		type: "environmental",
 		args: {
