@@ -29,9 +29,15 @@ listener.setListener(function(house){
 		// The sun just set
 		} else if(args.sunrise && (time < args.sunrise || time > args.sunset) && house.getStatus('daytime')){
 			house.triggerEvent('sunset');
+			house.log.info("SUNSET");
+			house.log.info(JSON.stringify(args));
+			house.log.info(time);
 		// The sun just rose
 		} else if(args.sunrise && (time > args.sunrise && time < args.sunset) && house.getStatus('nighttime')){
 			house.triggerEvent('sunrise');
+			house.log.info("SUNRISE");
+			house.log.info(JSON.stringify(args));
+			house.log.info(time);
 		}
 	});
 });
