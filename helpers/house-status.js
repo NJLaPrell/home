@@ -105,7 +105,6 @@ module.exports = {
 	initializeJobs: function(){
 		var jobs = this.getComponents('Jobs');
 		for(var i = 0; i < jobs.length; i++){
-			jobs[i].scheduleJob(this);
 			this.jobsRegistered[jobs[i].name] = jobs[i];
 			this.jobsRegistered[jobs[i].name].scheduleJob(this);
 		}
