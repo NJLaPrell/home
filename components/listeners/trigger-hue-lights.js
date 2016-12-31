@@ -5,7 +5,7 @@ var Hue = require.main.require('./helpers/hue-lights.js');
 var settings = {
 	name: 'Hue Lights Command',
 	description: 'Controls Hue lights.',
-	eventsListened: ['trigger-hueLights'],
+	eventsListened: ['trigger-hue-lights'],
 	eventsFired: []
 };
 
@@ -13,8 +13,8 @@ var listener = new Listener(settings);
 
 listener.setListener(function(house){
 	var hue = new Hue(house);
-	house.listenForEvent('trigger-hueLights', function(args){
-		house.recordTriggeredListener('trigger-hueLights');
+	house.listenForEvent('trigger-hue-lights', function(args){
+		house.recordTriggeredListener('trigger-hue-lights');
 		if(args.direction){
 			hue.toggleState(args.lightID, args.direction);
 		} else if(args.bri){

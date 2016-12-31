@@ -7,8 +7,8 @@ module.exports = {
 			direction: "\"on\" or \"off.\""
 		}
 	},
-	"trigger-hueLights": {
-		description: "Triggers Edimax switches on or off.",
+	"trigger-hue-lights": {
+		description: "Triggers Hue light states for on/off, brightness, color, preset colors, and supported custom scenes.",
 		type: "trigger",
 		args: {
 			lightID: "Numeric representation of the light to be controlled.",
