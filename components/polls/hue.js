@@ -8,7 +8,7 @@ var settings = {
 	description: 'Polls Hue light status every 10 seconds and syncs the house class.',
 	interval: '10 s',
 	executeOnStartup: true,
-	eventsTriggered: ['status-hueLightStates']
+	eventsTriggered: ['poll-hue']
 };
 
 var poll = new Poll(settings);
@@ -23,7 +23,7 @@ poll.setJob(function(house){
 	hue.getState().then(function(response){
 		house.setStatus('hue', response);
 		hue.getAllLightStates().then(function(results){
-			triggerEvent('status-hueLightStates', results);
+			triggerEvent('poll-hue', results);
 		});	
 	});
 	

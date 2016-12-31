@@ -65,7 +65,7 @@ module.exports = {
 			status: "Status value (on/off/sleeping)."
 		}
 	},
-	"status-hueLightStates": {
+	"poll-hue": {
 		description: "Status of all Hue lights. Sends a Hue status object",
 		type: "status"
 	},
