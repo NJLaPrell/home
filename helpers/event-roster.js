@@ -78,15 +78,15 @@ module.exports = {
 	},
 	"sunset": {
 		description: "Fires when the sun sets according to the weather API.",
-		type: "environmental"
+		type: "Environmental"
 	},
 	"sunrise": {
 		description: "description",
-		type: "environmental"
+		type: "Environmental"
 	},
 	"location": {
 		description: "description",
-		type: "environmental",
+		type: "Environmental",
 		args: {
 			person: "nick/brenda",
 			location: "home/away"
@@ -94,11 +94,11 @@ module.exports = {
 	},
 	"email-received": {
 		description: "Email received. Args represent the mail object.",
-		type: "type"
+		type: "Internal"
 	},
-	"trigger-hueAnimation": {
+	"trigger-hue-animation": {
 		description: "description",
-		type: "type",
+		type: "Trigger",
 		args: {
 			panic: "Boolean. Triggers panic animation."
 		}

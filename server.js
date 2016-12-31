@@ -148,7 +148,7 @@ router.route('/animation').put(function(req, res){
 		break;
 
 	}
-	house.triggerEvent('trigger-hueAnimation', args);
+	house.triggerEvent('trigger-hue-animation', args);
 	res.status(200).send({"message": "Success - The animation '" + req.body.method + "' has been executed."});
 });
 
