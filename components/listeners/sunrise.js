@@ -5,7 +5,7 @@ var settings = {
 	name: 'Sunrise',
 	description: 'Listens for the sunrise event, logs history, and turns the outside lights off.',
 	eventsListened: ['sunrise'],
-	eventsFired: ['trigger-toggleSwitch']
+	eventsFired: ['trigger-edimax-switch']
 };
 
 var listener = new Listener(settings);
@@ -21,8 +21,8 @@ listener.setListener(function(house){
 
 		// Turn off the Christmas lights
 		house.logHistory("The Christmas lights were turned off.");
-		house.triggerEvent("trigger-toggleSwitch", {name: "Christmas Lights 1", direction: "off"});
-		house.triggerEvent("trigger-toggleSwitch", {name: "Christmas Lights 2", direction: "off"});
+		house.triggerEvent("trigger-edimax-switch", {name: "Christmas Lights 1", direction: "off"});
+		house.triggerEvent("trigger-edimax-switch", {name: "Christmas Lights 2", direction: "off"});
 	});
 });
 

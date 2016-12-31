@@ -1,5 +1,5 @@
 module.exports = {
-	"trigger-toggleSwitch": {
+	"trigger-edimax-switch": {
 		description: "Triggers Edimax switches on or off.",
 		type: "trigger",
 		args: {

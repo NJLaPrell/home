@@ -7,7 +7,7 @@ var settings = {
 	name: 'FauxMo Switches',
 	type: 'TCP/IP',
 	description: 'Fake Wemo switch service. Each switch registered can be discovered by Amazon Alexa and is able to receive an action of "on" or "off."',
-	eventsTriggered: ['trigger-toggleSwitch', 'trigger-hueLights']
+	eventsTriggered: ['trigger-edimax-switch', 'trigger-hueLights']
 };
 
 var service = new Service(settings);
@@ -93,15 +93,15 @@ service.setService(function(house){
 	        name: 'Tiffany Lamp',
 	        port: 11006,
 	        handler: (action) => {
-	          house.triggerEvent('trigger-toggleSwitch', {name: "Tiffany Lamp", direction: action});
+	          house.triggerEvent('trigger-edimax-switch', {name: "Tiffany Lamp", direction: action});
 	        }
 	      },
 	      {
 	        name: 'Outside Lights',
 	        port: 11007,
 	        handler: (action) => {
-	          house.triggerEvent('trigger-toggleSwitch', {name: "Christmas Lights 1", direction: action});
-	          house.triggerEvent('trigger-toggleSwitch', {name: "Christmas Lights 2", direction: action});
+	          house.triggerEvent('trigger-edimax-switch', {name: "Christmas Lights 1", direction: action});
+	          house.triggerEvent('trigger-edimax-switch', {name: "Christmas Lights 2", direction: action});
 	        }
 	      },
 	      {
