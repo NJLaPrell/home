@@ -67,11 +67,11 @@ module.exports = {
 	},
 	"poll-hue": {
 		description: "Status of all Hue lights. Sends a Hue status object",
-		type: "status"
+		type: "Poll Results"
 	},
-	"switchStatus": {
+	"poll-edimax-switch": {
 		description: "Edimax switch status.",
-		type: "status",
+		type: "Poll Results",
 		args: {
 			PLUGNAME: "Boolean representing the on/off status of the switch."
 		}

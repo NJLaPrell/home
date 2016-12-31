@@ -6,7 +6,7 @@ var settings = {
 	name: 'Switch Status',
 	description: 'Checks Edimax switches every 10 seconds and syncs the house class up with their current status.',
 	interval: '30 s',
-	eventsTriggered: ['switchStatus'],
+	eventsTriggered: ['poll-edimax-switch'],
 	executeOnStartup: true
 };
 
@@ -24,7 +24,7 @@ poll.setJob(function(house){
 		for(var i=0; i< plug.plugs.length; i++){
 			status[plug.plugs[i].name] = res[i];
 		}
-		self.triggerEvent('switchStatus', status);
+		self.triggerEvent('poll-edimax-switch', status);
 	});
 	
 });

@@ -4,15 +4,15 @@ var Listener = require.main.require('./helpers/listener.js');
 var settings = {
 	name: 'Edimax Switch Status',
 	description: 'Listens for the switchStatus event fired by the switch poll and updates the status in the house status object.',
-	eventsListened: ['switchStatus'],
+	eventsListened: ['poll-edimax-switch'],
 	eventsFired: []
 };
 
 var listener = new Listener(settings);
 
 listener.setListener(function(house){
-	house.listenForEvent('switchStatus', function(args){
-		house.recordTriggeredListener('switchStatus');
+	house.listenForEvent('poll-edimax-switch', function(args){
+		house.recordTriggeredListener('poll-edimax-switch');
 		// Log the history
 		var oldState = house.getStatus('plugs');
 		var newState = null;
