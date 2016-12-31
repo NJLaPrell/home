@@ -1,7 +1,7 @@
 module.exports = {
 	"trigger-edimax-switch": {
 		description: "Triggers Edimax switches on or off.",
-		type: "trigger",
+		type: "Trigger",
 		args: {
 			name: "The name of the switch to toggle.",
 			direction: "\"on\" or \"off.\""
@@ -9,7 +9,7 @@ module.exports = {
 	},
 	"trigger-hue-lights": {
 		description: "Triggers Hue light states for on/off, brightness, color, preset colors, and supported custom scenes.",
-		type: "trigger",
+		type: "Trigger",
 		args: {
 			lightID: "Numeric representation of the light to be controlled.",
 			direction: "\"on\" or \"off\" to toggle the light.",
@@ -21,11 +21,11 @@ module.exports = {
 	},
 	"startup-complete": {
 		description: "Server startup sequence has completed.",
-		type: "internal"
+		type: "Internal"
 	},
-	"ups-status": {
+	"poll-ups": {
 		description: "UPS status poll event with data from the UPS status.",
-		type: "status",
+		type: "Poll Results",
 		args: {
 			status: "ONLINE or ONBATT",
 			startTime: "Date/Time",
@@ -37,9 +37,9 @@ module.exports = {
 			timeOnBattery: "In seconds"
 		}	
 	},
-	"internetCheck": {
+	"poll-internet-connectivity": {
 		description: "Indicates whether the house is connected to the internet.",
-		type: "status",
+		type: "Poll Results",
 		args: {
 			pass: "Boolean true when the internet is connected and false when it is not."
 		}
