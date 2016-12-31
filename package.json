@@ -22,7 +22,8 @@
   "passport": "*",
   "passport-local": "*",
   "express-session": "*",
-  "cookie-parser": "*"
+  "cookie-parser": "*",
+  "moment": "*"
   },
   "scripts": {
     "test": "node server.js",
