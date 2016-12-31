@@ -105,7 +105,7 @@ module.exports = {
 	},
 	"lutron-changed": {
 		description: "Lutron device changed",
-		type: "environmental",
+		type: "Environmental",
 		args: {
 			lightID: "ID of the Lutron device that was controlled.",
 			brightness: "New brightness value."
@@ -113,7 +113,7 @@ module.exports = {
 	},
 	"trigger-lutron": {
 		description: "Lutron device triggered by the home app.",
-		type: "environmental",
+		type: "Trigger",
 		args: {
 			light: "Light ID",
 			direction: "on/off"
