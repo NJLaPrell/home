@@ -150,5 +150,12 @@ module.exports = {
 	"RDP": {
 		description: "An RDP Connection was made to 192.168.0.25",
 		type: "environmental"
+	},
+	"weather": {
+		description: "Event fired by IFTTT for rain or freezing events.",
+		type: "environmental",
+		args: {
+			status: "rain/freezeing"
+		}
 	}
 };
