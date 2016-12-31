@@ -11,6 +11,11 @@ module.exports = {
 		return moment().format("YYYY-MM-DD hh:mm:ss A");
 	},
 	getFriendlyDate(date){
+		if(!date){
+			date = new Date();
+		} else {
+			date = Date.parse(date);
+		}
 		return moment(date).fromNow();
 	}
 };
