@@ -5,7 +5,7 @@ var settings = {
 	name: 'UPS Status',
 	description: 'Retrieves the current UPS status data ever minute and syncs it to the house status.',
 	interval: '1 m',
-	eventsTriggered: ['ups-status'],
+	eventsTriggered: ['poll-ups'],
 	executeOnStartup: true
 };
 
@@ -33,7 +33,7 @@ poll.setJob(function(){
 	  		batteryVoltage: status.BATTV,
 	  		timeOnBattery: status.TONBATT
 	  	};
-	  	self.triggerEvent('ups-status', simpleStatus);
+	  	self.triggerEvent('poll-ups', simpleStatus);
 	});
 });
 
