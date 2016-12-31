@@ -121,11 +121,11 @@ module.exports = {
 	},
 	"motion-while-away": {
 		description: "Motion detected while the house was unoccupied.",
-		type: "environmental"
+		type: "Environmental"
 	},
 	"hue-toggled": {
 		description: "Hue light turned on or off by the home app.",
-		type: "environmental",
+		type: "Environmental",
 		args: {
 			lightID: "Integer ID of the light changed.",
 			direction: "on/off"
@@ -133,7 +133,7 @@ module.exports = {
 	},
 	"hue-brightness-changed": {
 		description: "Hue light brightness was changed by the home app.",
-		type: "environmental",
+		type: "Environmental",
 		args: {
 			lightID: "Integer ID of the light changed.",
 			bri: "Hue brightness level."
@@ -141,19 +141,19 @@ module.exports = {
 	},
 	"hue-color-changed": {
 		description: "Hue light color was changed by the home app.",
-		type: "environmental",
+		type: "Environmental",
 		args: {
 			lightID: "Integer ID of the light changed.",
 			rgb: "Array of RGB values 0-255"
 		}
 	},
-	"RDP": {
+	"rdp": {
 		description: "An RDP Connection was made to 192.168.0.25",
-		type: "environmental"
+		type: "Environmental"
 	},
 	"weather": {
 		description: "Event fired by IFTTT for rain or freezing events.",
-		type: "environmental",
+		type: "Environmental",
 		args: {
 			status: "rain/freezeing"
 		}

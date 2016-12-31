@@ -6,13 +6,13 @@ var date = require.main.require("./helpers/date-time.js");
 var settings = {
 	name: 'RDP Connection Alert',
 	description: 'Fires a text alert when an RDP event is triggered.',
-	eventsListened: ['RDP']
+	eventsListened: ['rdp']
 };
 
 var listener = new Listener(settings);
 
 listener.setListener(function(house){
-	house.listenForEvent('RDP', function(args){
+	house.listenForEvent('rdp', function(args){
 		house.recordTriggeredListener('RDP');
 		house.setStatus('lastRDPConnection', date.getDateTime());
 		alert("RDP Connection Detected");
