@@ -58,9 +58,9 @@ module.exports = {
 			sunset: "Unix time representation of the time for today's sunset."
 		}
 	},
-	"tv-status": {
+	"poll-tv": {
 		description: "Status data for the state of the TV.",
-		type: "status",
+		type: "Poll Results",
 		args: {
 			status: "Status value (on/off/sleeping)."
 		}

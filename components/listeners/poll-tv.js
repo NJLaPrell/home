@@ -5,15 +5,15 @@ var roku = require.main.require('./helpers/roku');
 var settings = {
 	name: 'TV Check',
 	description: 'Checks to see if the TV is powered off. If it is, it is powered back on with the screen off so it continues to receive commands.',
-	eventsListened: ['tv-status'],
+	eventsListened: ['poll-tv'],
 	eventsFired: []
 };
 
 var listener = new Listener(settings);
 
 listener.setListener(function(house){
-	house.listenForEvent('tv-status', function(args){
-		house.recordTriggeredListener('tv-status');
+	house.listenForEvent('poll-tv', function(args){
+		house.recordTriggeredListener('poll-tv');
 		house.setStatus('tvStatus', args.status);
 		if(args.status == 'off'){
 			roku.executeCommand("wake", function(response){

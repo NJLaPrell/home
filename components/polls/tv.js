@@ -6,7 +6,7 @@ var settings = {
 	name: 'Roku Status',
 	description: 'Checks the TV every minute and turns it on to the blank screen if the power is off in order to prevent it from becoming unreachable.',
 	interval: '1 m',
-	eventsTriggered: ['tv-status'],
+	eventsTriggered: ['poll-tv'],
 	executeOnStartup: true
 };
 
@@ -16,13 +16,13 @@ poll.setJob(function(){
 	var self = this;
 	roku.getPowerStatus(function(power){
 		if(!power){
-			self.triggerEvent('tv-status', {status:'off'});
+			self.triggerEvent('poll-tv', {status:'off'});
 		} else {
 			roku.getScreenSaverMode(function(screensaver){
 				if(!screensaver){
-					self.triggerEvent('tv-status', {status:'on'});
+					self.triggerEvent('poll-tv', {status:'on'});
 				} else {
-					self.triggerEvent('tv-status', {status:'sleeping'});
+					self.triggerEvent('poll-tv', {status:'sleeping'});
 				}
 			});
 		}
