@@ -9,5 +9,8 @@ module.exports = {
 	},
 	getDateTime: function(){
 		return moment().format("YYYY-MM-DD hh:mm:ss A");
+	},
+	getFriendlyDate(date){
+		return moment(date).fromNow();
 	}
 };

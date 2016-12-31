@@ -21,17 +21,17 @@ module.exports = function(house){
 	model.status.brendaIsUnknown = house.status.brendaslocation ? false : true;
 
 	// Camera Information
-	model.status.motionLastDetected = house.status.motionLastDetected;
+	model.status.motionLastDetected = date.getFriendlyDate(house.status.motionLastDetected);
 	model.status.motionDetected = house.status.motionLastDetected ? true : false;
 	model.status.motionWhileAway = house.status.motionWhileAway;
 
 	// RDP Login Information
-	model.status.lastRDPConnection = house.status.lastRDPConnection ? house.status.lastRDPConnection : null;
+	model.status.lastRDPConnection = house.status.lastRDPConnection ? date.getFriendlyDate(house.status.lastRDPConnection) : null;
 	model.status.RDPConnectionDetected = house.status.lastRDPConnection ? true : false;
 
 	// Power Information
 	model.status.powered = house.status.powered;
-	model.status.powerOutSince = house.status.powerOutSince;	
+	model.status.powerOutSince = date.getFriendlyDate(house.status.powerOutSince);	
 	model.status.ups = {};
 	model.status.ups.status = house.status.upsStatus ? house.status.upsStatus.status : 'Unknown';
 	model.status.ups.startTime = house.status.upsStatus ? house.status.upsStatus.startTime : 'Unknown';
@@ -45,7 +45,7 @@ module.exports = function(house){
 	
 	// Internet Information
 	model.status.internet = house.status.internetAccess;
-	model.status.internetOutSince = house.status.internetOutSince;
+	model.status.internetOutSince = date.getFriendlyDate(house.status.internetOutSince);
 	
 	// TV Information
 	model.status.tv = {

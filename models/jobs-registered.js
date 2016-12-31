@@ -1,3 +1,4 @@
+var date = require.main.require('./helpers/date-time.js');
 
 module.exports = function(house){
 	var model = {};
@@ -12,7 +13,7 @@ module.exports = function(house){
 		job.executeOnStartup = house.jobsRegistered[name].executeOnStartup
 		job.events = house.jobsRegistered[name].eventsTriggered.length ? true : false;
 		job.eventsTriggered = house.jobsRegistered[name].eventsTriggered;
-		job.lastRun = house.jobsRegistered[name].lastRun ? house.jobsRegistered[name].lastRun : '<i>Never</i>';
+		job.lastRun = house.jobsRegistered[name].lastRun ? date.getFriendlyDate(house.jobsRegistered[name].lastRun) : '<i>Never</i>';
 		model.jobs.push(job);
 	}
 

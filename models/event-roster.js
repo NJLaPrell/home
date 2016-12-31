@@ -1,3 +1,4 @@
+var date = require.main.require('./helpers/date-time.js');
 
 module.exports = function(house){
 	var model = {};
@@ -13,7 +14,7 @@ module.exports = function(house){
 		event = {};
 		name = eventNames[i];
 		event.name = name;
-		event.lastTriggered = house.eventRoster[name].lastTriggered ? house.eventRoster[name].lastTriggered : '<i>Never</i>';
+		event.lastTriggered = house.eventRoster[name].lastTriggered ? date.getFriendlyDate(house.eventRoster[name].lastTriggered) : '<i>Never</i>';
 		event.description = house.eventRoster[name].description;
 		event.type = house.eventRoster[name].type;
 		event.args = house.eventRoster[name].args;
