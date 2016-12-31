@@ -5,7 +5,7 @@ var Plug = require.main.require('./helpers/smart-plug.js');
 var settings = {
 	name: 'Switch Status',
 	description: 'Checks Edimax switches every 10 seconds and syncs the house class up with their current status.',
-	interval: '10 s',
+	interval: '30 s',
 	eventsTriggered: ['switchStatus'],
 	executeOnStartup: true
 };
