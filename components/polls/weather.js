@@ -5,7 +5,7 @@ var Poll = require.main.require('./helpers/poll.js');
 var settings = {
 	name: 'Weather',
 	description: 'Uses the Open Weather Map API to get current weather every 1 minute and saves the results in the house status object to be used for sunrise/sunset calculation and display the weather on the dashboard.',
-	eventsTriggered: ['weather-status'],
+	eventsTriggered: ['poll-weather'],
 	interval: '1 m',
 	executeOnStartup: true
 };
@@ -34,7 +34,7 @@ poll.setJob(function(house){
 	        	sunrise: response.sys.sunrise,
 	        	sunset: response.sys.sunset
 	        };
-	        self.triggerEvent('weather-status', args);
+	        self.triggerEvent('poll-weather', args);
 	    });
 
 	    res.on('error', function(error){

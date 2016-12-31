@@ -44,9 +44,9 @@ module.exports = {
 			pass: "Boolean true when the internet is connected and false when it is not."
 		}
 	},
-	"weather-status": {
+	"poll-weather": {
 		description: "Weather data retrieved from openweathermap.org.",
-		type: "status",
+		type: "Poll Results",
 		args: {
 			description: "Abreviated description of current conditions.",
 			temp: "Degrees F",

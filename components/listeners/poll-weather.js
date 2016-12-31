@@ -4,15 +4,15 @@ var Listener = require.main.require('./helpers/listener.js');
 var settings = {
 	name: 'Weather Status',
 	description: 'Sets nighttime/daytime statuses on startup, updates the currentWeather status, and fires sunrise/sunset events.',
-	eventsListened: ['weather-status'],
+	eventsListened: ['poll-weather'],
 	eventsFired: ['sunset','sunrise']
 };
 
 var listener = new Listener(settings);
 
 listener.setListener(function(house){
-	house.listenForEvent('weather-status', function(args){
-		house.recordTriggeredListener('weather-status');
+	house.listenForEvent('poll-weather', function(args){
+		house.recordTriggeredListener('poll-weather');
 		house.setStatus('currentWeather', args);
 		var date = new Date();
 		var time = date.getTime()/1000;
