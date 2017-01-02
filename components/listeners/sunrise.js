@@ -19,10 +19,10 @@ listener.setListener(function(house){
 		house.setStatus('daytime', true);
 		house.setStatus('nighttime', false);
 
-		// Turn off the Christmas lights
-		house.logHistory("The Christmas lights were turned off.");
-		house.triggerEvent("trigger-edimax-switch", {name: "Christmas Lights 1", direction: "off"});
-		house.triggerEvent("trigger-edimax-switch", {name: "Christmas Lights 2", direction: "off"});
+		// Turn off the porch lights
+		house.logHistory("The porch lights were turned off.");
+		house.triggerEvent("trigger-lutron", {light:6, brightness: 0});
+		house.triggerEvent("trigger-lutron", {light:7, brightness: 0});
 	});
 });
 

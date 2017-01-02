@@ -5,7 +5,7 @@ var settings = {
 	name: 'Sunset',
 	description: 'Listens for the sunset event, logs history, changes the house status, and turns the outside lights on.',
 	eventsListened: ['sunset'],
-	eventsFired: ['trigger-edimax-switch']
+	eventsFired: ['trigger-lutron']
 };
 
 var listener = new Listener(settings);
@@ -19,10 +19,10 @@ listener.setListener(function(house){
 		house.setStatus('daytime', false);
 		house.setStatus('nighttime', true);
 
-		// Turn on the Christmas Lights
-		house.logHistory("The Christmas lights were turned on.");
-		house.triggerEvent("trigger-edimax-switch", {name: "Christmas Lights 1", direction: "on"});
-		house.triggerEvent("trigger-edimax-switch", {name: "Christmas Lights 2", direction: "on"});
+		// Turn on the porch lights
+		house.logHistory("The porch lights were turned on.");
+		house.triggerEvent("trigger-lutron", {light:6, brightness: 100});
+		house.triggerEvent("trigger-lutron", {light:7, brightness: 100});
 	});
 });
 
