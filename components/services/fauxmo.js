@@ -97,19 +97,17 @@ service.setService(function(house){
 	        }
 	      },
 	      {
-	        name: 'Outside Lights',
+	        name: 'Tree Light',
 	        port: 11007,
 	        handler: (action) => {
-	          house.triggerEvent('trigger-edimax-switch', {name: "Christmas Lights 1", direction: action});
-	          house.triggerEvent('trigger-edimax-switch', {name: "Christmas Lights 2", direction: action});
+	          house.triggerEvent('trigger-edimax-switch', {name: "Tree Light", direction: action});
 	        }
 	      },
 	      {
-	        name: 'Christmas',
+	        name: 'Wax Warmer',
 	        port: 11010,
 	        handler: (action) => {
-	          house.triggerEvent('trigger-hue-lights', {christmasMode: true, toggle: action});
-	          house.triggerEvent('trigger-hue-lights', {christmasMode: true, toggle: action});
+	          house.triggerEvent('trigger-edimax-switch', {name: "Wax Warmer", direction: action});
 	        }
 	      },
 	      {
