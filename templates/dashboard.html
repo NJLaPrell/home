@@ -360,7 +360,7 @@
 
     {{#each status.devices as |room|}}
         <div data-role="collapsible" data-content-theme="d">
-            <h4>{{room.room}}</h4>
+            <h4>{{room.room}} {{#if room.isLighted}}<img src="/img/light-bulb.png" alt="" style="float:right" />{{/if}}</h4>
             <div class="ui-field-contain">
                 <ul data-role="listview" data-inset="true" data-divider-theme="a">
                     {{#each room.devices as |device|}}

@@ -123,6 +123,7 @@ module.exports = function(house){
 
 	var devices = house.conf.deviceLayout;
 	for(var i = 0; i < devices.length; i++){
+		devices[i].isLighted = false;
 		for(var ii = 0; ii < devices[i].devices.length; ii++){
 			devices[i].devices[ii].hue = devices[i].devices[ii].type == 'hue' || devices[i].devices[ii].type == 'hue-color' ? true : false;
 			devices[i].devices[ii].hueColor = devices[i].devices[ii].type == 'hue-color' ? true : false;
@@ -130,12 +131,22 @@ module.exports = function(house){
 			devices[i].devices[ii].casetaDimmer = devices[i].devices[ii].type == 'caseta-dimmer' ? true : false;
 			if(devices[i].devices[ii].type == 'hue' || devices[i].devices[ii].type == 'hue-color'){
 				devices[i].devices[ii].device = model.status.hue.lights[devices[i].devices[ii].identifyer];
+				if(model.status.hue.lights[devices[i].devices[ii].identifyer].on && devices[i].devices[ii].isLight){
+					devices[i].isLighted = true;	
+				}
 			} else if(devices[i].devices[ii].type == 'edimax-switch'){
 				devices[i].devices[ii].device = model.status.plugs[devices[i].devices[ii].identifyer];
+				if(model.status.plugs[devices[i].devices[ii].identifyer] && devices[i].devices[ii].isLight){
+					devices[i].isLighted = true;
+				}
+
 			} else if(devices[i].devices[ii].type == 'caseta-dimmer'){
 				for(var iii = 0; iii < model.status.caseta.dimmers.length; iii++){
 					if (model.status.caseta.dimmers[iii].id == devices[i].devices[ii].identifyer){
 						devices[i].devices[ii].device = model.status.caseta.dimmers[iii];
+						if(model.status.caseta.dimmers[iii].on && devices[i].devices[ii].isLight){
+							devices[i].isLighted = true;	
+						}
 					}
 				}
 			}
