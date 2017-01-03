@@ -111,6 +111,13 @@ service.setService(function(house){
 	        }
 	      },
 	      {
+	        name: 'Television Backlight',
+	        port: 11012,
+	        handler: (action) => {
+	          house.triggerEvent('trigger-edimax-switch', {name: "TV Backlight", direction: action});
+	        }
+	      },
+	      {
 	        name: 'Volume',
 	        port: 11011,
 	        handler: (action) => {
