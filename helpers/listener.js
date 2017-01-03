@@ -16,7 +16,13 @@ function Listener(settings){
 }
 
 Listener.prototype.listen = function(house){
-	this.listener(house);
+	var self = this;
+	try {
+		this.listener(house);
+	}
+	catch(e){
+		house.log.error("Exception in Listener: " + self.name + " - " + JSON.stringify(e));
+	}
 };
 
 Listener.prototype.setListener = function(listener){

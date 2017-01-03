@@ -9,7 +9,7 @@ function Job(settings){
 	this.schedule = settings.schedule;
 	this.executeOnStartup = settings.executeOnStartup;
 	this.description = settings.description ? settings.description : null;
-	this.eventsTriggered = settings.eventsTriggered ? settings.eventsTriggered : [],
+	this.eventsTriggered = settings.eventsTriggered ? settings.eventsTriggered : [];
 	this.lastRun = null;
 	this.job = null;
 
@@ -26,8 +26,13 @@ Job.prototype.scheduleJob = function(house){
 	
 	schedule.scheduleJob(self.schedule, function(){
 		self.lastRun = house.date.getDateTime();
-		self.job(house)}
-	);
+		try {
+			self.job(house);
+		}
+		catch(e){
+			house.log.error("Exception in Job: " + self.name + " - " + JSON.stringify(e));
+		}
+	});
 	
 	if(this.executeOnStartup){
 		house.listenForEvent('startup-complete',function(){

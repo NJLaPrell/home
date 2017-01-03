@@ -7,7 +7,7 @@ function Service(settings){
 	this.name = settings.name;
 	this.description = settings.description ? settings.description : null;
 	this.type = settings.type;
-	this.eventsTriggered = settings.eventsTriggered ? settings.eventsTriggered : [],
+	this.eventsTriggered = settings.eventsTriggered ? settings.eventsTriggered : [];
 	this.startTime = null;
 	this.service = null;
 
@@ -21,7 +21,13 @@ Service.prototype.setService = function(service){
 Service.prototype.start = function(house){
 	this.log.startup("     Starting service: " + this.name + ".");
 	this.startTime = house.date.getDateTime();
-	this.service(house);
+	var self = this;
+	try {
+		this.service(house);
+	}
+	catch(e){
+		house.log.error("Exception in Service: " + self.name + " - " + JSON.stringify(e));
+	}
 };
 
 module.exports = Service;

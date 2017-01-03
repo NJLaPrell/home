@@ -31,14 +31,25 @@ Poll.prototype.execute = function(house){
 	
 	if(this.interval){
 		setInterval(function(){
-			self.job(house);
+			try {
+				self.job(house);	
+			}
+			catch(e){
+				house.log.error("Exception in Poll: " + self.name + " - " + JSON.stringify(e));
+			}
 			self.lastRun = house.date.getDateTime();
 		}, this.interval);	
 	}
 	
 	if(this.executeOnStartup){
 		house.listenForEvent('startup-complete',function(){
-			this.job(house);
+			var self=this;
+			try {
+				this.job(house);
+			}
+			catch (e){
+				house.log.error("Exception in Poll: " + self.name + " - " + JSON.stringify(e));
+			}
 			self.lastRun = house.date.getDateTime();
 		}.bind(this));
 	}
