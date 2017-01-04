@@ -7,19 +7,25 @@ var MailListener = require("mail-listener2");
 
 module.exports = function(house){
 	
-	var mailListener = new MailListener(conf.imap);
+	this.mailListener = new MailListener(conf.imap);
 
-	mailListener.start();
+	this.start = function(){
+		this.mailListener.start();
+	};
 
-	mailListener.on("server:connected",function(){
+	this.stop = function(){
+		this.mailListener.stop();
+	}	
+
+	this.mailListener.on("server:connected",function(){
 		
 	});
 
-	mailListener.on("mail", function(mail, seqno, attributes){
+	this.mailListener.on("mail", function(mail, seqno, attributes){
 		house.triggerEvent('email-received', mail);
 	});
 
-	mailListener.on("error", function(err){
+	this.mailListener.on("error", function(err){
 		house.logHistory("MailListener threw an error.");
 		house.log.error(err);
 	});

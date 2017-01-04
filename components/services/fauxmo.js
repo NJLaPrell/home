@@ -14,6 +14,7 @@ var service = new Service(settings);
 
 service.setService(function(house){
 
+	this.start = function(){
 
 	var fauxMo = new FauxMo(
 	  {
@@ -149,6 +150,13 @@ service.setService(function(house){
 	    ]
 	  });
 
+	};
+
+	this.stop = function(){
+		fauxMo = null;
+	};
+
+	return this;
 });
 
 module.exports = service;
