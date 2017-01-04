@@ -14,6 +14,13 @@ module.exports = function(house){
 		job.events = house.jobsRegistered[name].eventsTriggered.length ? true : false;
 		job.eventsTriggered = house.jobsRegistered[name].eventsTriggered;
 		job.lastRun = house.jobsRegistered[name].lastRun ? date.getFriendlyDate(house.jobsRegistered[name].lastRun) : '<i>Never</i>';
+
+		job.icon = !house.jobsRegistered[name].running ? 'stopped' : house.jobsRegistered[name].consecutiveExceptionCount > 0 ? 'warning' : false;
+		job.showIcon = job.icon ? true : false;
+		job.consecutiveExceptionCount = house.jobsRegistered[name].consecutiveExceptionCount;
+		job.exceptionList = house.jobsRegistered[name].exceptionList;
+		job.running = house.jobsRegistered[name].running;
+
 		model.jobs.push(job);
 	}
 

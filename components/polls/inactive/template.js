@@ -7,7 +7,8 @@ var settings = {
 	description: '***DESCRIPTION***',
 	interval: '10 s',
 	eventsTriggered: ['**EVENTS**'],
-	executeOnStartup: true
+	executeOnStartup: true,
+	shutdownThreshold: 0
 };
 
 var poll = new Poll(settings);

@@ -5,7 +5,8 @@ var settings = {
 	name: '***NAME***',
 	type: '***TYPE OF SERVICE***',
 	eventsTriggered: ['**EVENTS**'],
-	description: '***DESCRIPTION***'
+	description: '***DESCRIPTION***',
+	shutdownThreshold: 0
 };
 
 var service = new Service(settings);

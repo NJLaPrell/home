@@ -5,7 +5,30 @@
     <div role="main" class="ui-content">
     	{{#each jobs}}
     		<div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
-    			<h4>{{name}}</h4>
+    			<h4>{{name}}{{#if showIcon}} <img src="/img/{{icon}}.png" alt="" style="float:right" />{{/if}}</h4>
+
+                {{#unless running}}
+                    <div class="alert alert-danger" role="alert">
+                      <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+                      This job is not running!
+                    </div>
+                {{/unless}}
+
+                {{#if showIcon}}
+                    <div class="alert alert-danger" role="alert">
+                      <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+                      One or more exceptions have been logged by this job.
+                    </div>
+                    <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h5>Exceptions ({{consecutiveExceptionCount}})</h5>
+                        <ul>
+                            {{#each exceptionList as |exception|}}
+                                <li>{{exception}}</li>
+                            {{/each}} 
+                        </ul>
+                    </div>
+                {{/if}}
+
     			<ul data-role="listview" data-inset="true">
     				<li style="white-space: normal !important;word-wrap:break-word;overflow-wrap: break-word;"><b>Description:</b> {{{description}}}</li>
     				<li><b>Schedule:</b> {{schedule}}</li>

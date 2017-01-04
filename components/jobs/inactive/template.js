@@ -6,7 +6,8 @@ var settings = {
 	description: '***DESCRIPTION***',
 	schedule: '* * * * *',
 	eventsTriggered: ['**EVENTS**'],
-	executeOnStartup: true
+	executeOnStartup: true,
+	shutdownThreshold: 0
 };
 
 var job = new Job(settings);
