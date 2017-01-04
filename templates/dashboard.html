@@ -321,7 +321,7 @@
     </div>
 
 <!-- //////////////////////////////////////////////////////////////////// -->
-<!-- //// CAMERA PANEL ////////////////////////////////////////////////// -->
+<!-- //// MISC PANEL ////////////////////////////////////////////////// -->
 <!-- //////////////////////////////////////////////////////////////////// -->
 
     <div data-role="collapsible" data-content-theme="d">
@@ -329,33 +329,25 @@
         <div class="ui-field-contain">
             <ul data-role="listview" data-inset="true" data-divider-theme="a">
                 <li><b>Motion Last Detected:</b> {{#if status.motionDetected}}{{status.motionLastDetected}}{{else}}<i>Unknown</i>{{/if}}</li>
-                <li><b>Last RDP Session:</b> {{#if status.RDPConnectionDetected}}{{status.lastRDPConnection}}{{else}}<i>Unknown</i>{{/if}}
+                <li><b>Last RDP Session:</b> {{#if status.RDPConnectionDetected}}{{status.lastRDPConnection}}{{else}}<i>Unknown</i>{{/if}}</li>
+                <li><b>UPS Status:</b>
+                    <ul>
+                        <li><b>Start Time:</b> {{status.ups.startTime}}</li>
+                        <li><b>Status:</b> {{status.ups.status}}</li>
+                        <li><b>Line Voltage:</b> {{status.ups.lineVoltage}}</li>
+                        <li><b>Load Percent:</b> {{status.ups.loadPercent}}</li>
+                        <li><b>Battery Charge:</b> {{status.ups.batteryCharge}}</li>
+                        <li><b>Time Remaining:</b> {{status.ups.timeLeft}}</li>
+                        <li><b>Battery Voltage:</b> {{status.ups.batteryVoltage}}</li>
+                        <li><b>Time on Battery:</b> {{status.ups.timeOnBattery}}</li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
 
 <!-- //////////////////////////////////////////////////////////////////// -->
-<!-- //// UPS PANEL ///////////////////////////////////////////////////// -->
-<!-- //////////////////////////////////////////////////////////////////// -->
-
-    <div data-role="collapsible" data-content-theme="d">
-        <h4>UPS Status</h4>
-        <div class="ui-field-contain">
-            <ul data-role="listview" data-inset="true" data-divider-theme="a">
-                <li><b>Start Time:</b> {{status.ups.startTime}}</li>
-                <li><b>Status:</b> {{status.ups.status}}</li>
-                <li><b>Line Voltage:</b> {{status.ups.lineVoltage}}</li>
-                <li><b>Load Percent:</b> {{status.ups.loadPercent}}</li>
-                <li><b>Battery Charge:</b> {{status.ups.batteryCharge}}</li>
-                <li><b>Time Remaining:</b> {{status.ups.timeLeft}}</li>
-                <li><b>Battery Voltage:</b> {{status.ups.batteryVoltage}}</li>
-                <li><b>Time on Battery:</b> {{status.ups.timeOnBattery}}</li>
-            </ul>
-        </div>
-    </div>
-
-<!-- //////////////////////////////////////////////////////////////////// -->
-<!-- //// ROOM DEVICE PANEL ///////////////////////////////////////////// -->
+<!-- //// ROOM DEVICE PANELS ///////////////////////////////////////////// -->
 <!-- //////////////////////////////////////////////////////////////////// -->
 
     {{#each status.devices as |room|}}
