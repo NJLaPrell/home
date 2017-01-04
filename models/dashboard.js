@@ -10,7 +10,9 @@ module.exports = function(house){
 	// Weather Information
 	model.status.daytime = house.status.daytime;
 	model.status.nighttime = house.status.nighttime;
+	model.status.timeOfDayUnknown = house.status.daytime || house.status.nighttime ? false : true;
 	model.status.currentWeather = house.status.currentWeather;
+	model.status.weatherDataAvailable = house.status.currentWeather.description ? true : false;
 
 	// Location Information
 	model.status.nickIsHome = house.status.nickslocation == 'home' ? true : false;
@@ -30,9 +32,11 @@ module.exports = function(house){
 	model.status.RDPConnectionDetected = house.status.lastRDPConnection ? true : false;
 
 	// Power Information
+	model.status.powerStatusUnknown = house.status.powered === false || house.status.powered === true ? false : true;
 	model.status.powered = house.status.powered;
 	model.status.powerOutSince = date.getFriendlyDate(house.status.powerOutSince);	
 	model.status.ups = {};
+	model.status.upsStatusUnknown = house.status.upsStatus ? false : true;
 	model.status.ups.status = house.status.upsStatus ? house.status.upsStatus.status : 'Unknown';
 	model.status.ups.startTime = house.status.upsStatus ? house.status.upsStatus.startTime : 'Unknown';
 	model.status.ups.onBattery = model.status.ups.status == 'ONBATT' ? true : false;
@@ -44,6 +48,7 @@ module.exports = function(house){
 	model.status.ups.timeOnBattery = house.status.upsStatus ? house.status.upsStatus.timeOnBattery : 'Unknown';
 	
 	// Internet Information
+	model.status.internetAccessUnknown = house.status.internetAccess === false || house.status.internetAccess === true ? false : true;
 	model.status.internet = house.status.internetAccess;
 	model.status.internetOutSince = date.getFriendlyDate(house.status.internetOutSince);
 	

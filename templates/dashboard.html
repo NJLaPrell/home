@@ -198,7 +198,11 @@
     <div data-role="header">Home Dashboard</div>
     <div role="main" class="ui-content">
 
-    <img src="http://openweathermap.org/img/w/{{status.currentWeather.icon}}.png" alt="" /> {{status.currentWeather.description}} - {{status.currentWeather.temp}}°F / Wind: {{status.currentWeather.wind}} mph
+    {{#if status.weatherDataAvailable}}
+        <img src="http://openweathermap.org/img/w/{{status.currentWeather.icon}}.png" alt="" /> {{status.currentWeather.description}} - {{status.currentWeather.temp}}°F / Wind: {{status.currentWeather.wind}} mph
+    {{else}}
+        <i>Weather data is currently unavailable.</i>
+    {{/if}}
 
     {{#if status.motionWhileAway}}
         <div class="alert alert-danger" role="alert">
@@ -208,13 +212,15 @@
         </div>
     {{/if}}
 
-    {{#unless status.powered}}
-        <div class="alert alert-danger" role="alert">
-          <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
-          The power is out! Running on backup power.<br />
-          <b>Estimated time remaining:</b> {{status.ups.timeLeft}} ({{status.ups.batteryCharge}})<br />
-          <b>Outage Duration:</b> {{status.ups.timeOnBattery}}
-        </div>
+    {{#unless status.powerStatusUnknown}}
+        {{#unless status.powered}}
+            <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+              The power is out! Running on backup power.<br />
+              <b>Estimated time remaining:</b> {{status.ups.timeLeft}} ({{status.ups.batteryCharge}})<br />
+              <b>Outage Duration:</b> {{status.ups.timeOnBattery}}
+            </div>
+        {{/unless}}
     {{/unless}}
 
     {{#unless status.internet}}
@@ -234,6 +240,9 @@
                 {{#if status.nighttime}}
                     <img src="/img/night.png" alt="" /><br />Night
                 {{/if}}   
+                {{#if status.timeOfDayUnknown}}
+                    <img src="/img/unknown.png" alt="" /><br />Unknown
+                {{/if}}
             </div>
         </div>
         <div class="ui-block-b">
@@ -269,13 +278,22 @@
     <div class="ui-grid-b">
 
         <div class="ui-block-a">
-            {{#unless status.internet}}
-                <div class="ui-bar ui-bar-a alert alert-danger" style="text-align:center;padding:5px;">
+            {{#if status.internetAccessUnknown}}
+                <div class="ui-bar ui-bar-a" style="text-align:center;">
                     Internet <br />
                     <img src="/img/internet.png" alt="" /><br />
-                    Down
+                    <i>Unknown</i>
                 </div>
-            {{/unless}}    
+            {{else}}
+                {{#unless status.internet}}
+                    <div class="ui-bar ui-bar-a alert alert-danger" style="text-align:center;padding:5px;">
+                        Internet <br />
+                        <img src="/img/internet.png" alt="" /><br />
+                        Down
+                    </div>
+                {{/unless}}    
+            {{/if}}
+            
             {{#if status.internet}}
                <div class="ui-bar ui-bar-a" style="text-align:center;">
                     Internet <br />
@@ -286,13 +304,22 @@
         </div>
 
         <div class="ui-block-b">
-            {{#unless status.powered}}
-                <div class="ui-bar ui-bar-a alert alert-danger" style="text-align:center;padding:5px;">
+            {{#if status.powerStatusUnknown}}
+                <div class="ui-bar ui-bar-a" style="text-align:center;">
                     Power <br />
                     <img src="/img/power.png" alt="" /><br />
-                    Offline
+                    <i>Unknown</i>
                 </div>
-            {{/unless}}
+            {{else}}
+                {{#unless status.powered}}
+                    <div class="ui-bar ui-bar-a alert alert-danger" style="text-align:center;padding:5px;">
+                        Power <br />
+                        <img src="/img/power.png" alt="" /><br />
+                        Offline
+                    </div>
+                {{/unless}}
+            {{/if}}
+            
             {{#if status.powered}}
                 <div class="ui-bar ui-bar-a" style="text-align:center;">
                     Power <br />
@@ -310,11 +337,19 @@
                     On Battery
                 </div>
             {{else}}
-                <div class="ui-bar ui-bar-a" style="text-align:center;">
-                    UPS <br />
-                    <img src="/img/ups.png" alt="" /><br />
-                    Online
-                </div>
+                {{#if status.upsStatusUnknown}}
+                    <div class="ui-bar ui-bar-a" style="text-align:center;">
+                        UPS <br />
+                        <img src="/img/ups.png" alt="" /><br />
+                        <i>Unknown</i>
+                    </div>
+                {{else}}
+                    <div class="ui-bar ui-bar-a" style="text-align:center;">
+                        UPS <br />
+                        <img src="/img/ups.png" alt="" /><br />
+                        Online
+                    </div>
+                {{/if}}
             {{/if}}
         </div>
 
