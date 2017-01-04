@@ -5,21 +5,20 @@ var hue = require.main.require('./helpers/hue-lights.js');
 var settings = {
 	name: 'Hue Light Status',
 	description: 'Listens for the current status of the Hue lights and updates the house status object.',
-	eventsListened: ['poll-hue']
+	eventsListened: ['poll-hue'],
+	shutdownThreshold: 10
 };
 
 var listener = new Listener(settings);
 
-listener.setListener(function(house){
-	house.listenForEvent('poll-hue', function(args){
-		house.recordTriggeredListener('poll-hue');
-		var hue = house.getStatus('hue');
-		hue.lights = {};
-		for(var key in args){
-			hue.lights[key] = args[key];
-		}
-		house.setStatus('hue', hue);
-	});
+listener.registerListener('poll-hue', function(house, args){
+	house.recordTriggeredListener('poll-hue');
+	var hue = house.getStatus('hue');
+	hue.lights = {};
+	for(var key in args){
+		hue.lights[key] = args[key];
+	}
+	house.setStatus('hue', hue);
 });
 
 module.exports = listener;

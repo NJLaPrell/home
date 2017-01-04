@@ -20,6 +20,7 @@ module.exports = {
 	jobsRegistered: {},
 	lutron: null,
 	eventRoster: eventRoster,
+	activeEvents: {},
 	status: {
 		daytime: null,
 		nighttime: null,
@@ -83,10 +84,14 @@ module.exports = {
 			this.eventRoster[eventName].lastTriggered = date.getDateTime();
 		}
 	},
-	listenForEvent: function(eventName, eventAction){
-		eventEmitter.on(eventName, function(args){
-			eventAction(args);
-		});
+	listenForEvent: function(name, event, listenerMethod){
+		this.activeEvents[name] = function(args){
+			listenerMethod(this, args);
+		}.bind(this);
+		this.eventEmitter.on(event, this.activeEvents[name]);
+	},
+	removeEventListener: function(name, event){
+		this.eventEmitter.removeListener(event, this.activeEvents[name]);
 	},
 	initializePolls: function(){
 		var polls = this.getComponents('Polls');

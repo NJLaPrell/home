@@ -6,19 +6,18 @@ var settings = {
 	name: 'Roku Commands',
 	description: 'Sends commands to Roku.',
 	eventsListened: ['trigger-roku'],
-	eventsFired: []
+	eventsFired: [],
+	shutdownThreshold: 0
 };
 
 var listener = new Listener(settings);
 
-listener.setListener(function(house){
-	house.listenForEvent('trigger-roku', function(args){
-		house.recordTriggeredListener('trigger-roku');
-		roku.executeCommand(args.command, function(response){
-			if(response.status < 200 || response.status <= 300){
-				house.log.warning("Found Roku powered off.");
-			}	
-		});
+listener.registerListener('trigger-roku', function(house, args){
+	house.recordTriggeredListener('trigger-roku');
+	roku.executeCommand(args.command, function(response){
+		if(response.status < 200 || response.status <= 300){
+			house.log.warning("Found Roku powered off.");
+		}	
 	});
 });
 

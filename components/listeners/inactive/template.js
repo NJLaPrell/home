@@ -5,16 +5,15 @@ var settings = {
 	name: '***NAME***',
 	description: '***DESCRIPTION***',
 	eventsListened: ['***EVENTS***'],
-	eventsTriggered: ['***EVENTS TRIGGERED***']
+	eventsTriggered: ['***EVENTS TRIGGERED***'],
+	shutdownThreshold: 0
 };
 
 var listener = new Listener(settings);
 
-listener.setListener(function(house){
-	house.listenForEvent('***NAME***', function(args){
-		house.recordTriggeredListener('***NAME***');
-		// INSERT MAGIC HERE
-	});
+listener.registerListener('***NAME***', function(house, args){
+	house.recordTriggeredListener('***NAME***');
+	// INSERT MAGIC HERE
 });
 
 module.exports = listener;

@@ -6,20 +6,19 @@ var settings = {
 	name: 'Hue Animation Command',
 	description: 'Triggers hue animations.',
 	eventsListened: ['trigger-hueAnimation'],
-	eventsFired: []
+	eventsFired: [],
+	shutdownThreshold: 0
 };
 
 var listener = new Listener(settings);
 
-listener.setListener(function(house){
+listener.registerListener('trigger-hue-animation', function(house, args){
 	var animation = new HueAnimation();
-	house.listenForEvent('trigger-hue-animation', function(args){
-		house.recordTriggeredListener('trigger-hue-animation');
-		house.log.debug("Panic mode triggered.");
-		if(args.panic){
-			animation.trigger("panic");
-		}		
-	});
+	house.recordTriggeredListener('trigger-hue-animation');
+	house.log.debug("Panic mode triggered.");
+	if(args.panic){
+		animation.trigger("panic");
+	}		
 });
 
 module.exports = listener;

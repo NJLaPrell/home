@@ -6,17 +6,16 @@ var settings = {
 	name: 'Edimax Switch Toggle',
 	description: 'Toggles Edimax switches on or off.',
 	eventsListened: ['trigger-edimax-switch'],
-	eventsFired: []
+	eventsFired: [],
+	shutdownThreshold: 0
 };
 
 var listener = new Listener(settings);
 
-listener.setListener(function(house){
+listener.registerListener('trigger-edimax-switch', function(house, args){
 	var plug = new Plug(house);
-	house.listenForEvent('trigger-edimax-switch', function(args){
-		house.recordTriggeredListener('trigger-edimax-switch');
-		plug.toggle(args.name, args.direction);
-	});
+	house.recordTriggeredListener('trigger-edimax-switch');
+	plug.toggle(args.name, args.direction);
 });
 
 module.exports = listener;

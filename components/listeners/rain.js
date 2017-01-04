@@ -4,18 +4,17 @@ var Listener = require.main.require('./helpers/listener.js');
 var settings = {
 	name: 'Rain',
 	description: 'Checks the weather event to see if it is raining and logs history.',
-	eventsListened: ['weather']
+	eventsListened: ['weather'],
+	shutdownThreshold: 0
 };
 
 var listener = new Listener(settings);
 
-listener.setListener(function(house){
-	house.listenForEvent('weather', function(args){
-		house.recordTriggeredListener('weather');
-		if(args.status == 'rain'){
-			house.logHistory("It was raining.");
-		}
-	});
+listener.registerListener('weather', function(house, args){
+	house.recordTriggeredListener('weather');
+	if(args.status == 'rain'){
+		house.logHistory("It was raining.");
+	}
 });
 
 module.exports = listener;
