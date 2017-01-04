@@ -1,3 +1,4 @@
+var date = require.main.require('./helpers/date-time.js');
 
 module.exports = function(house){
 	var model = {};
@@ -18,6 +19,7 @@ module.exports = function(house){
 		listener.consecutiveExceptionCount = house.listenersRegistered[name].consecutiveExceptionCount;
 		listener.exceptionList = house.listenersRegistered[name].exceptionList;
 		listener.running = house.listenersRegistered[name].running;
+		listener.lastTriggered = house.listenersRegistered[name].lastTriggered ? date.getFriendlyDate(house.listenersRegistered[name].lastTriggered) : '<i>Never</i>';
 		
 		model.listeners.push(listener);
 	}

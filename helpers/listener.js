@@ -1,5 +1,6 @@
 var Log = require.main.require('./helpers/log.js');
 var conf = require.main.require('./config.js');
+var date = require.main.require('./helpers/date-time.js');
 
 function Listener(settings){
 	this.log = new Log(conf.debug);
@@ -14,6 +15,7 @@ function Listener(settings){
 	this.consecutiveExceptionCount = 0;
 	this.exceptionList = [];
 	this.running = null;
+	this.lastTriggered = null;
 
 	this.log.startup("     Starting Listener: " + this.name);
 
@@ -33,6 +35,7 @@ Listener.prototype.registerListener = function(event, listenerMethod){
 	this.listenerMethods[event] = function(house, args){
 		try {
 			listenerMethod(house, args);
+			this.lastTriggered = date.getDateTime();
 		}
 		catch (e) {
 			this.handleException(house, e);
