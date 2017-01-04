@@ -7,7 +7,8 @@ var settings = {
 	description: 'Checks Edimax switches every 10 seconds and syncs the house class up with their current status.',
 	interval: '30 s',
 	eventsTriggered: ['poll-edimax-switch'],
-	executeOnStartup: true
+	executeOnStartup: true,
+	shutdownThreshold: 10
 };
 
 var poll = new Poll(settings);

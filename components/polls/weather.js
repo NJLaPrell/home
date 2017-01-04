@@ -7,7 +7,8 @@ var settings = {
 	description: 'Uses the Open Weather Map API to get current weather every 1 minute and saves the results in the house status object to be used for sunrise/sunset calculation and display the weather on the dashboard.',
 	eventsTriggered: ['poll-weather'],
 	interval: '1 m',
-	executeOnStartup: true
+	executeOnStartup: true,
+	shutdownThreshold: 10
 };
 
 var poll = new Poll(settings);

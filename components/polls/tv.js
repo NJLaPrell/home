@@ -7,7 +7,8 @@ var settings = {
 	description: 'Checks the TV every minute and turns it on to the blank screen if the power is off in order to prevent it from becoming unreachable.',
 	interval: '1 m',
 	eventsTriggered: ['poll-tv'],
-	executeOnStartup: true
+	executeOnStartup: true,
+	shutdownThreshold: 10
 };
 
 var poll = new Poll(settings);

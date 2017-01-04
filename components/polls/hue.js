@@ -8,7 +8,8 @@ var settings = {
 	description: 'Polls Hue light status every 10 seconds and syncs the house class.',
 	interval: '10 s',
 	executeOnStartup: true,
-	eventsTriggered: ['poll-hue']
+	eventsTriggered: ['poll-hue'],
+	shutdownThreshold: 10
 };
 
 var poll = new Poll(settings);

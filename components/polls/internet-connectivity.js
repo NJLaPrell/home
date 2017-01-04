@@ -7,7 +7,8 @@ var settings = {
 	description: 'Pings Google DNS server to report on internet connectivity.',
 	interval: '10 s',
 	eventsTriggered: 'poll-internet-connectivity',
-	executeOnStartup: true
+	executeOnStartup: true,
+	shutdownThreshold: 3
 };
 
 var poll = new Poll(settings);

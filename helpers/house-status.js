@@ -92,7 +92,7 @@ module.exports = {
 		var polls = this.getComponents('Polls');
 		for(var i = 0; i < polls.length; i++){
 			this.pollsRegistered[polls[i].name] = polls[i];
-			this.pollsRegistered[polls[i].name].execute(this);
+			this.pollsRegistered[polls[i].name].start(this);
 		}
 	},
 	initializeListeners: function(){

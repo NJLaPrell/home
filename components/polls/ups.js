@@ -6,7 +6,8 @@ var settings = {
 	description: 'Retrieves the current UPS status data ever minute and syncs it to the house status.',
 	interval: '1 m',
 	eventsTriggered: ['poll-ups'],
-	executeOnStartup: true
+	executeOnStartup: true,
+	shutdownThreshold: 3
 };
 
 var poll = new Poll(settings);
@@ -18,6 +19,7 @@ poll.setJob(function(){
 		var status = {};
 	  	var lines = stdout.split("\n");
 	  	for(var i = 0; i < lines.length; i++){
+
 	  		if(lines[i]){
 	  			var stat = lines[i].split(":");
 	  			status[stat[0].trim()] = stat[1].trim();

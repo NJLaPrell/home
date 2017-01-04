@@ -14,6 +14,13 @@ module.exports = function(house){
 		poll.events = house.pollsRegistered[name].eventsTriggered.length ? true : false;
 		poll.eventsTriggered = house.pollsRegistered[name].eventsTriggered;
 		poll.executeOnStartup = house.pollsRegistered[name].executeOnStartup;
+
+		poll.icon = !house.pollsRegistered[name].running ? 'stopped' : house.pollsRegistered[name].consecutiveExceptionCount > 0 ? 'warning' : false;
+		poll.showIcon = poll.icon ? true : false;
+		poll.consecutiveExceptionCount = house.pollsRegistered[name].consecutiveExceptionCount;
+		poll.exceptionList = house.pollsRegistered[name].exceptionList;
+		poll.running = house.pollsRegistered[name].running;
+		
 		model.polls.push(poll);
 	}
 	

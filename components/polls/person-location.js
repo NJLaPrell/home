@@ -7,7 +7,8 @@ var settings = {
 	description: 'Uses Away.py to detect home/away values. The script is run as a service, but polls every 30 seconds.',
 	interval: '0 s',
 	eventsTriggered: ['location'],
-	executeOnStartup: true
+	executeOnStartup: true,
+	shutdownThreshold: 3
 };
 
 var poll = new Poll(settings);
