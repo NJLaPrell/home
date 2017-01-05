@@ -216,10 +216,10 @@ router.route('/dashboard/log').get(function(req, res){
 });
 
 router.route('/dashboard/details').get(function(req, res){
-	var model = {};
 	fs.readFile(__dirname + '/templates/details.html', 'utf8', function(err, html){
+		var model = require("./models/details.js");
 		var template = Handlebars.compile(html);
-		res.send(template(model));
+		res.send(template(model(house)));
 	});
 });
 

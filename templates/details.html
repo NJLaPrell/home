@@ -1,3 +1,11 @@
+<style>
+.badge {
+	text-shadow: 1px 0px #000000;
+	background-color: #557cba;
+}
+</style>
+
+
 <div data-role="page" id="details">
     <div data-role="header" data-theme="b">
         <h1>Details</h1>
@@ -5,26 +13,38 @@
     <div role="main" class="ui-content">
         <div class="ui-grid-a">
 	        <div class="ui-block-a">
-	        	<a href="/home/dashboard/details/jobs-registered/" class="ui-shadow ui-btn ui-corner-all ui-icon-clock ui-btn-icon-left" data-transition="flip">Jobs</a>
+	        	<a href="/home/dashboard/details/jobs-registered/" class="ui-shadow ui-btn ui-corner-all ui-icon-clock ui-btn-icon-left" data-transition="flip" style="text-align:left;">Jobs
+					<span class="badge badge-info">{{jobCount}}</span>
+					{{#if jobWarning}} <img src="/img/warning.png" alt="" style="float:right" />{{/if}}
+	        	</a>
 	        </div>
 	        <div class="ui-block-b">
-	        	<a href="/home/dashboard/details/services-registered/" class="ui-shadow ui-btn ui-corner-all ui-icon-cloud ui-btn-icon-left" data-transition="flip">Services</a>
+	        	<a href="/home/dashboard/details/services-registered/" class="ui-shadow ui-btn ui-corner-all ui-icon-cloud ui-btn-icon-left" data-transition="flip" style="text-align:left;">Services
+					<span class="badge badge-info">{{serviceCount}}</span>
+					{{#if serviceWarning}} <img src="/img/warning.png" alt="" style="float:right" />{{/if}}
+	        	</a>
 	        </div>
 	    </div>
         <div class="ui-grid-a">
 	        <div class="ui-block-a">
-	        	<a href="/home/dashboard/details/polls-registered/" class="ui-shadow ui-btn ui-corner-all ui-icon-recycle ui-btn-icon-left" data-transition="flip">Polls</a>
+	        	<a href="/home/dashboard/details/polls-registered/" class="ui-shadow ui-btn ui-corner-all ui-icon-recycle ui-btn-icon-left" data-transition="flip" style="text-align:left;">Polls
+					<span class="badge badge-info">{{pollCount}}</span>
+					{{#if pollWarning}} <img src="/img/warning.png" alt="" style="float:right" />{{/if}}
+	        	</a>
 	        </div>
 	        <div class="ui-block-b">
-	        	<a href="/home/dashboard/details/listeners-registered/" class="ui-shadow ui-btn ui-corner-all ui-icon-search ui-btn-icon-left" data-transition="flip">Listeners</a>
+	        	<a href="/home/dashboard/details/listeners-registered/" class="ui-shadow ui-btn ui-corner-all ui-icon-search ui-btn-icon-left" data-transition="flip" style="text-align:left;">Listeners
+					<span class="badge badge-info">{{listenerCount}}</span>
+					{{#if listenerWarning}} <img src="/img/warning.png" alt="" style="float:right" />{{/if}}
+	        	</a>
 	        </div>
 	    </div>
         <div class="ui-grid-a">
 	        <div class="ui-block-a">
-	        	<a href="/home/dashboard/details/event-roster/" class="ui-shadow ui-btn ui-corner-all ui-icon-calendar ui-btn-icon-left" data-transition="flip">Event Roster</a>
+	        	<a href="/home/dashboard/details/event-roster/" class="ui-shadow ui-btn ui-corner-all ui-icon-calendar ui-btn-icon-left" data-transition="flip" style="text-align:left;">Event Roster</a>
 	        </div>
 	        <div class="ui-block-b">
-	        	<a href="/home/dashboard/log/" class="ui-shadow ui-btn ui-corner-all ui-icon-bars ui-btn-icon-left" data-transition="flip">Log</a>
+	        	<a href="/home/dashboard/log/" class="ui-shadow ui-btn ui-corner-all ui-icon-bars ui-btn-icon-left" data-transition="flip" style="text-align:left;">Log</a>
 	        </div>
 	    </div>
 	    <div class="ui-grid-solo">
@@ -34,3 +54,6 @@
 	    </div>
     </div>
 </div>
+
+</body>
+</html>
