@@ -41,7 +41,7 @@ Job.prototype.scheduleJob = function(house){
 	});
 	
 	if(this.executeOnStartup){
-		house.listenForEvent('startup-complete',function(){
+		house.listenForEvent('Job - ' + this.name, 'startup-complete', function(){
 			try {
 				this.job(house);
 				self.lastRun = house.date.getDateTime();

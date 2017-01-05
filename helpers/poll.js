@@ -1,9 +1,11 @@
 var Log = require('./log.js');
 
+
 function Poll(settings){
 	this.triggerEvent = require('./trigger-event.js');
 	this.conf = require('../config.js');
 	this.log = new Log(this.conf.debug);
+	this.debug = this.conf.debug;
 
 	this.name = settings.name;
 	this.description = settings.description ? settings.description : null;
@@ -43,21 +45,28 @@ Poll.prototype.start = function(house){
 	
 	// Execute when startup is finished if executeOnStartup is set
 	if(this.executeOnStartup){
-		house.listenForEvent('startup-complete',function(){
+		house.listenForEvent('Poll - ' + this.name, 'startup-complete', function(){
 			this.execute(house);
 		}.bind(this));
 	}
 };
 
 Poll.prototype.execute = function(house){
-	try {
+	if(this.debug){
 		this.job(house);	
 		this.consecutiveExceptionCount = 0;
 		this.exceptionList = [];
 		this.lastRun = house.date.getDateTime();
-	}
-	catch(e){
-		this.handleException(house, e);
+	} else {
+		try {
+			this.job(house);	
+			this.consecutiveExceptionCount = 0;
+			this.exceptionList = [];
+			this.lastRun = house.date.getDateTime();
+		}
+		catch(e){
+			this.handleException(house, e);
+		}	
 	}
 };
 
