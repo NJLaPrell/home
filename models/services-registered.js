@@ -3,8 +3,12 @@ module.exports = function(house){
 	var model = {};
 	model.services = [];
 	var service;
+	var name;
 
-	for(var name in house.servicesRegistered){
+	let names = Object.keys(house.servicesRegistered);
+	names.sort();
+	for(var i = 0; i < names.length; i++){
+		name = names[i];
 		service = {};
 		service.name = name;
 		service.description = house.servicesRegistered[name].description ? house.servicesRegistered[name].description : '<i>None Given</i>';

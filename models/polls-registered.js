@@ -4,8 +4,13 @@ module.exports = function(house){
 	var model = {};
 	model.polls = [];
 	var poll;
+	var name;
 
-	for(var name in house.pollsRegistered){
+
+	let names = Object.keys(house.pollsRegistered);
+	names.sort();
+	for(var i = 0; i < names.length; i++){
+		name = names[i];
 		poll = {};
 		poll.name = name;
 		poll.description = house.pollsRegistered[name].description ? house.pollsRegistered[name].description : '<i>None Given</i>';

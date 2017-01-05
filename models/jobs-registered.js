@@ -3,9 +3,13 @@ var date = require.main.require('./helpers/date-time.js');
 module.exports = function(house){
 	var model = {};
 	model.jobs = [];
-
 	var job;
-	for(var name in house.jobsRegistered){
+	var name;
+
+	let names = Object.keys(house.jobsRegistered);
+	names.sort();
+	for(var i = 0; i < names.length; i++){
+		name = names[i];
 		job = {};
 		job.name = name;
 		job.description = house.jobsRegistered[name].description ? house.jobsRegistered[name].description : '<i>None Given</i>';

@@ -4,8 +4,12 @@ module.exports = function(house){
 	var model = {};
 	model.listeners = [];
 	var listener;
+	var name;
 
-	for(var name in house.listenersRegistered){
+	let names = Object.keys(house.listenersRegistered);
+	names.sort();
+	for(var i = 0; i < names.length; i++){
+		name = names[i];
 		listener = {};
 		listener.name = name;
 		listener.description = house.listenersRegistered[name].description ? house.listenersRegistered[name].description : '<i>None Given</i>';
