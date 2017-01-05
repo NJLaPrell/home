@@ -157,5 +157,9 @@ module.exports = {
 		args: {
 			status: "rain/freezeing"
 		}
+	},
+	"lutron-connected": {
+		description: "Fired one a Telnet connection is made to the Lutron hub and the username/password have been accepted.",
+		type: "Internal"
 	}
 };
