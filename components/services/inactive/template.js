@@ -5,6 +5,7 @@ var settings = {
 	name: '***NAME***',
 	type: '***TYPE OF SERVICE***',
 	eventsTriggered: ['**EVENTS**'],
+	eventsListened: ['**EVENTS**'],
 	description: '***DESCRIPTION***',
 	shutdownThreshold: 0
 };

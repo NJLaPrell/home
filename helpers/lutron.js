@@ -9,6 +9,7 @@ module.exports = function(house){
 	this.password = house.conf.lutron.password;
 	this.commandQueue = [];
 	this.readyForCommand = false;
+	this.connected = false;
 
 	// Initialize light states
 	for(var i = 0; i < house.status.caseta.dimmers.length; i++){
@@ -41,7 +42,10 @@ module.exports = function(house){
 
 			// General prompt
 			} else if(String(data) == 'GNET> '){
-
+				if(!this.connected){
+					this.connected = true;
+					house.triggerEvent('lutron-connected');
+				}
 			// Device state changed
 			} else if(String(data).indexOf('~OUTPUT') != -1) {
 				this.updateDeviceStatus(String(data));
@@ -73,6 +77,10 @@ module.exports = function(house){
 				house.triggerEvent('lutron-changed', {deviceID: deviceID, brightness: parseInt(params)});
 			}
 		}
+	};
+
+	this.pollDeviceStatus = function(deviceID){
+		this.sendCommand("?OUTPUT," + deviceID + ",1");
 	};
 
 	this.setBrightness = function(light, level){

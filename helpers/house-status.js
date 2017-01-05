@@ -165,5 +165,16 @@ module.exports = {
 			this.status.eventHistory[day] = [];
 		}
 		this.status.eventHistory[day].push({time: time, event: text});
+	},
+	formatException: function(e){
+		let name = e.name ? e.name + ': ' : '';
+		let message = e.message ? e.message : '';
+		let fileName = e.fileName ? ' in ' + e.fileName : '';
+		let lineNumber = e.lineNumber ? ' on line ' + e.lineNumber : '';
+		if(!name && !message && !fileName && !lineNumber){
+			return JSON.stringify(e);
+		} else {
+			return name + message +  fileName + lineNumber;
+		}
 	}
 };

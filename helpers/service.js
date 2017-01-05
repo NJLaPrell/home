@@ -25,8 +25,6 @@ Service.prototype.setService = function(Service){
 
 Service.prototype.start = function(house){
 	this.log.startup("     Starting service: " + this.name + ".");
-	
-
 	try {
 		this.service(house).start();
 		this.running = true;
@@ -38,8 +36,8 @@ Service.prototype.start = function(house){
 };
 
 Service.prototype.handleException = function(house, e) {
-	house.log.error("Exception in Service: " + this.name + " - " + JSON.stringify(e));
-	this.exceptionList.push(house.date.getDateTime() + " - " + JSON.stringify(e));
+	house.log.error("Exception in Service: " + house.formatException(e));
+	this.exceptionList.push(house.date.getDateTime() + " - "  + house.formatException(e));
 	this.consecutiveExceptionCount++;
 	if(this.shutdownThreshold !== 0 && this.shutdownThreshold < this.consecutiveExceptionCount){
 		try {
@@ -48,8 +46,8 @@ Service.prototype.handleException = function(house, e) {
 			this.startTime = null;
 		}
 		catch(e){
-			house.log.error("Exception trying to stop service: " + this.name + " - " + JSON.stringify(e));	
-			this.exceptionList.push(house.date.getDateTime() + " - " + JSON.stringify(e));
+			house.log.error("Exception trying to stop service: "  + house.formatException(e));	
+			this.exceptionList.push(house.date.getDateTime() + " - "  + house.formatException(e));
 			this.consecutiveExceptionCount++;
 		}
 	} else {
