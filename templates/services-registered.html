@@ -42,6 +42,15 @@
                         </ul>
                         </li>
                     {{/if}}
+                    {{#if eventsListenedPresent}}
+                        <li><b>Events Listened:</b>
+                        <ul>
+                            {{#each eventsListened as |event|}}
+                                <li>{{event}}</li>
+                            {{/each}}
+                        </ul>
+                        </li>
+                    {{/if}}
     			</ul>
 	    	</div>
         {{/each}}   

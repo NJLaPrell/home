@@ -8,6 +8,7 @@ function Service(settings){
 	this.description = settings.description ? settings.description : null;
 	this.type = settings.type;
 	this.eventsTriggered = settings.eventsTriggered ? settings.eventsTriggered : [];
+	this.eventsListened = settings.eventsListened ? settings.eventsListened : [];
 	this.startTime = null;
 	this.service = null;
 	this.shutdownThreshold = settings.shutdownThreshold ? settings.shutdownThreshold : 0;
