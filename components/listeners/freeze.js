@@ -11,7 +11,6 @@ var settings = {
 var listener = new Listener(settings);
 
 listener.registerListener('weather', function(house, args){
-	house.recordTriggeredListener('weather');
 	if(args.status == 'freezeing'){
 		house.logHistory("Outside temperature dropped below freezing.");
 	}

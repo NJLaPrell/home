@@ -12,7 +12,6 @@ var settings = {
 var listener = new Listener(settings);
 
 listener.registerListener('poll-ups', function(house, args){
-	house.recordTriggeredListener('poll-ups');
 	house.setStatus('upsStatus', args);
 	// Set the house to powered if the UPS reports online (as opposed to ONBATT)
 	// This is used for initial state on server start.

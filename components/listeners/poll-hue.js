@@ -12,7 +12,6 @@ var settings = {
 var listener = new Listener(settings);
 
 listener.registerListener('poll-hue', function(house, args){
-	house.recordTriggeredListener('poll-hue');
 	var hue = house.getStatus('hue');
 	hue.lights = {};
 	for(var key in args){

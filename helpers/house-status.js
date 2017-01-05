@@ -12,8 +12,6 @@ module.exports = {
 	eventEmitter: eventEmitter,
 	conf: conf,
 	log: new Log(conf.debug),
-	eventsFired: [],
-	listenersTriggered: [],
 	listenersRegistered: {},
 	pollsRegistered: {},
 	servicesRegistered: {},
@@ -75,7 +73,6 @@ module.exports = {
 		this.status[status] = value;
 	},
 	triggerEvent: function(eventName, args){
-		this.eventsFired.push({"time": date.getDateTime(), "event": eventName});
 		this.eventEmitter.emit(eventName, args);	
 		this.log.debug("Event Triggered: " + eventName + " - " + JSON.stringify(args));
 		if(!this.eventRoster[eventName]){
@@ -139,8 +136,6 @@ module.exports = {
 	getDebugInfo: function(){
 		return {
 			status: this.status,
-			eventsFired: this.eventsFired,
-			listenersTriggered: this.listenersTriggered,
 			listenersRegistered: this.listenersRegistered,
 			pollsRegistered: this.pollsRegistered,
 			jobsRegistered: this.jobsRegistered,
@@ -162,24 +157,6 @@ module.exports = {
 	    } catch (e) {}
 	    Error.prepareStackTrace = originalFunc; 
 	    return callerfile;
-	},
-	recordTriggeredListener: function(event){
-		this.listenersTriggered.push({
-			time: date.getDateTime(),
-			listener: this.getScript(),
-			triggeredBy: event	
-		});
-		this.trimDebugHistory();
-	},
-	trimDebugHistory: function(){
-		if(this.listenersTriggered.length > this.conf.maxDebugHistory || this.eventsFired.length > this.conf.maxDebugHistory){
-			if(this.listenersTriggered.length > this.conf.minDebugHistory){
-				this.listenersTriggered.splice(0,(this.listenersTriggered.length - this.conf.minDebugHistory));
-			}
-			if(this.eventsFired.length > this.conf.minDebugHistory){
-				this.eventsFired.splice(0,(this.eventsFired.length - this.conf.minDebugHistory));
-			}
-		}
 	},
 	logHistory: function(text){
 		var day = date.getDate();

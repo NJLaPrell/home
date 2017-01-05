@@ -14,7 +14,7 @@ var listener = new Listener(settings);
 
 listener.registerListener('trigger-hue-lights', function(house, args){
 	var hue = new Hue(house);
-	house.recordTriggeredListener('trigger-hue-lights');
+
 	if(args.direction){
 		hue.toggleState(args.lightID, args.direction);
 	} else if(args.bri){

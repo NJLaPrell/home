@@ -12,7 +12,6 @@ var settings = {
 var listener = new Listener(settings);
 
 listener.registerListener('poll-edimax-switch', function(house, args){
-	house.recordTriggeredListener('poll-edimax-switch');
 	// Log the history
 	var oldState = house.getStatus('plugs');
 	var newState = null;

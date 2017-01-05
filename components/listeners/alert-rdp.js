@@ -13,7 +13,6 @@ var settings = {
 var listener = new Listener(settings);
 
 listener.registerListener('rdp', function(house, args){
-	house.recordTriggeredListener('RDP');
 	house.setStatus('lastRDPConnection', date.getDateTime());
 	alert("RDP Connection Detected");
 	house.logHistory("An RDP connection was made to 192.168.0.25");

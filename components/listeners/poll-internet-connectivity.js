@@ -13,7 +13,6 @@ var settings = {
 var listener = new Listener(settings);
 
 listener.registerListener('poll-internet-connectivity', function(house, args){
-	house.recordTriggeredListener('poll-internet-connectivity');
 
 	// Set the internetAccess status variable
 	house.setStatus('internetAccess', args.pass);

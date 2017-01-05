@@ -13,7 +13,6 @@ var settings = {
 var listener = new Listener(settings);
 
 listener.registerListener('ups', function(house, args){
-	house.recordTriggeredListener('ups');
 	var powered = args.powerStatus == 'off' ? false : true;
 	house.setStatus('powered', powered);
 	if(!powered){

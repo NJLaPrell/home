@@ -13,7 +13,6 @@ var settings = {
 var listener = new Listener(settings);
 
 listener.registerListener('poll-tv', function(house, args){
-	house.recordTriggeredListener('poll-tv');
 	house.setStatus('tvStatus', args.status);
 	if(args.status == 'off'){
 		roku.executeCommand("wake", function(response){

@@ -14,7 +14,7 @@ var listener = new Listener(settings);
 
 listener.registerListener('trigger-edimax-switch', function(house, args){
 	var plug = new Plug(house);
-	house.recordTriggeredListener('trigger-edimax-switch');
+
 	plug.toggle(args.name, args.direction);
 });
 

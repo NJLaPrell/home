@@ -12,7 +12,6 @@ var settings = {
 var listener = new Listener(settings);
 
 listener.registerListener('sunrise', function(house, args){
-	house.recordTriggeredListener('sunrise');
 	house.logHistory("The sun rose.");
 
 	// Toggle the status

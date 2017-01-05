@@ -12,7 +12,6 @@ var settings = {
 var listener = new Listener(settings);
 
 listener.registerListener('poll-weather', function(house, args){
-	house.recordTriggeredListener('poll-weather');
 	house.setStatus('currentWeather', args);
 	var date = new Date();
 	var time = date.getTime()/1000;

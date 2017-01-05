@@ -13,11 +13,8 @@ var settings = {
 var listener = new Listener(settings);
 
 listener.registerListener('email-received', function(house, args){
-
-	house.recordTriggeredListener('email-received');
 	if(args.subject){
 		house.setStatus('motionLastDetected', date.getDateTime());
-
 		var away = house.getStatus('nickslocation') == 'away' && house.getStatus('brendaslocation') == 'away' ? true : false;
 		var motion = args.subject.indexOf('Alarm:Cam_495920') != -1 ? true : false;
 		if(motion && away){
@@ -32,7 +29,6 @@ listener.registerListener('email-received', function(house, args){
 			house.setStatus('motionWhileAway', false);
 		}	
 	}
-
 });
 
 module.exports = listener;

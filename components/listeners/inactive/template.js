@@ -12,7 +12,6 @@ var settings = {
 var listener = new Listener(settings);
 
 listener.registerListener('***NAME***', function(house, args){
-	house.recordTriggeredListener('***NAME***');
 	// INSERT MAGIC HERE
 });
 
