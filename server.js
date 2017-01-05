@@ -191,7 +191,8 @@ router.route('/status').get(function(req, res){
 // Debug Route
 ////////////////////////////////////////////////////////////
 router.route('/debug').get(function(req, res){
-	res.status(200).send(house.getDebugInfo());
+	var util = require('util');
+	res.status(200).send(util.inspect(house.getDebugInfo(),{ showHidden: true, depth: null }));
 });
 
 ////////////////////////////////////////////////////////////
