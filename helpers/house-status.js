@@ -42,6 +42,7 @@ module.exports = {
 		},
 		eventHistory: {},
 		motionWhileAway: false,
+		wemo: {},
 		plugs: {},
 		hue: {},
 		caseta: {

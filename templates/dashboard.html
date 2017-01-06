@@ -42,6 +42,22 @@
                 });
             });
 
+            $(".wemoSwitch").on('change',function(){
+                var name = this.id;
+                var direction = $(this).val();
+                $.ajax({
+                    url: '/home/trigger-event',
+                    type: 'POST',
+                    data: {
+                        event: "trigger-wemo",
+                        args: {
+                            device: name,
+                            value: direction
+                        }
+                    }
+                });
+            });
+
             $(".casetaDimmer").on('change',function(){
                 var name = this.id;
                 var direction = $(this).val();
@@ -409,6 +425,13 @@
                                 <select class="smartPlugSwitch" name="{{device.name}}" id="{{device.name}}" data-role="slider">
                                     <option value="off"{{#unless device.device}} selected="selected"{{/unless}}>Off</option>
                                     <option value="on"{{#if device.device}} selected="selected"{{/if}}>On</option>
+                                </select>
+                            {{/if}}
+
+                            {{#if device.wemoSwitch}}
+                                <select class="wemoSwitch" name="{{device.name}}" id="{{device.name}}" data-role="slider">
+                                    <option value="0"{{#unless device.device}} selected="selected"{{/unless}}>Off</option>
+                                    <option value="1"{{#if device.device}} selected="selected"{{/if}}>On</option>
                                 </select>
                             {{/if}}
 

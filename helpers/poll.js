@@ -65,8 +65,8 @@ Poll.prototype.execute = function(house){
 
 // Log the error, add it to the list for the UI, and stop the poll if the threshold is reached.
 Poll.prototype.handleException = function(house, e){
-	house.log.error("Exception in Poll: " + this.name + " - " + JSON.stringify(e));
-	this.exceptionList.push(house.date.getDateTime() + " - " + JSON.stringify(e));
+	house.log.error("Exception in Poll: " + this.name + " - " + house.formatException(e));
+	this.exceptionList.push(house.date.getDateTime() + " - " + house.formatException(e));
 	this.consecutiveExceptionCount++;
 	if(this.shutdownThreshold !== 0 && this.shutdownThreshold < this.consecutiveExceptionCount){
 		this.running=false;	

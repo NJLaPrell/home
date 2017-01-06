@@ -161,5 +161,29 @@ module.exports = {
 	"lutron-connected": {
 		description: "Fired one a Telnet connection is made to the Lutron hub and the username/password have been accepted.",
 		type: "Internal"
+	},
+	"wemo-discovered": {
+		description: "Fired by the Wemo service when a Wemo device is discovered at startup.",
+		type: "Internal",
+		args: {
+			device: "Friendly device name",
+			info: "deviceInfo object returned by the descovery method."
+		}
+	},
+	"wemo-changed": {
+		description: "Fired by the Wemo service when a Wemo device state changes.",
+		type: "Environmental",
+		args: {
+			device: "Friendly device name",
+			value: "binary state value"
+		}
+	},
+	"trigger-wemo": {
+		description: "Trigger to change the state of a wemo device. Currenly only supports binary state change.",
+		type: "Trigger",
+		args: {
+			device: "Friendly device name",
+			value: "binary state value"
+		}
 	}
 };

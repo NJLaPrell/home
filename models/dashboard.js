@@ -69,6 +69,8 @@ module.exports = function(house){
 	// Edimax Smart Plug Information
 	model.status.plugs = house.status.plugs;
 
+	model.status.wemo = house.status.wemo;
+
 	// Hue Light Information
 	model.status.hue = {};
 	model.status.hue.lights = {};
@@ -134,6 +136,7 @@ module.exports = function(house){
 			devices[i].devices[ii].hueColor = devices[i].devices[ii].type == 'hue-color' ? true : false;
 			devices[i].devices[ii].edimaxSwitch = devices[i].devices[ii].type == 'edimax-switch' ? true : false;
 			devices[i].devices[ii].casetaDimmer = devices[i].devices[ii].type == 'caseta-dimmer' ? true : false;
+			devices[i].devices[ii].wemoSwitch = devices[i].devices[ii].type == 'wemo-switch' ? true : false;
 			if(devices[i].devices[ii].type == 'hue' || devices[i].devices[ii].type == 'hue-color'){
 				devices[i].devices[ii].device = model.status.hue.lights[devices[i].devices[ii].identifyer];
 				if(model.status.hue.lights[devices[i].devices[ii].identifyer].on && devices[i].devices[ii].isLight){
@@ -145,6 +148,11 @@ module.exports = function(house){
 					devices[i].isLighted = true;
 				}
 
+			} else if(devices[i].devices[ii].type == 'wemo-switch'){ 
+				devices[i].devices[ii].device = model.status.wemo[devices[i].devices[ii].identifyer].binaryState == 1 ? true : false;
+				if(model.status.wemo[devices[i].devices[ii].identifyer].binaryState == 1 && devices[i].devices[ii].isLight){
+					devices[i].isLighted = true;
+				}
 			} else if(devices[i].devices[ii].type == 'caseta-dimmer'){
 				for(var iii = 0; iii < model.status.caseta.dimmers.length; iii++){
 					if (model.status.caseta.dimmers[iii].id == devices[i].devices[ii].identifyer){

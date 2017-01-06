@@ -45,8 +45,8 @@ Listener.prototype.registerListener = function(event, listenerMethod){
 
 // Graceful exception handling
 Listener.prototype.handleException = function(house, e) {
-	house.log.error("Exception in Listener: " + this.name + " - " + JSON.stringify(e));
-	this.exceptionList.push(house.date.getDateTime() + " - " + JSON.stringify(e));
+	house.log.error("Exception in Listener: " + this.name + " - " + house.formatException(e));
+	this.exceptionList.push(house.date.getDateTime() + " - " + house.formatException(e));
 	this.consecutiveExceptionCount++;
 	if(this.shutdownThreshold !== 0 && this.shutdownThreshold < this.consecutiveExceptionCount){
 		for(var event in this.listenerMethods){

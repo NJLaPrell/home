@@ -19,15 +19,12 @@ module.exports = {
 		return moment(date).fromNow();
 	},
 	getFriendlyDay: function(date){
-		console.log("Date Received: " + date);
 		if(!date){
 			date = new Date();
 		} else {
 			date = this.getISODate(date);
 		}
 		let dayString = moment(date).calendar(null, {sameElse: 'MM/DD/YYYY'});
-		console.log(moment(date).local());
-		console.log("Day String: " + dayString);
 		let dayFrags = dayString.split(" ");
 		return dayFrags[0];
 	},

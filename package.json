@@ -23,7 +23,8 @@
   "passport-local": "*",
   "express-session": "*",
   "cookie-parser": "*",
-  "moment": "*"
+  "moment": "*",
+  "wemo-client": "*"
   },
   "scripts": {
     "test": "node server.js",
