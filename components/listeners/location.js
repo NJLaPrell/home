@@ -13,6 +13,11 @@ var listener = new Listener(settings);
 listener.registerListener('location', function(house, args){
 	var person = args.person == 'nick' ? 'nickslocation' : 'brendaslocation';
 	house.setStatus(person, args.location);
+	if(house.getStatus('nick') == 'away' && house.getStatus('brenda') == 'away'){
+		house.triggerEvent('house-unoccupied');
+	} else if(house.getStatus('nick') == 'home' && house.getStatus('brenda') == 'home'){
+		house.triggerEvent('house-occupied');
+	}
 });
 
 module.exports = listener;

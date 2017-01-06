@@ -24,6 +24,7 @@ module.exports = {
 		nighttime: null,
 		nickslocation: null,
 		brendaslocation: null,
+		houseOccupied: null,
 		motionLastDetected: null,
 		lastRDPConnection: null,
 		powered: null,

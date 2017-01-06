@@ -185,5 +185,14 @@ module.exports = {
 			device: "Friendly device name",
 			value: "binary state value"
 		}
+	},
+	"house-occupied": {
+		description: "Triggered when one or more people arrive home when the house was previously unoccupied.",
+		type: "Environmental"
+	}
+	,
+	"house-unoccupied": {
+		description: "Triggered when a person leaves and there are no others in the house.",
+		type: "Environmental"
 	}
 };
