@@ -52,22 +52,15 @@ Poll.prototype.start = function(house){
 };
 
 Poll.prototype.execute = function(house){
-	if(this.debug){
+	try {
 		this.job(house);	
 		this.consecutiveExceptionCount = 0;
 		this.exceptionList = [];
 		this.lastRun = house.date.getDateTime();
-	} else {
-		try {
-			this.job(house);	
-			this.consecutiveExceptionCount = 0;
-			this.exceptionList = [];
-			this.lastRun = house.date.getDateTime();
-		}
-		catch(e){
-			this.handleException(house, e);
-		}	
 	}
+	catch(e){
+		this.handleException(house, e);
+	}	
 };
 
 // Log the error, add it to the list for the UI, and stop the poll if the threshold is reached.
