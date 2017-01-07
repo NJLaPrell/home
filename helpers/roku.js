@@ -57,6 +57,11 @@ module.exports = {
 			this.sendRequest("/keypress/VolumeMute", "POST", response);
 			break;	
 
+			case "pause":
+			case "play":
+			this.sendRequest("/keypress/Play", "POST", response);
+			break;	
+
 			case "volume-up":
 			this.sendRequest("/keypress/VolumeUp", "POST");
 			this.sendRequest("/keypress/VolumeUp", "POST");

@@ -146,6 +146,34 @@ service.setService(function(house){
 	            }
 	          });
 	        }
+	      },
+	      {
+	        name: 'Pause',
+	        port: 11013,
+	        handler: (action) => {
+	          roku.executeCommand("pause", function(response){
+	            var payload = {};
+	            if(response.status!=200){
+	              house.log.error("Failed to execute pause switch: " + response.message);
+	            } else {
+	              house.log.debug("Executed Pause switch.");
+	            }
+	          });
+	        }
+	      },
+	      {
+	        name: 'Play',
+	        port: 11014,
+	        handler: (action) => {
+	          roku.executeCommand("play", function(response){
+	            var payload = {};
+	            if(response.status!=200){
+	              house.log.error("Failed to execute play switch: " + response.message);
+	            } else {
+	              house.log.debug("Executed Play switch.");
+	            }
+	          });
+	        }
 	      }
 	    ]
 	  });
