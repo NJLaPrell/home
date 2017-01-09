@@ -16,7 +16,7 @@ var poll = new Poll(settings);
 poll.setJob(function(house){
 	var url = 'http://api.openweathermap.org/data/2.5/weather?id=5318313&APPID=' + this.conf.weatherAPIKey + '&units=imperial';
 	var self = this;
-	http.get(url, function(res){
+	var apiCall = http.get(url, function(res){
 	    var body = '';
 
 	    res.on('data', function(chunk){
@@ -39,9 +39,13 @@ poll.setJob(function(house){
 	    });
 
 	    res.on('error', function(error){
-	    	house.logError(error);
+	    	house.log.error(error);
 	    });
 	});	
+
+	apiCall.on('error', function(error){
+		house.log.error(error);
+	})
 });
 
 module.exports = poll;
