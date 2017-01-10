@@ -22,7 +22,7 @@ module.exports = function(house){
 		this.lutron = net.connect(23, this.host);
 
 		this.lutron.on('error', function(error){
-			house.log.error(error);
+			throw error;
 		});
 
 		// Respond to incomming data
