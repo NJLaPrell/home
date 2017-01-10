@@ -51,6 +51,12 @@ poll.setJob(function(house){
 		}
 	});
 
+	// Set houseOccupied on startup.
+	if(house.getStatus('nickslocation') == 'home' || house.getStatus('brendaslocation') == 'home'){
+		house.setStatus('houseOccupied', true);
+	} else {
+		house.setStatus('houseOccupied', false);
+	}
 
 });
 
