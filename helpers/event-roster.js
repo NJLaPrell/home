@@ -194,5 +194,31 @@ module.exports = {
 	"house-unoccupied": {
 		description: "Triggered when a person leaves and there are no others in the house.",
 		type: "Environmental"
+	},
+	"sensor-monitor-started": {
+		description: "The sensor monitor has been started",
+		type: "Internal"
+	},
+	"sensor-reported": {
+		description: "A sensor value has been reported",
+		type: "Environmental",
+		args: {
+			sensorID: "The name/ID of the sensor reporting.",
+			value: "The value reported by the sensor"
+		}
+	},
+	"sensor-temp-1": {
+		description: "The first temperature sensor monitor.",
+		type: "Sensor Data",
+		args: {
+			value: "The average of the last 10 reported values."
+		}
+	},
+	"sensor-connected": {
+		description: "A sensor has been connected",
+		type: "Internal",
+		args: {
+			sensorID: "Name/ID of the sensor connecting."
+		}
 	}
 };
