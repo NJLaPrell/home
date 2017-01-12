@@ -48,7 +48,8 @@ module.exports = {
 		hue: {},
 		caseta: {
 			dimmers: conf.lutron.dimmers
-		}
+		},
+		sensors: {}
 	},
 	colorPreset: {
 		red: [255, 0, 0],
