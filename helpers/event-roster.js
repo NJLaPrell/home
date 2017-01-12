@@ -220,5 +220,20 @@ module.exports = {
 		args: {
 			sensorID: "Name/ID of the sensor connecting."
 		}
+	},
+	"sensor-offline": {
+		description: "A sensor has been stopped either intentionally or as the result of an error or timeout.",
+		type: "Internal",
+		args: {
+			sensorID: "Name/ID of the sensor that stopped."
+		}
+	},
+	"sensor-error": {
+		description: "A sensor has reported an error condition.",
+		type: "Internal",
+		args: {
+			sensorID: "Name/ID of the sensor that stopped.",
+			error: "Error message."
+		}
 	}
 };
