@@ -235,5 +235,12 @@ module.exports = {
 			sensorID: "Name/ID of the sensor that stopped.",
 			error: "Error message."
 		}
+	},
+	"sensor-timeout": {
+		description: "A sensor has timed out as indicated by a failure to respond to a ping.",
+		type: "Internal",
+		args: {
+			sensorID: "Name/ID of the sensor that stopped."
+		}
 	}
 };
