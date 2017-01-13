@@ -242,5 +242,12 @@ module.exports = {
 		args: {
 			sensorID: "Name/ID of the sensor that stopped."
 		}
+	},
+	"sensor-tmp-office": {
+		descrption: "Office temperature.",
+		type: "Sensor",
+		args: {
+			value: "Temperature averaged over 10 measurements."
+		}
 	}
 };

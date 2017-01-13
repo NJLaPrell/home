@@ -14,6 +14,8 @@ module.exports = function(house){
 	model.status.currentWeather = house.status.currentWeather;
 	model.status.weatherDataAvailable = house.status.currentWeather.description ? true : false;
 
+	model.status.insideTemp = house.status.temperature.office ? house.status.temperature.office : '<i>Unknown</i>';
+
 	// Location Information
 	model.status.nickIsHome = house.status.nickslocation == 'home' ? true : false;
 	model.status.nickIsAway = house.status.nickslocation == 'away' ? true : false;

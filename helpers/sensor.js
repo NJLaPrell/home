@@ -11,6 +11,7 @@ module.exports = function(sensorID, house){
 	this.heartbeatInterval = house.conf.sensors[this.id].heartbeatInterval;
 	this.retryTime = house.conf.sensors[this.id].retry;
 	this.type = house.conf.sensors[this.id].type;
+	this.reportBeforeAvgCount = house.conf.sensors[this.id].reportBeforeAvgCount;
 	
 	this.history = [];
 	this.value = null;
@@ -132,6 +133,10 @@ module.exports = function(sensorID, house){
 	};
 
 	this.handleSensorData = function(data){
+		if(isNaN(data)){
+			house.log.warning("Sensor " + this.id + " reported non-numeric value: " + data);
+			return;
+		}
 		// Set the last reported value
 		this.value = data;
 
@@ -139,14 +144,15 @@ module.exports = function(sensorID, house){
 		this.history.push({date: date.getDateTime(), value: data});
 
 		// Get the average if we have enough data
-		if(this.avgCount <= this.history.length){
+		if(this.avgCount <= this.history.length || this.reportBeforeAvgCount){
+			var avgCount = this.avgCount <= this.history.length ? this.avgCount : this.history.length;
 			var avg = 0;
-			for(var i = 0; i < this.avgCount; i++){
+			for(var i = 0; i < avgCount; i++){
 				avg = parseFloat(avg) + parseFloat(this.history[(this.history.length -1 - i)].value);
 			}
-			this.avg = avg/this.avgCount;
+			this.avg = avg/avgCount;
 			house.triggerEvent(this.reportEvent, {value: this.avg});
-			house.log.debug("Sensor \"" + this.id + "\" calculated an average of " + this.avg + " over " + this.avgCount + " data points.");
+			house.log.debug("Sensor \"" + this.id + "\" calculated an average of " + this.avg + " over " + avgCount + " data points.");
 		}
 	};
 
