@@ -42,6 +42,10 @@ job.setJob(function(house){
 	  });
 	});
 
+	imap.once('error', function(err){
+		house.log.error("purge-mail.js failed to connect: " + err);
+	});
+
 	imap.connect();
 	
 });
