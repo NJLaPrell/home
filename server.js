@@ -1,9 +1,10 @@
-process.on('uncaughtException', function (err) {
-    console.log(err);
-}); 
 
 // Config
 var house = require('./helpers/house-status');
+
+process.on('uncaughtException', function (err) {
+    house.log.error(err);
+}); 
 
 var express = require('express');
 var app =  new express();

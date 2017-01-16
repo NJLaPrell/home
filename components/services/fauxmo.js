@@ -174,6 +174,34 @@ service.setService(function(house){
 	            }
 	          });
 	        }
+	      },
+	      {
+	        name: 'Morning',
+	        port: 11015,
+	        handler: (action) => {
+	          house.triggerEvent('trigger-scene', {scene: "morning"});
+	        }
+	      },
+	      {
+	        name: 'Quiet Time',
+	        port: 11016,
+	        handler: (action) => {
+	          house.triggerEvent('trigger-scene', {scene: "tv"});
+	        }
+	      },
+	      {
+	        name: 'Dim',
+	        port: 11017,
+	        handler: (action) => {
+	          house.triggerEvent('trigger-scene', {scene: "dim"});
+	        }
+	      },
+	      {
+	        name: 'Home',
+	        port: 11018,
+	        handler: (action) => {
+	          house.triggerEvent('trigger-scene', {scene: "home"});
+	        }
 	      }
 	    ]
 	  });

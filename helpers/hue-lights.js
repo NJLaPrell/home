@@ -101,7 +101,44 @@ module.exports = function(house) {
 				house.triggerEvent('hue-color-changed', {lightID: light, rgb: rgb});
 			}
 		});
-	}
+	};
+
+	this.setScene = function(scene){
+		switch(scene){
+			case "dim":
+				var colorLampState = hue.lightState.create();
+				colorLampState = colorLampState.on().bri(170).hue(7170).sat(241).xy(0.537, 0.4159).ct(500);
+				var lampState = hue.lightState.create();
+				lampState = lampState.off();
+				api.setLightState(1, colorLampState, function(err, result){
+					this.house.log.error(err);
+				}.bind(this));
+				api.setLightState(3, colorLampState, function(err, result){
+					this.house.log.error(err);
+				}.bind(this));
+				api.setLightState(4, lampState, function(err, result){
+					this.house.log.error(err);
+				}.bind(this));
+
+			break;
+
+			case "daytime":
+				var colorLampState = hue.lightState.create();
+				colorLampState = colorLampState.on().bri(255).hue(8402).sat(140).xy(0.4575, 0.4099).ct(366);
+				var lampState = hue.lightState.create();
+				lampState = lampState.on().bri(254);
+				api.setLightState(1, colorLampState, function(err, result){
+					this.house.log.error(err);
+				}.bind(this));
+				api.setLightState(3, colorLampState, function(err, result){
+					this.house.log.error(err);
+				}.bind(this));
+				api.setLightState(4, lampState, function(err, result){
+					this.house.log.error(err);
+				}.bind(this));
+			break;
+		}
+	};
 
 	return this;
 };
