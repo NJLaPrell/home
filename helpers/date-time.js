@@ -25,7 +25,7 @@ module.exports = {
 			date = this.getISODate(date);
 		}
 		let dayString = moment(date).calendar(null, {sameElse: 'MM/DD/YYYY'});
-		let dayFrags = dayString.split(" ");
+		let dayFrags = dayString.split(" at ");
 		return dayFrags[0];
 	},
 	getISODate: function(string){

@@ -8,7 +8,7 @@ var HueAnimation = (function() {
 	this.username = conf.hueUsername;
 	this.api = null;
 	this.intervalMax = 50;
-	this.transitionWaitMin = 200;
+	this.transitionWaitMin = 300;
 
 	// Hue API variables
 	this.hueAPI = null;
@@ -120,10 +120,22 @@ var HueAnimation = (function() {
 		setTimeout(function(){
 			if(self.intervalCount == self.intervalMax){
 				self.intervalCount++;
-				self.restoreInitialState();
+				try {
+						self.restoreInitialState();
+					} catch (e){
+						console.log(e);
+						var util = require('util');
+						console.log(util.inspect(this,{ showHidden: true, depth: null }));						
+					}
 			} else if(self.intervalCount < self.intervalMax) {
 				self.api.setLightState(light, self.getRandomColorState()).then(function(){
-					self.panicChange(light);
+					try {
+						self.panicChange(light);
+					} catch (e){
+						console.log(e);
+						var util = require('util');
+						console.log(util.inspect(this,{ showHidden: true, depth: null }));
+					}
 				}).done();
 			}
 		}, self.transitionWaitMin);

@@ -1,3 +1,7 @@
+process.on('uncaughtException', function (err) {
+    console.log(err);
+}); 
+
 // Config
 var house = require('./helpers/house-status');
 
