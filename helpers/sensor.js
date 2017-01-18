@@ -133,6 +133,7 @@ module.exports = function(sensorID, house){
 	};
 
 	this.handleSensorData = function(data){
+		data = data.replace("PING","");
 		if(isNaN(data)){
 			house.log.warning("Sensor " + this.id + " reported non-numeric value: " + data);
 			return;

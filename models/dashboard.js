@@ -151,9 +151,11 @@ module.exports = function(house){
 				}
 
 			} else if(devices[i].devices[ii].type == 'wemo-switch'){ 
-				devices[i].devices[ii].device = model.status.wemo[devices[i].devices[ii].identifyer].binaryState == 1 ? true : false;
-				if(model.status.wemo[devices[i].devices[ii].identifyer].binaryState == 1 && devices[i].devices[ii].isLight){
-					devices[i].isLighted = true;
+				if(model.status.wemo[devices[i].devices[ii].identifyer]){
+					devices[i].devices[ii].device = model.status.wemo[devices[i].devices[ii].identifyer].binaryState == 1 ? true : false;
+					if(model.status.wemo[devices[i].devices[ii].identifyer].binaryState == 1 && devices[i].devices[ii].isLight){
+						devices[i].isLighted = true;
+					}
 				}
 			} else if(devices[i].devices[ii].type == 'caseta-dimmer'){
 				for(var iii = 0; iii < model.status.caseta.dimmers.length; iii++){

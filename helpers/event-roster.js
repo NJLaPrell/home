@@ -249,5 +249,12 @@ module.exports = {
 		args: {
 			value: "Temperature averaged over 10 measurements."
 		}
+	},
+	"trigger-scene": {
+		description: "Activate a predefined automation scene.",
+		type: "Trigger",
+		args: {
+			scene: "Scene name."
+		}
 	}
 };
