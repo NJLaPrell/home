@@ -2,12 +2,17 @@
 // Config
 var house = require('./helpers/house-status');
 
+// Handle uncaught exceptions so the server does not force restart.
 process.on('uncaughtException', function (err) {
-    house.log.error(err);
+   house.log.error(err);
 }); 
 
+// Initialize Express and Socket.io
 var express = require('express');
 var app =  new express();
+app.use(express.static(__dirname + '/home/socket/'))
+var server = app.listen(house.conf.port);
+var io = require('socket.io').listen(server, { path: '/home/socket/socket.io' });
 
 var bodyParser = require('body-parser');
 var auth = require('basic-auth');
@@ -21,9 +26,11 @@ var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 
-var funct = function(username, password){
-	return true;
-};
+var WatchJS = require("melanke-watchjs")
+var watch = WatchJS.watch;
+var unwatch = WatchJS.unwatch;
+var callWatchers = WatchJS.callWatchers;
+
 
 //===============PASSPORT=================
 // Use the LocalStrategy within Passport to login/"signin" users.
@@ -70,9 +77,6 @@ house.initializeServices();
 
 
 
-
-
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -97,10 +101,6 @@ app.use(function(req, res, next){
 
   next();
 });
-
-
-
-
 
 var router = express.Router();
 
@@ -132,7 +132,6 @@ router.use(function(req, res, next){
 	}
 	
 });
-
 
 ////////////////////////////////////////////////////////////
 // HUE ANIMATION ROUTES
@@ -279,6 +278,41 @@ router.route('/dashboard/details/event-roster').get(function(req, res){
 });
 
 ////////////////////////////////////////////////////////////
+// NEW Dashboard Routes
+////////////////////////////////////////////////////////////
+var path = require('path');
+router.route('/dashboard2').get(function(req, res){
+	res.sendFile(path.join(__dirname + '/static/pages/index.html'));
+});
+
+router.route('/dashboard/panels/weather').get(function(req, res){
+	renderTemplate('panels/weather', {foo:"bar"}, function(page){
+		console.log(page);
+		res.send(page);
+	});
+});
+
+
+
+////////////////////////////////////////////////////////////
+// Dashboard Socket.io Events
+////////////////////////////////////////////////////////////
+
+io.on('connection', function(socket) {
+
+	renderAndWatch(house.status.temperature, false, 'panels/temperature', house.status.temperature, 'update-temperature', socket);
+
+	renderAndWatch(house.status, "currentWeather", 'panels/weather', 'panels/weather', 'update-weather', socket);
+
+	renderAndWatch(house.status, ["daytime","nighttime","nickslocation","brendaslocation","powered","InternetAccess","upsStatus"], 'panels/status', 'panels/status', 'update-status-panel', socket);
+
+	renderAndWatch(house.status, ["powered","internetAccess","motionLastDetected"], 'panels/alerts', 'panels/alerts', 'update-alerts-panel', socket);
+
+});
+
+
+
+////////////////////////////////////////////////////////////
 // Signin Route
 ////////////////////////////////////////////////////////////
 router.route('/signin').get(function(req, res){
@@ -298,11 +332,47 @@ app.post('/home/login', passport.authenticate('local-signin', {
 // Rout all the calls through /home
 app.use('/home', router);
 
-app.use(express.static('static'));
+app.use('/static', express.static(__dirname + '/static'));
 
-app.listen(house.conf.port);
+
 
 
 console.log('********* STARTUP COMPLETE **********\r\n\r\n');
 house.triggerEvent('startup-complete');
 
+
+////////////////////////////////////////////////////////////
+// Utility Functions
+////////////////////////////////////////////////////////////
+
+// Render the template and trigger socket.io event, then setup a watch for further renders.
+function renderAndWatch(watchObject, watchProperties, template, model, eventName, socket){
+	var render = function() {
+		renderTemplate(template, model, function(page){
+			socket.emit(eventName, {html:page});
+			house.log.debug("Rendering template for socket.io event: " + eventName);
+		});
+	};
+	render();
+	if(watchProperties){
+		watch(watchObject, watchProperties, function(){
+			render();
+		});	
+	} else {
+		watch(watchObject, function(){
+			render();
+		});		
+	}
+}
+
+// Render the given model and template. Model can be a path or an object.
+function renderTemplate(template, model, cb){
+	fs.readFile(__dirname + '/templates/' + template + '.hbs', 'utf8', function(err, html){
+		template = Handlebars.compile(html);
+		if(typeof model == 'string'){
+			console.log('string');
+			model = require("./models/" + model + ".js")(house);
+		}
+		cb(template(model));
+	});	
+}

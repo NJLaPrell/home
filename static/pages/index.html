@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	    <title>Home Dashboard</title>
+	    <meta charset="utf-8"  />
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	    <!-- jQuery -->
+	    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+	    <!-- Bootstrap -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	    <!-- Spectrum -->
+	    <script src="/js/spectrum.js"></script>
+	    <link rel="stylesheet" href="/css/spectrum.css" />
+
+		<script src="/js/dashboard.js"></script>
+	    <link rel="stylesheet" href="/css/dashboard.css" />
+
+	    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+	    <script>
+		  var socket = io('http://192.168.0.35', {path: '/home/socket/socket.io'});
+		  
+		  socket.on('update-weather', function (data) {
+		    $("#weather").html(data.html);
+		  });
+		  
+		  socket.on('update-temperature', function (data) {
+		    $("#insideTemp").html(data.html);
+		  });
+
+		  socket.on('update-status-panel', function (data) {
+		    $("#statusPanel").html(data.html);
+		  });
+
+		  socket.on('update-alerts-panel', function (data) {
+		    $("#alertsPanel").html(data.html);
+		  });
+
+		</script>
+
+    </head>
+	<body>
+		<div data-role="page" id="dashboard">
+    		<div data-role="header">Home Dashboard</div>
+
+	    	<div role="main" class="ui-content">
+
+	    	<div id="weather"></div>
+
+	    	<div id="insideTemp"></div>
+
+	    	<div id="alertsPanel"></div>
+
+	   		<div id="statusPanel"></div>
+
+	   		<div id="miscPanel"></div>
+
+	   		<div id="devicesPanels"></div>
+
+		    <div class="ui-grid-a">
+		        <div class="ui-block-a">
+		            <a href="/home/dashboard/events/" class="ui-btn ui-btn ui-icon-calendar ui-btn-icon-left" data-rel="dialog" data-transition="pop">Event Log</a>
+		        </div>
+		        <div class="ui-block-b">
+		            <a href="/home/dashboard/details/" class="ui-btn ui-btn ui-icon-info ui-btn-icon-left" data-transition="flip">Details</a>
+		        </div>
+		    </div>
+
+	    </div>
+
+	    <div data-role="footer" id="footer"></div>
+
+		
+
+	</body>
+</html>

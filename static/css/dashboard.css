@@ -1,0 +1,44 @@
+input.ui-slider-input {
+    display : none !important;
+}
+.ui-slider-track {
+    margin: 0 15px 0 15px !important;
+}
+.hueColorButton {
+    padding: 2px ! important;
+    margin-top:4px;
+}
+.hueColorBlock .ui-input-text {
+    width:36px;
+    padding:2px ! important;
+}
+
+.sp-replacer {
+    padding:0px;
+    width:30px;
+}
+.sp-preview {
+    width: 10px;
+}
+.sp-preview-inner {
+    width: 12px;
+}
+
+.sp-dd {
+    width:5px;
+    padding:0px;
+    margin:0px;
+}
+
+.badge {
+    text-shadow: 1px 1px #000000 ! important;
+    background-color: #557cba ! important;
+    border: 1px solid #000066;
+    margin-top:6px;
+    margin-left:6px;
+    position: absolute;
+    width:22px;
+    padding:4px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 8px #000000;
+}

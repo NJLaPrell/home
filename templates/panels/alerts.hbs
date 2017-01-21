@@ -1,0 +1,26 @@
+{{#if motionWhileAway}}
+    <div class="alert alert-danger" role="alert">
+      <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+      Motion has been detected while nobody is home.<br />
+      <b>Motion Last Detected:</b> {{motionLastDetected}}
+    </div>
+{{/if}}
+
+{{#unless powerStatusUnknown}}
+    {{#unless powered}}
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+          The power is out! Running on backup power.<br />
+          <b>Estimated time remaining:</b> {{{ups.timeLeft}}} ({{{ups.batteryCharge}}})<br />
+          <b>Outage Duration:</b> {{{ups.timeOnBattery}}}
+        </div>
+    {{/unless}}
+{{/unless}}
+
+{{#unless internet}}
+    <div class="alert alert-danger" role="alert">
+      <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+      The connection to the internet is down!<br />
+      Out Since: {{{internetOutSince}}}
+    </div>
+{{/unless}}

@@ -1,0 +1,5 @@
+{{#if weatherDataAvailable}}
+    <img src="http://openweathermap.org/img/w/{{currentWeather.icon}}.png" alt="" /> {{currentWeather.description}} - {{currentWeather.temp}}°F / Wind: {{currentWeather.wind}} mph
+{{else}}
+    <i>Weather data is currently unavailable.</i>
+{{/if}}

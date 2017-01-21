@@ -1,0 +1,124 @@
+<div class="ui-grid-b">
+        <div class="ui-block-a">
+            <div class="ui-bar ui-bar-a" style="text-align:center;">
+            It is currently
+                {{#if daytime}}
+                    <img src="/img/day.png" alt="" /><br />Daytime
+                {{/if}}
+                {{#if nighttime}}
+                    <img src="/img/night.png" alt="" /><br />Night
+                {{/if}}   
+                {{#if timeOfDayUnknown}}
+                    <img src="/img/unknown.png" alt="" /><br />Unknown
+                {{/if}}
+            </div>
+        </div>
+        <div class="ui-block-b">
+            <div class="ui-bar ui-bar-a" style="text-align:center;">Nick Is
+                {{#if nickIsAway}}
+                    <img src="/img/away.png" alt="" /><br />Away
+                {{/if}}
+                {{#if nickIsHome}}
+                    <img src="/img/home.png" alt="" /><br />Home
+                {{/if}}  
+                {{#if nickIsUnknown}}
+                    <img src="/img/unknown.png" alt="" /><br />Unknown
+                {{/if}}  
+            </div>
+        </div>
+        <div class="ui-block-c">
+            <div class="ui-bar ui-bar-a" style="text-align:center;">Brenda Is
+                {{#if brendaIsAway}}
+                    <img src="/img/away.png" alt="" /><br />Away
+                {{/if}}
+                {{#if brendaIsHome}}
+                    <img src="/img/home.png" alt="" /><br />Home
+                {{/if}}  
+                {{#if brendaIsUnknown}}
+                    <img src="/img/unknown.png" alt="" /><br />Unknown
+                {{/if}}  
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div class="ui-grid-b">
+
+        <div class="ui-block-a">
+            {{#if internetAccessUnknown}}
+                <div class="ui-bar ui-bar-a" style="text-align:center;">
+                    Internet <br />
+                    <img src="/img/internet.png" alt="" /><br />
+                    <i>Unknown</i>
+                </div>
+            {{else}}
+                {{#unless internet}}
+                    <div class="ui-bar ui-bar-a alert alert-danger" style="text-align:center;padding:5px;">
+                        Internet <br />
+                        <img src="/img/internet.png" alt="" /><br />
+                        Down
+                    </div>
+                {{/unless}}    
+            {{/if}}
+            
+            {{#if internet}}
+               <div class="ui-bar ui-bar-a" style="text-align:center;">
+                    Internet <br />
+                    <img src="/img/internet.png" alt="" /><br />
+                    Up
+                </div>
+            {{/if}}
+        </div>
+
+        <div class="ui-block-b">
+            {{#if powerStatusUnknown}}
+                <div class="ui-bar ui-bar-a" style="text-align:center;">
+                    Power <br />
+                    <img src="/img/power.png" alt="" /><br />
+                    <i>Unknown</i>
+                </div>
+            {{else}}
+                {{#unless powered}}
+                    <div class="ui-bar ui-bar-a alert alert-danger" style="text-align:center;padding:5px;">
+                        Power <br />
+                        <img src="/img/power.png" alt="" /><br />
+                        Offline
+                    </div>
+                {{/unless}}
+            {{/if}}
+            
+            {{#if powered}}
+                <div class="ui-bar ui-bar-a" style="text-align:center;">
+                    Power <br />
+                    <img src="/img/power.png" alt="" /><br />
+                    Online
+                </div>
+            {{/if}}
+        </div>
+
+        <div class="ui-block-c">
+            {{#if ups.onBattery}}
+                <div class="ui-bar ui-bar-a alert alert-success" style="text-align:center;padding:5px;">
+                    UPS <br />
+                    <img src="/img/ups.png" alt="" /><br />
+                    On Battery
+                </div>
+            {{else}}
+                {{#if upsStatusUnknown}}
+                    <div class="ui-bar ui-bar-a" style="text-align:center;">
+                        UPS <br />
+                        <img src="/img/ups.png" alt="" /><br />
+                        <i>Unknown</i>
+                    </div>
+                {{else}}
+                    <div class="ui-bar ui-bar-a" style="text-align:center;">
+                        UPS <br />
+                        <img src="/img/ups.png" alt="" /><br />
+                        Online
+                    </div>
+                {{/if}}
+            {{/if}}
+        </div>
+
+    </div>

@@ -24,7 +24,9 @@
   "express-session": "*",
   "cookie-parser": "*",
   "moment": "*",
-  "wemo-client": "*"
+  "wemo-client": "*",
+  "melanke-watchjs": "*",
+  "socket.io": "*"
   },
   "scripts": {
     "test": "node server.js",
