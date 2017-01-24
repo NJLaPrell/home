@@ -1,0 +1,25 @@
+<div data-role="collapsible" data-content-theme="d">
+    <h4>Misc</h4>
+    <div class="ui-field-contain">
+        <ul data-role="listview" data-inset="true" data-divider-theme="a">
+            <li><b>Motion Last Detected:</b> {{#if motionDetected}}{{motionLastDetected}}{{else}}<i>Unknown</i>{{/if}}</li>
+            <li><b>Last RDP Session:</b> {{#if RDPConnectionDetected}}{{lastRDPConnection}}{{else}}<i>Unknown</i>{{/if}}</li>
+            <li><b>UPS Status:</b>
+                {{#if upsStatusUnknown}}
+                    <i>Unknown</i>
+                {{else}}
+                    <ul>
+                        <li><b>Start Time:</b> {{ups.startTime}}</li>
+                        <li><b>Status:</b> {{ups.status}}</li>
+                        <li><b>Line Voltage:</b> {{ups.lineVoltage}}</li>
+                        <li><b>Load Percent:</b> {{ups.loadPercent}}</li>
+                        <li><b>Battery Charge:</b> {{ups.batteryCharge}}</li>
+                        <li><b>Time Remaining:</b> {{ups.timeLeft}}</li>
+                        <li><b>Battery Voltage:</b> {{ups.batteryVoltage}}</li>
+                        <li><b>Time on Battery:</b> {{ups.timeOnBattery}}</li>
+                    </ul>
+                {{/if}}
+            </li>
+        </ul>
+    </div>
+</div>

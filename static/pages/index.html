@@ -44,6 +44,14 @@
 		    $("#alertsPanel").html(data.html);
 		  });
 
+		  socket.on('update-misc-panel', function (data) {
+		    $("#miscPanel").html(data.html).trigger('create');
+		  });
+
+		  socket.on('load-devices-panel', function (data) {
+		    $("#devicesPanel").html(data.html).trigger('create');
+		  });
+
 		</script>
 
     </head>
@@ -63,7 +71,7 @@
 
 	   		<div id="miscPanel"></div>
 
-	   		<div id="devicesPanels"></div>
+	   		<div id="devicesPanel"></div>
 
 		    <div class="ui-grid-a">
 		        <div class="ui-block-a">
@@ -77,8 +85,6 @@
 	    </div>
 
 	    <div data-role="footer" id="footer"></div>
-
-		
 
 	</body>
 </html>

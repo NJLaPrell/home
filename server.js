@@ -308,6 +308,13 @@ io.on('connection', function(socket) {
 
 	renderAndWatch(house.status, ["powered","internetAccess","motionLastDetected"], 'panels/alerts', 'panels/alerts', 'update-alerts-panel', socket);
 
+	renderAndWatch(house.status, ["motionLastDetected","lastRDPConnection","upsStatus"], 'panels/misc', 'panels/misc', 'update-misc-panel', socket);
+
+	renderTemplate('panels/devices', 'panels/devices', function(page){
+		socket.emit('load-devices-panel', {html:page});
+		house.log.debug("Rendering template for socket.io event: load-devices-panel");
+	});
+
 });
 
 
@@ -370,7 +377,6 @@ function renderTemplate(template, model, cb){
 	fs.readFile(__dirname + '/templates/' + template + '.hbs', 'utf8', function(err, html){
 		template = Handlebars.compile(html);
 		if(typeof model == 'string'){
-			console.log('string');
 			model = require("./models/" + model + ".js")(house);
 		}
 		cb(template(model));

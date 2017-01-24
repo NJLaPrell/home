@@ -1,0 +1,98 @@
+    {{#each devices as |room|}}
+        <div data-role="collapsible" data-content-theme="d">
+            <h4>{{room.room}} {{#if room.isLighted}}<img src="/img/light-bulb.png" alt="" style="float:right" />{{/if}}</h4>
+            <div class="ui-field-contain">
+                <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                    {{#each room.devices as |device|}}
+                        <li>
+                            <h5>{{device.name}}</h5>
+                            
+                            {{#if device.edimaxSwitch}}
+                                <select class="smartPlugSwitch" name="{{device.name}}" id="{{device.name}}" data-role="slider">
+                                    <option value="off"{{#unless device.device}} selected="selected"{{/unless}}>Off</option>
+                                    <option value="on"{{#if device.device}} selected="selected"{{/if}}>On</option>
+                                </select>
+                            {{/if}}
+
+                            {{#if device.wemoSwitch}}
+                                <select class="wemoSwitch" name="{{device.name}}" id="{{device.name}}" data-role="slider">
+                                    <option value="0"{{#unless device.device}} selected="selected"{{/unless}}>Off</option>
+                                    <option value="1"{{#if device.device}} selected="selected"{{/if}}>On</option>
+                                </select>
+                            {{/if}}
+
+                            {{#if device.casetaDimmer}}
+                                <div class="ui-grid-a">
+                                    <div class="ui-block-a">
+                                        <p>&nbsp;</p>
+                                        <select class="casetaDimmer" name="{{device.device.id}}" id="{{device.device.id}}" data-role="slider">
+                                            <option value="off"{{#unless device.device.on}} selected="selected"{{/unless}}>Off</option>
+                                            <option value="on"{{#if device.device.on}} selected="selected"{{/if}}>On</option>
+                                        </select>
+                                    </div>
+                                    <div class="ui-block-b">
+                                        <label for="casetabrightness-{{device.device.id}}">Brightness</label>
+                                        <input class="casetaBrightness" type="range" name="casetabrightness-{{device.device.id}}" id="casetabrightness-{{device.device.id}}" value="{{device.device.brightness}}" min="0" max="100" data-highlight="true" /> 
+                                    </div>
+                                </div>
+                            {{/if}}
+
+                            {{#if device.hue}}
+                                <div class="ui-grid-a">
+                                    <div class="ui-block-a" style="width:35%">
+                                        <select class="hueSwitch" name="{{device.identifyer}}" id="{{device.identifyer}}" data-role="slider">
+                                            <option value="off"{{#unless device.device.on}} selected="selected"{{/unless}}>Off</option>
+                                            <option value="on"{{#if device.device.on}} selected="selected"{{/if}}>On</option>
+                                        </select>   
+                                    </div>
+                                    <div class="ui-block-b hueColorBlock" style="width:65%">
+                                       {{#if device.device.rgb}}
+                                            <div class="ui-grid-d">
+                                                <div class="ui-block-a">
+                                                    <input class="hueColor" type="text" id="color-{{device.identifyer}}" name="color-{{device.identifyer}}" value="{{device.device.rgb}}" />
+                                                </div>
+                                                <div class="ui-block-b">
+                                                    <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if device.device.colorPreset.warm}}ui-btn-active{{/if}}" id="{{device.identifyer}}-warm"><span style="background-color:#FFD19D;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                </div>
+                                                <div class="ui-block-c">
+                                                    <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if device.device.colorPreset.red}}ui-btn-active{{/if}}" id="{{device.identifyer}}-red"><span style="background-color:#FF5300;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                </div>
+                                                <div class="ui-block-d">
+                                                    <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if device.device.colorPreset.purple}}ui-btn-active{{/if}}" id="{{device.identifyer}}-purple"><span style="background-color:#FF6BD3;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                </div>
+                                                <div class="ui-block-e">
+                                                    <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if device.device.colorPreset.yellow}}ui-btn-active{{/if}}" id="{{device.identifyer}}-yellow"><span style="background-color:#FF9524;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                </div>
+                                            </div>
+                                            <!-- ***************** ROW TWO  ***************** -->
+                                            <div class="ui-grid-d">
+                                                <div class="ui-block-a">
+                                                    <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if device.device.colorPreset.white}}ui-btn-active{{/if}}" id="{{device.identifyer}}-white"><span style="background-color:#FFFFFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                </div>
+                                                <div class="ui-block-b">
+                                                    <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if device.device.colorPreset.cold}}ui-btn-active{{/if}}" id="{{device.identifyer}}-cold"><span style="background-color:#CFEFFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                </div>
+                                                <div class="ui-block-c">
+                                                    <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if device.device.colorPreset.green}}ui-btn-active{{/if}}" id="{{device.identifyer}}-green"><span style="background-color:#72FF53;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                </div>
+                                                <div class="ui-block-d">
+                                                    <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if device.device.colorPreset.blue}}ui-btn-active{{/if}}" id="{{device.identifyer}}-blue"><span style="background-color:#319EFF;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                </div>
+                                                <div class="ui-block-e">
+                                                    <a href="#" class="ui-btn ui-btn-inline ui-corner-all hueColorButton {{#if device.device.colorPreset.orange}}ui-btn-active{{/if}}" id="{{device.identifyer}}-orange"><span style="background-color:#FF9825;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
+                                                </div>
+                                            </div>
+                                       {{/if}}
+                                    </div>       
+                                </div>
+                                <div class="ui-grid-solo">
+                                    <input class="hueBri" type="range" name="brightness-{{device.identifyer}}" id="brightness-{{device.identifyer}}" value="{{device.device.bri}}" min="0" max="254" data-highlight="true" /> 
+                                </div>
+                            {{/if}}
+
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    {{/each}}
