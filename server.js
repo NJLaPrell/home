@@ -3,14 +3,14 @@
 var house = require('./helpers/house-status');
 
 // Handle uncaught exceptions so the server does not force restart.
-process.on('uncaughtException', function (err) {
-   house.log.error(err);
-}); 
+//process.on('uncaughtException', function (err) {
+//   house.log.error(err);
+//}); 
 
 // Initialize Express and Socket.io
 var express = require('express');
 var app =  new express();
-app.use(express.static(__dirname + '/home/socket/'))
+app.use(express.static(__dirname + '/home/socket/'));
 var server = app.listen(house.conf.port);
 var io = require('socket.io').listen(server, { path: '/home/socket/socket.io' });
 
@@ -26,7 +26,7 @@ var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 
-var WatchJS = require("melanke-watchjs")
+var WatchJS = require("melanke-watchjs");
 var watch = WatchJS.watch;
 var unwatch = WatchJS.unwatch;
 var callWatchers = WatchJS.callWatchers;
@@ -202,6 +202,7 @@ router.route('/debug').get(function(req, res){
 ////////////////////////////////////////////////////////////
 // Dashboard Routes
 ////////////////////////////////////////////////////////////
+/*
 router.route('/dashboard').get(function(req, res){
 	fs.readFile(__dirname + '/templates/dashboard.html', 'utf8', function(err, html){
 		var template = Handlebars.compile(html);
@@ -209,6 +210,7 @@ router.route('/dashboard').get(function(req, res){
 		res.send(template(model(house)));
 	});
 });
+*/
 
 router.route('/dashboard/log').get(function(req, res){
 	fs.readFile(__dirname + '/logs/log.log', 'utf8', function(err, html){
@@ -281,7 +283,7 @@ router.route('/dashboard/details/event-roster').get(function(req, res){
 // NEW Dashboard Routes
 ////////////////////////////////////////////////////////////
 var path = require('path');
-router.route('/dashboard2').get(function(req, res){
+router.route('/dashboard').get(function(req, res){
 	res.sendFile(path.join(__dirname + '/static/pages/index.html'));
 });
 
@@ -313,6 +315,36 @@ io.on('connection', function(socket) {
 	renderTemplate('panels/devices', 'panels/devices', function(page){
 		socket.emit('load-devices-panel', {html:page});
 		house.log.debug("Rendering template for socket.io event: load-devices-panel");
+	});
+
+	house.conf.deviceLayout.forEach(function(group){
+		var watchers = [];
+		var room = group.room;
+		group.devices.forEach(function(device){
+			if(device.type == 'caseta-dimmer'){
+				watchers.push('caseta');
+			} else if(device.type == 'hue-color' || device.type == 'hue'){
+				watchers.push('hue');
+			} else if(device.type == 'edimax-switch'){
+				watchers.push('plugs');
+			} else if(device.type == 'wemo-switch'){
+				watchers.push('wemo');
+			}
+		});
+
+		var render = function(){
+			fs.readFile(__dirname + '/templates/panels/device.hbs', 'utf8', function(err, html){
+				template = Handlebars.compile(html);
+				var model = require("./models/panels/device.js")(house, room);	
+				socket.emit('update-device-panel', {html:template(model), room:model.room, isLighted:model.isLighted});
+				house.log.debug("Rendering template for socket.io event: update-device-panel for room: " + model.room);
+			});	
+		};
+		
+		watch(house.status, watchers, function(){
+			render();	
+		});
+		render();
 	});
 
 });

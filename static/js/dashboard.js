@@ -1,8 +1,12 @@
 
 $(document).ready(function(){
-    $(".checkboxInAppearanceOnly").on('click',function(){return false;});
+    initializeUI(this);
+});
 
-    $(".smartPlugSwitch").on('change',function(){
+function initializeUI(context){
+    $(context).find(".checkboxInAppearanceOnly").on('click',function(){return false;});
+
+    $(context).find(".smartPlugSwitch").on('change',function(){
         var name = this.id;
         var direction = $(this).val();
         $.ajax({
@@ -18,7 +22,7 @@ $(document).ready(function(){
         });
     });
 
-    $(".wemoSwitch").on('change',function(){
+    $(context).find(".wemoSwitch").on('change',function(){
         var name = this.id;
         var direction = $(this).val();
         $.ajax({
@@ -34,7 +38,7 @@ $(document).ready(function(){
         });
     });
 
-    $(".casetaDimmer").on('change',function(){
+    $(context).find(".casetaDimmer").on('change',function(){
         var name = this.id;
         var direction = $(this).val();
         $.ajax({
@@ -50,7 +54,7 @@ $(document).ready(function(){
         });
     });
 
-    $(".hueSwitch").on('change',function(){
+    $(context).find(".hueSwitch").on('change',function(){
         var name = this.id;
         var direction = $(this).val();
         $.ajax({
@@ -66,7 +70,7 @@ $(document).ready(function(){
         });
     });
 
-    $( ".hueBri" ).slider({
+    $(context).find( ".hueBri" ).slider({
       stop: function( event, ui ) {
         var name = this.id.split("-");
         name = name[1];
@@ -85,7 +89,7 @@ $(document).ready(function(){
       }
     });
 
-    $( ".casetaBrightness" ).slider({
+    $(context).find( ".casetaBrightness" ).slider({
       stop: function( event, ui ) {
         var name = this.id.split("-");
         name = name[1];
@@ -105,7 +109,7 @@ $(document).ready(function(){
     });
 
 
-    $(".hueColor").spectrum({
+    $(context).find(".hueColor").spectrum({
         change: function(color){
             var name = this.id.split("-");
             name = name[1];
@@ -124,7 +128,7 @@ $(document).ready(function(){
         replacerClassName: 'colorPicker'
     });
 
-    $(".hueColorButton").on('click', function(){
+    $(context).find(".hueColorButton").on('click', function(){
         var components = this.id.split("-");
         var name = components[0];
         var preset = components[1];
@@ -141,8 +145,6 @@ $(document).ready(function(){
                 }
             }
         });    
-    });
-
-
-
-});
+    }); 
+}
+    

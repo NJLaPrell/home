@@ -52,6 +52,16 @@
 		    $("#devicesPanel").html(data.html).trigger('create');
 		  });
 
+		  socket.on('update-device-panel', function (data) {
+		    $("#room-panel-" + data.room).html(data.html).trigger('create');
+		    initializeUI($("#room-panel-" + data.room));
+		    if(data.isLighted){
+				$("#room-panel-" + data.room + "-isLighted").fadeIn();
+		    } else {
+				$("#room-panel-" + data.room + "-isLighted").fadeOut();
+		    }
+		  });
+
 		</script>
 
     </head>
