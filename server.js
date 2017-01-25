@@ -81,7 +81,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cookieParser());
-app.use(session({secret: 'supernova', saveUninitialized: true, resave: true}));
+app.use(session({secret: house.conf.sessionSecret, saveUninitialized: true, resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -187,9 +187,9 @@ router.route('/trigger-event').post(function(req, res){
 ////////////////////////////////////////////////////////////
 // Status Route
 ////////////////////////////////////////////////////////////
-router.route('/status').get(function(req, res){
-	res.status(200).send(house.getStatusReport());
-});
+//router.route('/status').get(function(req, res){
+//	res.status(200).send(house.getStatusReport());
+//});
 
 ////////////////////////////////////////////////////////////
 // Debug Route
