@@ -202,99 +202,42 @@ router.route('/debug').get(function(req, res){
 ////////////////////////////////////////////////////////////
 // Dashboard Routes
 ////////////////////////////////////////////////////////////
-/*
-router.route('/dashboard').get(function(req, res){
-	fs.readFile(__dirname + '/templates/dashboard.html', 'utf8', function(err, html){
-		var template = Handlebars.compile(html);
-		var model = require("./models/dashboard.js");
-		res.send(template(model(house)));
-	});
-});
-*/
-
-router.route('/dashboard/log').get(function(req, res){
-	fs.readFile(__dirname + '/logs/log.log', 'utf8', function(err, html){
-		var model = {errorLog:html};
-		fs.readFile(__dirname + '/templates/log.html', 'utf8', function(err, html){
-			var template = Handlebars.compile(html);
-			res.send(template(model));
-		});
-	});
-});
-
-router.route('/dashboard/details').get(function(req, res){
-	fs.readFile(__dirname + '/templates/details.html', 'utf8', function(err, html){
-		var model = require("./models/details.js");
-		var template = Handlebars.compile(html);
-		res.send(template(model(house)));
-	});
-});
-
-router.route('/dashboard/events').get(function(req, res){
-	fs.readFile(__dirname + '/templates/events.html', 'utf8', function(err, html){
-		var template = Handlebars.compile(html);
-		var model = require("./models/event-log.js");
-		res.send(template(model(house)));
-	});
-
-});
-
-router.route('/dashboard/details/jobs-registered').get(function(req, res){
-	fs.readFile(__dirname + '/templates/jobs-registered.html', 'utf8', function(err, html){
-		var template = Handlebars.compile(html);
-		var model = require("./models/jobs-registered.js");
-		res.send(template(model(house)));
-	});
-});
-
-router.route('/dashboard/details/services-registered').get(function(req, res){
-	fs.readFile(__dirname + '/templates/services-registered.html', 'utf8', function(err, html){
-		var template = Handlebars.compile(html);
-		var model = require("./models/services-registered.js");
-		res.send(template(model(house)));
-	});
-});
-
-router.route('/dashboard/details/polls-registered').get(function(req, res){
-	fs.readFile(__dirname + '/templates/polls-registered.html', 'utf8', function(err, html){
-		var template = Handlebars.compile(html);
-		var model = require("./models/polls-registered.js");
-		res.send(template(model(house)));
-	});
-});
-
-router.route('/dashboard/details/listeners-registered').get(function(req, res){
-	fs.readFile(__dirname + '/templates/listeners-registered.html', 'utf8', function(err, html){
-		var template = Handlebars.compile(html);
-		var model = require("./models/listeners-registered.js");
-		res.send(template(model(house)));
-	});
-});
-
-router.route('/dashboard/details/event-roster').get(function(req, res){
-	fs.readFile(__dirname + '/templates/event-roster.html', 'utf8', function(err, html){
-		var template = Handlebars.compile(html);
-		var model = require("./models/event-roster.js");
-		res.send(template(model(house)));
-	});
-});
-
-////////////////////////////////////////////////////////////
-// NEW Dashboard Routes
-////////////////////////////////////////////////////////////
 var path = require('path');
 router.route('/dashboard').get(function(req, res){
 	res.sendFile(path.join(__dirname + '/static/pages/index.html'));
 });
 
-router.route('/dashboard/panels/weather').get(function(req, res){
-	renderTemplate('panels/weather', {foo:"bar"}, function(page){
-		console.log(page);
-		res.send(page);
-	});
+router.route('/dashboard/log').get(function(req, res){
+	renderAndSend('log', 'log', res);
 });
 
+router.route('/dashboard/details').get(function(req, res){
+	renderAndSend('details', 'details', res);
+});
 
+router.route('/dashboard/events').get(function(req, res){
+	renderAndSend('events', 'event-log', res);
+});
+
+router.route('/dashboard/details/jobs-registered').get(function(req, res){
+	renderAndSend('jobs-registered', 'jobs-registered', res);
+});
+
+router.route('/dashboard/details/services-registered').get(function(req, res){
+	renderAndSend('services-registered', 'services-registered', res);
+});
+
+router.route('/dashboard/details/polls-registered').get(function(req, res){
+	renderAndSend('polls-registered', 'polls-registered', res);
+});
+
+router.route('/dashboard/details/listeners-registered').get(function(req, res){
+	renderAndSend('listeners-registered', 'listeners-registered', res);
+});
+
+router.route('/dashboard/details/event-roster').get(function(req, res){
+	renderAndSend('event-roster', 'event-roster', res);
+});
 
 ////////////////////////////////////////////////////////////
 // Dashboard Socket.io Events
@@ -340,10 +283,12 @@ io.on('connection', function(socket) {
 				house.log.debug("Rendering template for socket.io event: update-device-panel for room: " + model.room);
 			});	
 		};
-		
-		watch(house.status, watchers, function(){
-			render();	
+		watchers.forEach(function(watchVariable){
+			watch(house.status[watchVariable], function(){
+				render();	
+			});	
 		});
+		
 		render();
 	});
 
@@ -413,4 +358,10 @@ function renderTemplate(template, model, cb){
 		}
 		cb(template(model));
 	});	
+}
+
+function renderAndSend(template, model, res){
+	renderTemplate(template, model, function(page){
+		res.send(page);
+	});
 }

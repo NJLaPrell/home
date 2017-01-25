@@ -92,7 +92,6 @@ module.exports = function(house, room){
 				devices[i].device = plugs[devices[i].identifyer];
 				if(plugs[devices[i].identifyer] && devices[i].isLight){
 					model.isLighted = true;
-					console.log("isLighted");
 				}
 
 			} else if(devices[i].type == 'wemo-switch'){ 

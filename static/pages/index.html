@@ -71,17 +71,77 @@
 
 	    	<div role="main" class="ui-content">
 
-	    	<div id="weather"></div>
+	    	<div id="weather">Loading Weather Data...</div>
 
-	    	<div id="insideTemp"></div>
+	    	<div id="insideTemp">Loading Temperature Data...</div>
 
 	    	<div id="alertsPanel"></div>
 
-	   		<div id="statusPanel"></div>
+	   		<div id="statusPanel">
+				<div class="ui-grid-b">
+			        <div class="ui-block-a">
+			            <div class="ui-bar ui-bar-a" style="text-align:center;">
+			            	It is currently<br />
+			                <img src="/img/unknown.png" alt="" /><br />
+			                Unknown
+			            </div>
+			        </div>
+			        <div class="ui-block-b">
+			            <div class="ui-bar ui-bar-a" style="text-align:center;">
+			            	Nick Is<br />
+			                <img src="/img/unknown.png" alt="" /><br />
+			                Unknown
+			            </div>
+			        </div>
+			        <div class="ui-block-c">
+			            <div class="ui-bar ui-bar-a" style="text-align:center;">
+			            	Brenda Is<br />
+			                <img src="/img/unknown.png" alt="" /><br />
+			                Unknown
+			            </div>
+			        </div>
+			    </div>
+			    <div class="ui-grid-b">
+			        <div class="ui-block-a">
+		                <div class="ui-bar ui-bar-a" style="text-align:center;">
+		                    Internet <br />
+		                    <img src="/img/internet.png" alt="" /><br />
+		                    <i>Unknown</i>
+		                </div>
+			        </div>
 
-	   		<div id="miscPanel"></div>
+			        <div class="ui-block-b">
+		                <div class="ui-bar ui-bar-a" style="text-align:center;">
+		                    Power <br />
+		                    <img src="/img/power.png" alt="" /><br />
+		                    <i>Unknown</i>
+		                </div>
+			        </div>
 
-	   		<div id="devicesPanel"></div>
+			        <div class="ui-block-c">
+	                    <div class="ui-bar ui-bar-a" style="text-align:center;">
+	                        UPS <br />
+	                        <img src="/img/ups.png" alt="" /><br />
+	                        <i>Unknown</i>
+	                    </div>  
+			        </div>
+			    </div>
+	   		</div>
+
+	   		<div id="miscPanel">
+	   			<div data-role="collapsible" data-content-theme="d">
+				    <h4>Misc</h4>
+				    <div class="ui-field-contain">
+				        <ul data-role="listview" data-inset="true" data-divider-theme="a">
+				            <li><b>Motion Last Detected:</b> <i>Unknown</i></li>
+				            <li><b>Last RDP Session:</b> <i>Unknown</i></li>
+				            <li><b>UPS Status:</b> <i>Unknown</i></li>
+				        </ul>
+				    </div>
+				</div>
+	   		</div>
+
+	   		<div id="devicesPanel">Loading Devices...</div>
 
 		    <div class="ui-grid-a">
 		        <div class="ui-block-a">
