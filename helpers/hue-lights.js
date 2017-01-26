@@ -72,7 +72,8 @@ module.exports = function(house) {
 	this.setBrightness = function(light, brightness){
 		var state = hue.lightState.create();
 		var self = this;
-		api.setLightState(light, state.bri(brightness), function(err, result){
+		var newState = brightness > 0 ? state.on().bri(brightness) : state.off();
+		api.setLightState(light, newState, function(err, result){
 			if(err) {
 				self.house.log.error(err);
 			} else {

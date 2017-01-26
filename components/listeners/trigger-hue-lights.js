@@ -17,7 +17,7 @@ listener.registerListener('trigger-hue-lights', function(house, args){
 
 	if(args.direction){
 		hue.toggleState(args.lightID, args.direction);
-	} else if(args.bri){
+	} else if(typeof args.bri !== 'undefined'){
 		hue.setBrightness(args.lightID, args.bri);
 	} else if(args.rgb){
 		var rgb = [args.rgb.r, args.rgb.g, args.rgb.b];
