@@ -31,6 +31,8 @@ var watch = WatchJS.watch;
 var unwatch = WatchJS.unwatch;
 var callWatchers = WatchJS.callWatchers;
 
+var compression = require('compression');
+app.use(compression());
 
 //===============PASSPORT=================
 // Use the LocalStrategy within Passport to login/"signin" users.
@@ -274,7 +276,6 @@ io.on('connection', function(socket) {
 				watchers.push('wemo');
 			}
 		});
-
 		var render = function(){
 			fs.readFile(__dirname + '/templates/panels/device.hbs', 'utf8', function(err, html){
 				template = Handlebars.compile(html);
@@ -288,7 +289,6 @@ io.on('connection', function(socket) {
 				render();	
 			});	
 		});
-		
 		render();
 	});
 
@@ -313,7 +313,7 @@ app.post('/home/login', passport.authenticate('local-signin', {
   })
 );
 
-// Rout all the calls through /home
+// Route all the calls through /home
 app.use('/home', router);
 
 app.use('/static', express.static(__dirname + '/static'));
