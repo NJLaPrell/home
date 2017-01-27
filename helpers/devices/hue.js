@@ -27,7 +27,7 @@ module.exports = function(house, device) {
 		var state = hue.lightState.create();
 		var newState = settings.on === false ? state.off() : state.on();
 		if(typeof settings.brightness !== 'undefined'){
-			newState = newState.bri(settings.brightness);
+			newState = newState.bri(settings.brightness * 2.24);
 		}
 		if(typeof settings.rgb !== 'undefined'){
 			newState = newState.rgb(settings.rgb);
@@ -44,7 +44,7 @@ module.exports = function(house, device) {
 		if(typeof settings.ct !== 'undefined'){
 			newState = newState.ct(settings.ct);
 		}
-		api.setLightState(light, newState, function(err, result){
+		api.setLightState(properties.host, newState, function(err, result){
 			if(err) {
 				this.house.log.error(err);
 				if(typeof cb === 'function'){cb(false);}

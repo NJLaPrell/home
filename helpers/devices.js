@@ -50,8 +50,8 @@ module.exports = function(house) {
 	this.update = function(deviceId, settings, cb) {
 		if(this.devices[deviceId]){
 			for(var i in settings){
-				if(this.devices[deviceId].indexOf(settings[i]) == -1){
-					house.log.error("Devices::update called with method: " + ettings[i] + ", but the method is not supported for this device.");
+				if(this.devices[deviceId].status.capabilities.indexOf(i) == -1){
+					house.log.error("Devices::update called with method: " + i + ", but the method is not supported for this device.");
 					if(typeof cb === 'function'){
 						cb(false);
 					}
