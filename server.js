@@ -74,6 +74,7 @@ house.initializePolls();
 house.initializeListeners();
 house.initializeJobs();
 house.initializeServices();
+house.initializeDevices();
 
 
 

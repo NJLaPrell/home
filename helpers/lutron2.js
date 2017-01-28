@@ -93,7 +93,6 @@ module.exports = function(house){
 			var cmd = this.commandQueue.shift();
 			this.lutron.write(cmd.cmd + "\r\n", cmd.cb);
 			house.log.debug("Lutron Data Sent: " + cmd);
-			console.log("Lutron Data Sent: " + cmd);
 		}
 	};
 

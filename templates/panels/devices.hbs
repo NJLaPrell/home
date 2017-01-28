@@ -1,6 +1,6 @@
-{{#each devices as |room|}}
+{{#each rooms as |room|}}
     <div data-role="collapsible" data-content-theme="d">
-        <h4>{{room.room}} <span class="temperature"></span><span id="room-panel-{{room.id}}-isLighted" style="float:right; display:none;"><img src="/img/light-bulb.png" alt="" /></span></h4>
+        <h4>{{room.name}} <span class="temperature"></span><span id="room-panel-{{room.id}}-isLighted" style="float:right; display:none;"><img src="/img/light-bulb.png" alt="" /></span></h4>
         <div class="ui-field-contain">
             <ul data-role="listview" data-inset="true" data-divider-theme="a" id="room-panel-{{room.id}}">
                 <li><i>Loading</i>

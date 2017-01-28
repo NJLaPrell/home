@@ -7,17 +7,18 @@ eventEmitter.setMaxListeners(100);
 var date = require('./date-time.js');
 var fs = require('fs');
 var eventRoster = require('./event-roster.js');
+var Devices = require.main.require('./helpers/devices.js');
 
 module.exports = {
 	date: date,
 	eventEmitter: eventEmitter,
 	conf: conf,
 	log: new Log(conf.debug),
+	devices: null,
 	listenersRegistered: {},
 	pollsRegistered: {},
 	servicesRegistered: {},
 	jobsRegistered: {},
-	lutron: null,
 	eventRoster: eventRoster,
 	activeEvents: {},
 	status: {
@@ -95,6 +96,9 @@ module.exports = {
 	},
 	removeEventListener: function(name, event){
 		this.eventEmitter.removeListener(event, this.activeEvents[name]);
+	},
+	initializeDevices: function(){
+		this.devices = new Devices(this);
 	},
 	initializePolls: function(){
 		var polls = this.getComponents('Polls');

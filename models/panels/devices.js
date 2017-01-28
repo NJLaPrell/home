@@ -1,9 +1,12 @@
 module.exports = function(house){
 	var model = {};
+	model.rooms = [];
 
-	model.devices = house.conf.deviceLayout;
-	model.devices.forEach(function(device, key){
-		model.devices[key].id = device.room.replace(/ /g,"").replace(/\'/g,"").toLowerCase();
+	Object.keys(house.devices.getRoomList()).forEach(function(room){
+		model.rooms.push({
+			id: room.replace(/ /g,"").replace(/\'/g,"").toLowerCase(),
+			name: room
+		});
 	});
 
 	return model;

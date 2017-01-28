@@ -13,7 +13,7 @@ var listener = new Listener(settings);
 
 listener.registerListener('trigger-lutron', function(house, args){
 	var brightness = args.direction ? (args.direction == 'on' ? 100 : 0) : args.brightness;
-	house.servicesRegistered['Lutron Caseta Hub'].lutron.setBrightness(args.light, brightness);		
+	house.devices[args.id].update({brightness: brightness});	
 });
 
 module.exports = listener;

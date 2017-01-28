@@ -3,8 +3,43 @@ var fs = require('fs');
 
 module.exports = function(house, room){
 	var model = {};
+	model.roomId = room.replace(/ /g,"").replace(/\'/g,"").toLowerCase();
+
+	model.deviceList = house.devices.getDevicesInRoom(room);
+	console.log(room);
+	console.log(model.deviceList);
+
+	for(var i in model.deviceList){
+		model.deviceList[i].id = 'device-' + i;
+		model.deviceList[i].type = {};
+		model.deviceList[i].type.switch = model.deviceList[i].capabilities.indexOf('on') !== -1  && model.deviceList[i].capabilities.indexOf('brightness') === -1 ? true : false;
+		model.deviceList[i].type.dimableSwitch = model.deviceList[i].capabilities.indexOf('brightness') !== -1 ? true : false;
+		model.deviceList[i].type.colorLight = model.deviceList[i].capabilities.indexOf('rgb') !== -1 ? true : false;
 
 
+		if(model.deviceList[i].type.colorLight){
+			colorPreset = {};	
+			var r = model.deviceList[i].rgb[0];
+			var g = model.deviceList[i].rgb[1];
+			var b = model.deviceList[i].rgb[2];
+			model.deviceList[i].rgb = 'rgb ' + r + ' ' + g + ' ' + b;
+			for(var color in house.colorPreset){
+				if(house.colorPreset[color][0] == r && house.colorPreset[color][1] == g && house.colorPreset[color][2] == b ){
+					model.deviceList[i].colorPreset[color] = true;
+				} else {
+					lmodel.deviceList[i].colorPreset[color] = false;
+				}
+			}
+		}
+		
+
+
+
+	}
+
+
+
+/*
 	// Edimax Smart Plug Information
 	var plugs = house.status.plugs;
 
@@ -102,13 +137,9 @@ module.exports = function(house, room){
 					}
 				}
 			} else if(devices[i].type == 'caseta-dimmer'){
-				for(var iii = 0; iii < caseta.dimmers.length; iii++){
-					if (caseta.dimmers[iii].id == devices[i].identifyer){
-						devices[i].device = caseta.dimmers[iii];
-						if(caseta.dimmers[iii].on && devices[i].isLight){
-							model.isLighted = true;	
-						}
-					}
+				devices[i].device = house.devices[devices[i].identifyer];
+				if(devices[i].device.status.on && devices[i].device.isLight){
+					model.isLighted = true;
 				}
 			}
 		
@@ -116,6 +147,6 @@ module.exports = function(house, room){
 
 	model.devices = devices;
 	model.room = room.replace(/ /g,"").replace(/\'/g,"").toLowerCase();
-
+*/
 	return model;
 };

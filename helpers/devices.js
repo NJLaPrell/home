@@ -31,8 +31,8 @@ module.exports = function(house) {
 		}
 		var deviceList = {};
 		this.devicesPerRoom[room].forEach(function(device, id) {
-			deviceList[id] = device;
-		});
+			deviceList[id] = this.devices[device].status;
+		}.bind(this));
 		return deviceList;
 	};
 
