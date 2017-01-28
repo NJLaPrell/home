@@ -1,34 +1,44 @@
-
-var api = require('edimax-smartplug');
 var DeviceStatus = require.main.require('./helpers/devices/device-status.js');
 
-module.exports = function(house, device) {
+module.exports = function(house, device, api) {
 	this.status = new DeviceStatus(device);
 
 	var properties = {
 		name: device.name,
-		timeout: house.conf.smartPlugConfig.timeout,
-		username: house.conf.smartPlugConfig.username,
-		password: house.conf.smartPlugConfig.password,
 		host: device.identifyer
 	};
 
 	this.poll = function(cb){
-		if(typeof cb === 'function'){cb(this.status);}
+		var self = this;
+		var pollHandler = function(args){
+			if(args.deviceID == properties.host){
+				self.status.on = args.brightness > 0 ? true : false;
+				self.status.brightness = args.brightness;
+				house.eventEmitter.removeListener('lutron-changed', pollHandler)
+				if(typeof cb === 'function'){cb(self.status);}
+			}
+		};
+		house.eventEmitter.on('lutron-changed', pollHandler)
+		api.pollDeviceStatus(properties.host);
 	};
 
 	this.update = function(settings, cb) {
-		/*
-		api.setSwitchState(settings.on, properties).then(function(){
-			this.status.on = settings.on;
-			house.log.debug("Edimax switch " + this.status.name + " turned " + (settings.on ? 'on' : 'off') + ".");
-			if(typeof cb === 'function'){cb(true);}
-		}.bind(this)).catch(function(e) {
-			house.log.warning("Failed to get the state of switch: " + this.status.name + "\rError: " + e);
-			if(typeof cb === 'function'){cb(false);}
-		}.bind(this));
-		*/
+		var self = this;
+		var brightness = 0;
+		if(settings.on){
+			brightness = 100;
+		}
+		if(settings.brightness){
+			brightness = settings.brightness;
+		}
+		api.setBrightness(properties.host, brightness, cb(true));
 	};
+
+	// Keep status in sync
+	house.eventEmitter.on('lutron-changed', function(args){
+		this.status.on = args.brightness > 0 ? true : false;
+		this.brightness = args.brightness;	
+	}.bind(this));
 
 	return this;
 

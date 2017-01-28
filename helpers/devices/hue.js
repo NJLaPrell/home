@@ -7,9 +7,6 @@ module.exports = function(house, device) {
 	var api = new hue.HueApi(house.conf.deviceConfig.hue.host, house.conf.deviceConfig.hue.username);
 	var properties = {
 		name: device.name,
-		timeout: house.conf.smartPlugConfig.timeout,
-		username: house.conf.smartPlugConfig.username,
-		password: house.conf.smartPlugConfig.password,
 		host: device.identifyer
 	};
 

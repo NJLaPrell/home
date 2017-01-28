@@ -1,3 +1,4 @@
+Lutron = require.main.require('./helpers/lutron2.js');
 EdimaxSwitch = require.main.require('./helpers/devices/edimax-switch.js');
 HueLight = require.main.require('./helpers/devices/hue.js');
 CasetaDimmer = require.main.require('./helpers/devices/caseta.js');
@@ -7,6 +8,8 @@ WemoSwitch = require.main.require('./helpers/devices/wemo.js');
 module.exports = function(house) {
 	this.devices = {};
 	this.devicesPerRoom = {};
+
+	var lutron = null;
 
 	this.getDevice = function(deviceId) {
 		if(typeof this.devices[deviceId] === 'undefined') {
@@ -87,7 +90,11 @@ module.exports = function(house) {
 		} else if(device.type == 'hue' || device.type == 'hue-color'){
 			this.devices[id] = new HueLight(house, device);
 		} else if(device.type == 'caseta-dimmer'){
-			this.devices[id] = new CasetaDimmer(house, device);	
+			if(!lutron){
+				lutron = new Lutron(house);	
+				lutron.connect();
+			}
+			this.devices[id] = new CasetaDimmer(house, device, lutron);	
 		} else if(device.type == 'wemo-switch'){
 			this.devices[id] = new WemoSwitch(house, device);
 		} else if(device.type == 'temperature-sensor'){

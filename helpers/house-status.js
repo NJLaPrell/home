@@ -3,6 +3,7 @@ var conf = require('../config.js');
 var Log = require('./log');
 var events = require('events');
 var eventEmitter = new events.EventEmitter();
+eventEmitter.setMaxListeners(100);
 var date = require('./date-time.js');
 var fs = require('fs');
 var eventRoster = require('./event-roster.js');
