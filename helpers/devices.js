@@ -95,6 +95,7 @@ module.exports = function(house) {
 				lutron.connect();
 			}
 			this.devices[id] = new CasetaDimmer(house, device, lutron);	
+			this.devices[id].poll();
 		} else if(device.type == 'wemo-switch'){
 			this.devices[id] = new WemoSwitch(house, device);
 		} else if(device.type == 'temperature-sensor'){

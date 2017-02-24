@@ -7,7 +7,7 @@ module.exports = function(house, room){
 	model.isLighted = false;
 
 	model.deviceList = house.devices.getDevicesInRoom(room);
-
+	console.log(room + ':');
 	console.log(model.deviceList);
 
 	for(var i in model.deviceList){
