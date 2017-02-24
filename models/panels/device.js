@@ -6,8 +6,8 @@ module.exports = function(house, room){
 	model.roomId = room.replace(/ /g,"").replace(/\'/g,"").toLowerCase();
 
 	model.deviceList = house.devices.getDevicesInRoom(room);
-	console.log(room);
-	console.log(model.deviceList);
+
+	//console.log(model.deviceList);
 
 	for(var i in model.deviceList){
 		model.deviceList[i].id = 'device-' + i;
@@ -17,7 +17,7 @@ module.exports = function(house, room){
 		model.deviceList[i].type.colorLight = model.deviceList[i].capabilities.indexOf('rgb') !== -1 ? true : false;
 
 
-		if(model.deviceList[i].type.colorLight){
+		if(model.deviceList[i].rgb){
 			colorPreset = {};	
 			var r = model.deviceList[i].rgb[0];
 			var g = model.deviceList[i].rgb[1];

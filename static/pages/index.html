@@ -50,16 +50,15 @@
 
 		  socket.on('load-devices-panel', function (data) {
 		    $("#devicesPanel").html(data.html).trigger('create');
-		  });
-
-		  socket.on('update-device-panel', function (data) {
-		    $("#room-panel-" + data.room).html(data.html).trigger('create');
-		    initializeUI($("#room-panel-" + data.room));
-		    if(data.isLighted){
-				$("#room-panel-" + data.room + "-isLighted").fadeIn();
-		    } else {
-				$("#room-panel-" + data.room + "-isLighted").fadeOut();
-		    }
+		    socket.on('update-device-panel', function (data) {
+			    $("#room-panel-" + data.roomId).html(data.html).trigger('create');
+			    initializeUI($("#room-panel-" + data.roomId));
+			    if(data.isLighted){
+					$("#room-panel-" + data.roomId + "-isLighted").fadeIn();
+			    } else {
+					$("#room-panel-" + data.roomId + "-isLighted").fadeOut();
+			    }
+			  });
 		  });
 
 		</script>
