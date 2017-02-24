@@ -18,7 +18,7 @@ module.exports = function(house, device, api) {
 				if(typeof cb === 'function'){cb(self.status);}
 			}
 		};
-		house.eventEmitter.on('lutron-changed', pollHandler)
+		//house.eventEmitter.on('lutron-changed', pollHandler)
 		api.pollDeviceStatus(properties.host);
 	};
 

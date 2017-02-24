@@ -8,6 +8,7 @@ module.exports = function(house){
 	this.username = house.conf.lutron.username;
 	this.password = house.conf.lutron.password;
 	this.commandQueue = [];
+	this.responseQueue = [];
 	this.readyForCommand = false;
 	this.connected = false;
 
@@ -23,8 +24,6 @@ module.exports = function(house){
 		// Respond to incomming data
 		this.lutron.on('data', function(data){
 
-			this.readyForCommand = this.connected ? true : false;
-
 			house.log.debug("Lutron Data Received: " + String(data));
 
 			// Login prompt
@@ -34,32 +33,40 @@ module.exports = function(house){
 			} else if(String(data) == 'password: '){
 				this.lutron.write(this.password + "\r\n");
 			// General prompt
-			} else if(String(data) == 'GNET> '){
-				if(!this.connected){
-					this.connected = true;
-					this.readyForCommand = true;
-					this.lutron.write("\r\n");
-					house.triggerEvent('lutron-connected');
-				}
-			// Device state changed
-			} else if(String(data).indexOf('~OUTPUT') != -1) {
-				this.updateDeviceStatus(String(data));
-			// Device state changed
-			} else if(String(data).indexOf('#OUTPUT') != -1) {
-				this.updateDeviceStatus(String(data));
-
-			// Remote button pressed
-			} else if(String(data).indexOf('~DEVICE') != -1) {
-
-			// Unexpected response
 			} else {
-				house.log.warning("Unexpected response from Caseta hub: " + String(data));
+				this.responseQueue = this.responseQueue.concat(this.responseQueue, String(data).split("\r\n"));
+				this.processResponseQueue();
 			}
 
-			// Process any queued commands
-			this.processCommandQueue();
+			
 
 		}.bind(this));
+	};
+
+	this.processResponseQueue = function(response) {
+		while (response = this.responseQueue.shift()){
+			response = response.replace("GNET> ","");
+			if(response == 'GNET> '){
+				if(!this.connected){
+					this.connected = true;
+					house.triggerEvent('lutron-connected');
+				}
+			} else if(response.indexOf('~OUTPUT') != -1) {
+				// Device state changed
+				this.updateDeviceStatus(response);
+			} else if(response.indexOf('#OUTPUT') != -1) {
+				// Device state changed
+				this.updateDeviceStatus(response);			
+			} else if(response.indexOf('~DEVICE') != -1) {
+				// Remote button pressed
+			} else {
+				// Unexpected response
+				house.log.warning("Unexpected response from Caseta hub: " + response);
+			}
+		}
+		this.readyForCommand = true;
+		// Process any queued commands
+		this.processCommandQueue();
 	};
 
 	this.updateDeviceStatus = function(output){

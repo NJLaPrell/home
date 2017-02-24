@@ -3,19 +3,19 @@
     <li>
         <h5>{{device.name}}</h5>
         
-        {{#if device.type.switch}}
-            <select class="switch" name="{{device.id}}" id="{{device.id}}" data-role="slider">
-                <option value="off"{{#unless device.status.on}} selected="selected"{{/unless}}>Off</option>
-                <option value="on"{{#if device.status.on}} selected="selected"{{/if}}>On</option>
-            </select>
-        {{/if}}
-
         {{#if unknownState}}
             <div class="alert alert-warning" role="alert">
               <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
               The state of this device is unknown.
             </div>
         {{else}}
+
+            {{#if device.type.switch}}
+                <select class="switch" name="{{device.id}}" id="{{device.id}}" data-role="slider">
+                    <option value="off"{{#unless device.status.on}} selected="selected"{{/unless}}>Off</option>
+                    <option value="on"{{#if device.status.on}} selected="selected"{{/if}}>On</option>
+                </select>
+            {{/if}}
 
             {{#if device.type.dimableSwitch}}
                 <div class="ui-grid-a">
