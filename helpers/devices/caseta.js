@@ -35,7 +35,7 @@ module.exports = function(house, device, api) {
 	};
 
 	// Keep status in sync
-	house.eventEmitter.on('lutron-changed', function(args){
+	house.eventEmitter.on('lutron-changed-' + properties.host, function(args){
 		this.status.on = args.brightness > 0 ? true : false;
 		this.status.brightness = args.brightness;	
 	}.bind(this));

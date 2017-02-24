@@ -77,6 +77,7 @@ module.exports = function(house){
 		var action = commands[2];
 		var params = commands[3];
 		house.triggerEvent('lutron-changed', {deviceID: deviceID, brightness: parseInt(params)});
+		house.triggerEvent('lutron-changed-' + deviceID, {deviceID: deviceID, brightness: parseInt(params)});
 	};
 
 	this.pollDeviceStatus = function(deviceID, cb){
