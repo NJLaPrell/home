@@ -66,6 +66,10 @@ module.exports = function(house, device) {
 		this.status.ct = status.state.ct ? status.state.ct : null;
 	};
 
+	setInterval(function() {
+		this.poll();
+	}.bind(this), 5000);
+
 	return this;
 
 };
