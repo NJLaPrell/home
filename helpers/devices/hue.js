@@ -4,6 +4,7 @@ var DeviceStatus = require.main.require('./helpers/devices/device-status.js');
 
 module.exports = function(house, device) {
 	this.status = new DeviceStatus(device);
+	this.type = 'hue';
 	var api = new hue.HueApi(house.conf.deviceConfig.hue.host, house.conf.deviceConfig.hue.username);
 	var properties = {
 		name: device.name,
@@ -12,8 +13,6 @@ module.exports = function(house, device) {
 
 	this.poll = function(cb){
 		api.lightStatus(properties.host).then(function(result){
-			console.log("lightStatus");
-			console.log(result);
 			this.setStatus(result);
 			if(typeof cb === 'function'){cb(this.status);}
 		}.bind(this)).catch(function(err){

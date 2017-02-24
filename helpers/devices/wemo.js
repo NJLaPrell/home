@@ -4,6 +4,7 @@ var DeviceStatus = require.main.require('./helpers/devices/device-status.js');
 
 module.exports = function(house, device) {
 	this.status = new DeviceStatus(device);
+	this.type = 'wemo-switch';
 
 	var properties = {
 		name: device.name,

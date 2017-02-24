@@ -4,7 +4,8 @@ var DeviceStatus = require.main.require('./helpers/devices/device-status.js');
 
 module.exports = function(house, device) {
 	this.status = new DeviceStatus(device);
-
+	this.type = 'sensor';
+	
 	var properties = {
 		name: device.name,
 		timeout: house.conf.smartPlugConfig.timeout,

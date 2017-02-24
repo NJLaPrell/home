@@ -45,12 +45,6 @@ module.exports = {
 		},
 		eventHistory: {},
 		motionWhileAway: false,
-		wemo: {},
-		plugs: {},
-		hue: {},
-		caseta: {
-			dimmers: conf.lutron.dimmers
-		},
 		temperature: {
 			office: null
 		}
@@ -144,6 +138,7 @@ module.exports = {
 		return this.status;
 	},
 	getDebugInfo: function(){
+		return this.devices;
 		return {
 			status: this.status,
 			listenersRegistered: this.listenersRegistered,

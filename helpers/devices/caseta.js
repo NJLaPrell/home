@@ -2,6 +2,7 @@ var DeviceStatus = require.main.require('./helpers/devices/device-status.js');
 
 module.exports = function(house, device, api) {
 	this.status = new DeviceStatus(device);
+	this.type = 'caseta';
 
 	var properties = {
 		name: device.name,
