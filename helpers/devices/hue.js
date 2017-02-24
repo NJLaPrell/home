@@ -12,6 +12,8 @@ module.exports = function(house, device) {
 
 	this.poll = function(cb){
 		api.lightStatus(properties.host).then(function(result){
+			console.log("lightStatus");
+			console.log(result);
 			this.setStatus(result);
 			if(typeof cb === 'function'){cb(this.status);}
 		}.bind(this)).catch(function(err){
@@ -57,6 +59,7 @@ module.exports = function(house, device) {
 	this.setStatus = function(status){
 		this.status.on = status.state.on;
 		this.status.brightness = status.state.bri != null ? (status.state.bri/2.54) : null;
+		this.status.brightness = !status.state.on ? 0 : this.status.brightness;
 		this.status.hue = status.state.hue ? status.state.hue : null;
 		this.status.sat = status.state.sat ? status.state.sat : null;
 		this.status.xy = status.state.xy ? status.state.xy : null;
