@@ -281,8 +281,6 @@ io.on('connection', function(socket) {
 			fs.readFile(__dirname + '/templates/panels/device.hbs', 'utf8', function(err, html){
 				template = Handlebars.compile(html);
 				var model = require("./models/panels/device.js")(house, room);	
-				console.log("SEND:");
-				console.log(model.room);
 				socket.emit('update-device-panel', {html:template(model), roomId:model.roomId, isLighted:model.isLighted});
 				house.log.debug("Rendering template for socket.io event: update-device-panel for room: " + model.room);
 			});	

@@ -4,10 +4,11 @@ var fs = require('fs');
 module.exports = function(house, room){
 	var model = {};
 	model.roomId = room.replace(/ /g,"").replace(/\'/g,"").toLowerCase();
+	model.isLighted = false;
 
 	model.deviceList = house.devices.getDevicesInRoom(room);
 
-	//console.log(model.deviceList);
+	console.log(model.deviceList);
 
 	for(var i in model.deviceList){
 		model.deviceList[i].id = 'device-' + i;
@@ -15,7 +16,12 @@ module.exports = function(house, room){
 		model.deviceList[i].type.switch = model.deviceList[i].capabilities.indexOf('on') !== -1  && model.deviceList[i].capabilities.indexOf('brightness') === -1 ? true : false;
 		model.deviceList[i].type.dimableSwitch = model.deviceList[i].capabilities.indexOf('brightness') !== -1 ? true : false;
 		model.deviceList[i].type.colorLight = model.deviceList[i].capabilities.indexOf('rgb') !== -1 ? true : false;
+		
+		if(model.deviceList[i].on){
+			model.isLighted = true;
+		}
 
+		model.deviceList[i].unknownState = model.deviceList[i].on == null ? true : false;
 
 		if(model.deviceList[i].rgb){
 			colorPreset = {};	

@@ -55,8 +55,8 @@ module.exports = function(house, device) {
 	};
 
 	this.setStatus = function(status){
-		this.status.on = status.state.on ? status.state.on : null;
-		this.status.brightness = status.state.bri ? (status.state.bri/2.54) : null;
+		this.status.on = status.state.on;
+		this.status.brightness = status.state.bri != null ? (status.state.bri/2.54) : null;
 		this.status.hue = status.state.hue ? status.state.hue : null;
 		this.status.sat = status.state.sat ? status.state.sat : null;
 		this.status.xy = status.state.xy ? status.state.xy : null;
