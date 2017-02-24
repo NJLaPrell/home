@@ -11,7 +11,7 @@ module.exports = function(house, room){
 	console.log(model.deviceList);
 
 	for(var i in model.deviceList){
-		model.deviceList[i].id = 'device-' + i;
+		model.deviceList[i].id = 'device-' + model.deviceList[i].id;
 		model.deviceList[i].type = {};
 		model.deviceList[i].type.switch = model.deviceList[i].capabilities.indexOf('on') !== -1  && model.deviceList[i].capabilities.indexOf('brightness') === -1 ? true : false;
 		model.deviceList[i].type.dimableSwitch = model.deviceList[i].capabilities.indexOf('brightness') !== -1 ? true : false;

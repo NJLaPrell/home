@@ -45,7 +45,9 @@ module.exports = function(house){
 
 	this.processResponseQueue = function(response) {
 		while (response = this.responseQueue.shift()){
-			response = response.replace("GNET> ","");
+			if(response != "GNET> "){
+				response = response.replace("GNET> ","");	
+			}
 			if(response == 'GNET> '){
 				if(!this.connected){
 					this.connected = true;

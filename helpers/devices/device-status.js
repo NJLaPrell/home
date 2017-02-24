@@ -1,6 +1,7 @@
 module.exports = function(device){
 	this.status = {
 		name: device.name,
+		id: device.id,
 		on: null,
 		brightness: null,
 		rgb: null,

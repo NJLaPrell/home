@@ -1,4 +1,4 @@
-Lutron = require.main.require('./helpers/lutron2.js');
+Lutron = require.main.require('./helpers/lutron.js');
 EdimaxSwitch = require.main.require('./helpers/devices/edimax-switch.js');
 HueLight = require.main.require('./helpers/devices/hue.js');
 CasetaDimmer = require.main.require('./helpers/devices/caseta.js');
@@ -85,6 +85,7 @@ module.exports = function(house) {
 		var id = this.getNextDeviceId();
 		
 		// Instantiate the appropriate class for the device
+		device.id = id;
 		if(device.type == 'edimax-switch'){
 			this.devices[id] = new EdimaxSwitch(house, device);
 		} else if(device.type == 'hue' || device.type == 'hue-color'){
