@@ -24,6 +24,7 @@ listener.registerListener('trigger-scene', function(house, args){
 			house.servicesRegistered['Lutron Caseta Hub'].lutron.setBrightness(4, 0);
 			house.servicesRegistered['Lutron Caseta Hub'].lutron.setBrightness(2, 0);
 			house.servicesRegistered['Lutron Caseta Hub'].lutron.setBrightness(5, 0);
+			house.servicesRegistered['Lutron Caseta Hub'].lutron.setBrightness(8, 0);
 		break;	
 
 		case "tv":
@@ -36,6 +37,7 @@ listener.registerListener('trigger-scene', function(house, args){
 			house.servicesRegistered['Lutron Caseta Hub'].lutron.setBrightness(4, 0);
 			house.servicesRegistered['Lutron Caseta Hub'].lutron.setBrightness(2, 0);
 			house.servicesRegistered['Lutron Caseta Hub'].lutron.setBrightness(5, 0);
+			house.servicesRegistered['Lutron Caseta Hub'].lutron.setBrightness(8, 0);
 
 			// Switches
 			var plug = new Plug(house);
