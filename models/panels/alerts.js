@@ -11,7 +11,7 @@ module.exports = function(house){
 
 
 	model.ups = {};
-	model.ups.batteryCharge = house.status.upsStatus ? house.status.upsStatus.batteryCharge.split(".")[0] + '%' : '<i>Unknown</i>';
+	model.ups.batteryCharge = house.status.upsStatus ? house.status.upsStatus.batteryCharge ? house.status.upsStatus.batteryCharge.split(".")[0] + '%' : '<i>Unknown</i>' : '<i>Unknown</i>';
 	model.ups.timeLeft = house.status.upsStatus ? house.status.upsStatus.timeLeft : '<i>Unknown</i>';
 	model.ups.timeOnBattery = house.status.upsStatus ? house.status.upsStatus.timeOnBattery : '<i>Unknown</i>';
 

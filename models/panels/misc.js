@@ -16,7 +16,7 @@ module.exports = function(house){
 	model.ups.onBattery = model.ups.status == 'ONBATT' ? true : false;
 	model.ups.lineVoltage = house.status.upsStatus ? house.status.upsStatus.lineVoltage : 'Unknown';
 	model.ups.loadPercent = house.status.upsStatus ? house.status.upsStatus.loadPercent : 'Unknown';
-	model.ups.batteryCharge = house.status.upsStatus ? house.status.upsStatus.batteryCharge.split(".")[0] + '%' : 'Unknown';
+	model.ups.batteryCharge = house.status.upsStatus ? house.status.upsStatus.batteryCharge ? house.status.upsStatus.batteryCharge.split(".")[0] + '%' : 'Unknown' : 'Unknown';
 	model.ups.timeLeft = house.status.upsStatus ? house.status.upsStatus.timeLeft : 'Unknown';
 	model.ups.batteryVoltage = house.status.upsStatus ? house.status.upsStatus.batteryVoltage : 'Unknown';
 	model.ups.timeOnBattery = house.status.upsStatus ? house.status.upsStatus.timeOnBattery : 'Unknown';
