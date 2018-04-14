@@ -46,7 +46,7 @@ module.exports = {
 			break;
 
 			case "turn-off-screen":
-			this.sendRequest("/launch/dev", "POST", response);
+			this.sendRequest("/launch/151908", "POST", response);
 			break;
 
 			case "power":
