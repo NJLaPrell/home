@@ -14,7 +14,7 @@ var listener = new Listener(settings);
 
 listener.registerListener('poll-tv', function(house, args){
 	house.setStatus('tvStatus', args.status);
-	if(args.status == 'off'){
+	if(args.status == 'offffffffff'){
 		roku.executeCommand("wake", function(response){
 			if(response.status < 200 || response.status >= 300){
 				house.log.warning("Found Roku powered off. Can't wake it. He's dead, Jim.\rResponse: " + JSON.stringify(response));

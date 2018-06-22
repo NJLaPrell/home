@@ -19,6 +19,10 @@ module.exports = {
 			this.executeCommand("turn-off-screen", response);
 			break;
 
+			case "find-remote":
+			this.sendRequest("/keypress/FindRemote", "POST", response);
+			break;
+
 			case "power-on":
 			self.executeCommand("home", function(response){
 				var doItAgain = setTimeout(function(response){
@@ -46,7 +50,8 @@ module.exports = {
 			break;
 
 			case "turn-off-screen":
-			this.sendRequest("/launch/151908", "POST", response);
+			//this.sendRequest("/launch/151908", "POST", response);
+			this.sendRequest("/keypress/PowerOff", "POST", response);
 			break;
 
 			case "power":

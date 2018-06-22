@@ -202,7 +202,21 @@ service.setService(function(house){
 	        handler: (action) => {
 	          house.triggerEvent('trigger-scene', {scene: "home"});
 	        }
-	      }
+	      },
+              {
+                name: 'Remote Finder',
+                port: 11019,
+                handler: (action) => {
+                  roku.executeCommand("find-remote", function(response){
+                    var payload = {};
+                    if(response.status!=200){
+                      house.log.error("Failed to execute Remote Finder switch: " + response.message);
+                    } else {
+                      house.log.debug("Executed Remote Finder switch.");
+                    }
+                  });
+                }
+              }
 	    ]
 	  });
 
